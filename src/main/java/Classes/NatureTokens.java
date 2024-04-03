@@ -5,9 +5,9 @@ package Classes;
 
        
 
-        public NatureTokens(int x)
+        public NatureTokens(int z)
         {
-            value = x;
+            value = z;
         }
 
         
