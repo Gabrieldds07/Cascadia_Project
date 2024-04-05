@@ -2,6 +2,7 @@ package Classes;
 
 public class Biome {
     private final int type;
+    //1 river, 2 wetland, 3 forest, 4 mountain, 5 prairie
     private boolean scored;
 
     public Biome(int type) {

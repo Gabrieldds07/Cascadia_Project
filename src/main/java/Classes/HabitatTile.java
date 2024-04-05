@@ -2,16 +2,16 @@ package Classes;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 public class HabitatTile {
-    ArrayList<NatureTokens> tokens;
+    ArrayList<AnimalToken> tokens;
     ArrayList<Biome> biomes;
-    NatureTokens tokenPlaced;
-    NatureTokens correspondingToken;
+    AnimalToken tokenPlaced;
+    AnimalToken correspondingToken;
     Boolean clicked;
     Boolean placed;
     Boolean keyStone;
     BufferedImage img;
 
-    public HabitatTile(ArrayList<NatureTokens> t, ArrayList<Biome>b, boolean k, BufferedImage i){
+    public HabitatTile(ArrayList<AnimalToken> t, ArrayList<Biome>b, boolean k, BufferedImage i){
         tokens = t;
         biomes = b;
         tokenPlaced = null;
@@ -41,11 +41,11 @@ public class HabitatTile {
         this.clicked = clicked;
     }
 
-    public void setTokenPlaced(NatureTokens tokenPlaced) {
+    public void setTokenPlaced(AnimalToken tokenPlaced) {
         this.tokenPlaced = tokenPlaced;
     }
 
-    public void setCorrespondingToken(NatureTokens correspondingToken) {
+    public void setCorrespondingToken(AnimalToken correspondingToken) {
         this.correspondingToken = correspondingToken;
     }
 
@@ -54,7 +54,7 @@ public class HabitatTile {
         return biomes;
     }
 
-    public ArrayList<NatureTokens> getTokens() {
+    public ArrayList<AnimalToken> getTokens() {
         return tokens;
     }
 
@@ -70,7 +70,7 @@ public class HabitatTile {
         return keyStone;
     }
 
-    public NatureTokens getTokenPlaced() {
+    public AnimalToken getTokenPlaced() {
         return tokenPlaced;
     }
 
@@ -82,7 +82,7 @@ public class HabitatTile {
         return img;
     }
 
-    public NatureTokens getCorrespondingToken() {
+    public AnimalToken getCorrespondingToken() {
         return correspondingToken;
     }
 }
