@@ -2,7 +2,6 @@ package Classes;
 
 import javax.smartcardio.Card;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.TreeMap;
 
 public class Game {
@@ -33,13 +32,36 @@ public class Game {
             allTokens.add(a);
         }
 
+        //habitat instantiation
+
+        //available habitat instantiation
+        for(int i=1;i<=5;i++){
+            int num = (int)(Math.random() *(allHabitats.size()));
+            availableHabitats.add(allHabitats.get(num));
+        }
+
         //card instantiation
 
         //scoring cards instantiation
-        for(int i=1;i<5;i++){
-            Random = new Random();
-            scoringCards = ;
-        }
+        String s = "Bear";
+        int num = (int)(Math.random() *(allCards.get(s).size()));
+        scoringCards.add(allCards.get(s, num));
+
+        s = "Fox";
+        num = (int)(Math.random() *(allCards.get(s).size()));
+        scoringCards.add(allCards.get(s, num));
+
+        s = "Salmon";
+        num = (int)(Math.random() *(allCards.get(s).size()));
+        scoringCards.add(allCards.get(s, num));
+
+        s = "Hawk";
+        num = (int)(Math.random() *(allCards.get(s).size()));
+        scoringCards.add(allCards.get(s, num));
+
+        s = "Elk";
+        num = (int)(Math.random() *(allCards.get(s).size()));
+        scoringCards.add(allCards.get(s, num));
     }
 
     public ArrayList<AnimalToken> getAllTokens() {
