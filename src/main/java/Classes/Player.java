@@ -6,7 +6,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 public class Player {
     private PlayerBoard playerBoard;
-    private int natureTokens;
     private  int turnsLeft;
     private boolean isTurn;
 
@@ -16,14 +15,6 @@ public class Player {
 
     public PlayerBoard getPlayerBoard() {
         return playerBoard;
-    }
-
-    public int getNatureTokens() {
-        return natureTokens;
-    }
-
-    public void setNatureTokens(int natureTokens) {
-        this.natureTokens = natureTokens;
     }
 
     public boolean isTurn() {
