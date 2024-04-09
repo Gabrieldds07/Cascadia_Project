@@ -1,7 +1,5 @@
 package Graphics;
 
-import Graphics.Panels.StartScreen;
-
 import javax.swing.*;
 
 /**
