@@ -6,12 +6,12 @@ import java.util.TreeMap;
 
 public class Game {
     private int turn;
-    private ArrayList <Player> playerList;
-    private  ArrayList <AnimalToken> allTokens;
-    private  ArrayList <HabitatTile> allHabitats;
-    private  HabitatDashBoard availableHabitats;
-    private  Map<String, ArrayList<Card>> allCards;
-    private  ArrayList <Card> scoringCards;
+    private ArrayList <Player> playerList = new ArrayList();;
+    private  ArrayList <AnimalToken> allTokens = new ArrayList();;
+    private  ArrayList <HabitatTile> allHabitats = new ArrayList();;
+    private  HabitatDashBoard availableHabitats;;
+    //private  Map<String, ArrayList<ScoringCard>> allCards;
+    private  ArrayList <ScoringCard> scoringCards = new ArrayList();;
 
     public Game(int numOfPlayers){
         turn = 0;
@@ -34,15 +34,30 @@ public class Game {
 
         //habitat instantiation
 
+        //starting habitat
+
         //available habitat instantiation
         for(int i=1;i<=5;i++){
             int num = (int)(Math.random() *(allHabitats.size()));
-            availableHabitats.add(allHabitats.get(num));
+            availableHabitats.addHabitat(allHabitats.get(num));
         }
 
         //card instantiation
+        //1 bear, 2 elk, 3 salmon, 4 hawk, 5 fox
+        TreeMap<Integer, Integer> s = new TreeMap<>();
+
+        //bear
+        s.put(1,4);
+        s.put(2,11);
+        s.put(3,15);
+        s.put(4,27);
+        scoringCards.add(new ScoringCard(1, s));
+
+        //elk
+
 
         //scoring cards instantiation
+        /*
         String s = "Bear";
         int num = (int)(Math.random() *(allCards.get(s).size()));
         scoringCards.add(allCards.get(s, num));
@@ -62,6 +77,7 @@ public class Game {
         s = "Elk";
         num = (int)(Math.random() *(allCards.get(s).size()));
         scoringCards.add(allCards.get(s, num));
+        */
     }
 
     public ArrayList<AnimalToken> getAllTokens() {
