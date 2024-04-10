@@ -1,6 +1,27 @@
 package Classes;
-import java.awt.image.BufferedImage;
+import Classes.*;
+
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.image.*;
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.io.*;
+import java.net.URL;
+import java.nio.Buffer;
+import java.nio.channels.Channels;
+import java.nio.channels.ReadableByteChannel;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import static java.lang.System.*;
+
+import java.util.Iterator;
 import java.util.ArrayList;
+import java.util.TreeMap;
+
 public class HabitatTile {
     ArrayList<AnimalToken> tokens;
     ArrayList<Biome> biomes;
@@ -9,7 +30,9 @@ public class HabitatTile {
     Boolean clicked;
     Boolean placed;
     Boolean keyStone;
-    BufferedImage img;
+    private ArrayList <BufferedImage> tiles = new ArrayList<BufferedImage>();
+
+
 
     public HabitatTile(ArrayList<AnimalToken> t, ArrayList<Biome>b, boolean k, BufferedImage i){
         tokens = t;
