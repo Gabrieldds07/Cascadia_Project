@@ -2,11 +2,14 @@ package Classes;
 
 import java.util.TreeMap;
 
-public class Card {
+public class ScoringCard {
+    private int type;
+    //1 bear, 2 elk, 3 salmon, 4 hawk, 5 fox
     private TreeMap<Integer, Integer> scoring;
 
-    public Card() {
-        scoring = new TreeMap<>();
+    public ScoringCard(int t, TreeMap<Integer, Integer> s) {
+        type = t;
+        scoring = s;
     }
 
     public TreeMap<Integer, Integer> getScoring() {
