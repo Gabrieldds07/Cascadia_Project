@@ -51,7 +51,6 @@ public class PlayerBoard {
 
     public Hexagon getAdjacentHexagon(int side, int rC, int cC) {
         //checking if hexagon is at
-
         //top
         if(rC == 0){
             if(side == 0 || side == 1){ return null;}
@@ -97,7 +96,6 @@ public class PlayerBoard {
         for(int i = 0; i < 6; i++){
             hexes.add(getAdjacentHexagon(i, rC, cC));
         }
-
         return hexes;
     }
 
@@ -105,41 +103,47 @@ public class PlayerBoard {
         return natureTokens;
     }
 
-    public int numConnectedSalmon(int rC, int cC){
-        int max;
-        this.getAdjacentHexagons(rC, cC);
-        //top right
-        //top left
-        //straight
-    }
-
-
-    public int numConnectedElk(int rC, int cC){
-        ArrayList<Hexagon> hexes= getAdjacentHexagons(rC, cC);
-        int r = rC;
-        int c = cC;
-        int count = 1;
-        int maxCnt = 0;
-
-
-        if(maxCnt < count){
-            maxCnt = count;
-        }
-
-        //return max
-        return maxCnt;
-    }
-
     private int elkConnected(int rC, int cC){
 
     }
 
-    public int noSurrounding(){
-        //if animal token has to be a pair (bear)
+    public int calculateSalmon(int rC, int cC){
+        int numConnected = 1;
+        ArrayList<Hexagon> h = this.getAdjacentHexagons(rC, cC);
+
+        numConnected += surroundingTokens(rC, cC, h);
+        return numConnected
+    }
+
+    public int surroundingTokens(int rC, int cC, ArrayList<Hexagon> h){
+        int salmonTokens = 0;
+        int sideWithSalmon;
+        int nonSalmon = 0;
+        for(int i =0; i <6; i++){
+            if(h.get(i).getHabitatTile()!= null && h.get(i).getHabitatTile().getTokenPlaced().getType() ==3){
+                salmonTokens++;
+                sideWithSalmon = i;
+            }
+            if(h.get(i).getHabitatTile()!= null && h.get(i).getHabitatTile().getTokenPlaced().getType() !=3){
+                nonSalmon++;
+            }
+        }
+        board[rC][cC].getHabitatTile().getTokenPlaced()
+        if(salmonTokens == 2 && sideWithSalmon > 3){
+            return 1 + surroundingTokens(rC, cC, h);
+        } else {
+            return 0;
+        }
+    }
+
+
+    public int calculateHawk(){
         //if no animal token pair (hawk)
     }
 
-    public int foxSurrounding(){}
+    public int calculateBear(){}
+
+    public int calculateFox(){}
 
     //public int tokenLineOfSight(){}
 
