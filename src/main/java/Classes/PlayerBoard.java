@@ -108,9 +108,42 @@ public class PlayerBoard {
         natureTokens = i ;
     }
 
-    private int calculateElk(int rC, int cC){ }
+    public int scoreBiomes(){
+        boolean firstTile = false;
+        //1 river, 2 wetland, 3 forest, 4 mountain, 5 prairie
+        int maxRiver = 0;
+        int maxWetland = 0;
+        int maxForest = 0;
+        int maxMountain = 0;
+        int maxPrairie = 0;
+        for(int i = 0; i < 20; i++){
+            for(int j = 0; j < 20; j++){
+                if(board[i][j].getHabitatTile() != null){
+                    if(firstTile == false){
+                        board[i][j].getHabitatTile().getBiomes().get(3); // call recursion, set biome = scored
+                        board[i][j].getHabitatTile().getBiomes().get(1); // call recursion
+                        board[i][j].getHabitatTile().getBiomes().get(2); // call recursion
+                        firstTile = true;
+                    } else {
+                        if(j == 19){
+                            firstTile = false;
+                        }
+                        board[i][j].getHabitatTile().getBiomes().get(1); // call recursion
+                        board[i][j].getHabitatTile().getBiomes().get(2); // call recursion
+                    }
+                }
+            }
+        }
+        return maxRiver + maxWetland + maxForest + maxMountain + maxPrairie;
+    }
 
-    public int calculateSalmon(int rC, int cC){ }
+    public void biomeRecurssion(){
+
+    }
+
+    public int calculateElk(int rC, int cC){}
+
+    public int calculateSalmon(int rC, int cC){}
 
     public int calculateHawk(){}
 
