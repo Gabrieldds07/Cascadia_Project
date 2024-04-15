@@ -109,7 +109,7 @@ public class PlayerBoard {
     }
 
     public int scoreBiomes(){
-        boolean firstTile = false;
+        boolean firstTile = true;
         //1 river, 2 wetland, 3 forest, 4 mountain, 5 prairie
         int maxRiver = 0;
         int maxWetland = 0;
@@ -119,17 +119,17 @@ public class PlayerBoard {
         for(int i = 0; i < 20; i++){
             for(int j = 0; j < 20; j++){
                 if(board[i][j].getHabitatTile() != null){
-                    if(firstTile == false){
+                    if(firstTile == true){
                         board[i][j].getHabitatTile().getBiomes().get(3); // call recursion, set biome = scored
                         board[i][j].getHabitatTile().getBiomes().get(1); // call recursion
                         board[i][j].getHabitatTile().getBiomes().get(2); // call recursion
-                        firstTile = true;
+                        firstTile = false;
                     } else {
-                        if(j == 19){
-                            firstTile = false;
-                        }
                         board[i][j].getHabitatTile().getBiomes().get(1); // call recursion
                         board[i][j].getHabitatTile().getBiomes().get(2); // call recursion
+                        if(j == 19){
+                            firstTile = true;
+                        }
                     }
                 }
             }
@@ -137,7 +137,14 @@ public class PlayerBoard {
         return maxRiver + maxWetland + maxForest + maxMountain + maxPrairie;
     }
 
-    public void biomeRecurssion(){
+    public void biomeRecurssion(int i, int j, boolean firstTile){
+        if(firstTile){
+            board[i][j].getHabitatTile().getBiomes().get(3); // call recursion, set biome = scored
+            board[i][j].getHabitatTile().getBiomes().get(1); // call recursion
+            board[i][j].getHabitatTile().getBiomes().get(2); // call recursion
+        } else {
+
+        }
 
     }
 
