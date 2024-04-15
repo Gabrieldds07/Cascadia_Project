@@ -1,3 +1,4 @@
+package Graphics;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import javax.swing.*;

@@ -112,7 +112,7 @@ public class PlayerBoard {
         ArrayList<Hexagon> h = this.getAdjacentHexagons(rC, cC);
 
         numConnected += surroundingTokens(rC, cC, h);
-        return numConnected
+        return numConnected;
     }
 
     public int surroundingTokens(int rC, int cC, ArrayList<Hexagon> h){
