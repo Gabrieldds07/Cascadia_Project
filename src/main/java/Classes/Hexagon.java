@@ -3,6 +3,7 @@ package Classes;
 public class Hexagon {
     private HabitatTile habitatTile;
     private boolean gray;
+    //empty or not
     private int r;
     private int c;
 
@@ -27,7 +28,7 @@ public class Hexagon {
         return c;
     }
 
-    public void setXandY(int r, int c) {
+    public void setRandC(int r, int c) {
         this.r = r;
         this.c = c;
     }

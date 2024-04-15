@@ -33,7 +33,6 @@ public class HabitatTile {
     private ArrayList <BufferedImage> tiles = new ArrayList<BufferedImage>();
 
 
-
     public HabitatTile(ArrayList<AnimalToken> t, ArrayList<Biome>b, boolean k, BufferedImage i){
         tokens = t;
         biomes = b;
