@@ -91,13 +91,17 @@ public class HabitatTile {
     public HabitatTile(String keyStoneTileNumber, int type1, int type2, int animal1, Boolean keyStone, BufferedImage image){
         //1 Bear, 2 Elk, 3 Salmon, 4 Hawk, 5 Fox
         //1 river, 2 wetland, 3 forest, 4 mountain, 5 prairie
-        this.side0=type1;
-        this.side1=type1;
-        this.side2=type1;
-        this.side3=type2;
-        this.side4=type2;
-        this.side5=type2;
-        this.animal1=animal1;
+        this.tileNumber=keyStoneTileNumber;
+        Biome b = new Biome(type1);
+        for(int i =0; i < 3; i++){
+            biomes.add(b);
+        }
+        b = new Biome(type2);
+        for(int i =0; i < 3; i++){
+            biomes.add(b);
+        }
+        AnimalToken a = new AnimalToken(animal1);
+        tokens.add(a);
         this.keyStone=keyStone;
         this.image=image;
     }

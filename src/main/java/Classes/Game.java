@@ -35,6 +35,7 @@ public class Game {
     //private  Map<String, ArrayList<ScoringCard>> allCards;
     private  ArrayList <ScoringCard> scoringCards = new ArrayList();;
     private Stack<HabitatTile> tiles;
+    private Stack<HabitatTile> starterTiles;
 
     public Game(int numOfPlayers) {
         initializeImages();
@@ -205,6 +206,7 @@ public class Game {
             tiles.push(new HabitatTile("55",4, 1, 3, 4,            ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile55.png")))));
             tiles.push(new HabitatTile("56",5, 4, 1, 3,            ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile56.png")))));
 
+            starterTiles.push(new HabitatTile("1", 3, 3, 2, true, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile56.png")))));
 
             //1 Bear, 2 Elk, 3 Salmon, 4 Hawk, 5 Fox
             //1 river, 2 wetland, 3 forest, 4 mountain, 5 prairie
