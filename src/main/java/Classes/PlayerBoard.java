@@ -10,6 +10,8 @@ public class PlayerBoard {
     private int oddR[] = {-1, -1, 0, 1, 1, 0};
     private int evenC[] = {-1, 0, 1, 0, -1, -1};
     private int evenR[] = {-1, -1, 0, 1, 1, 0};
+    private ArrayList<int> firstTileBiomeScoring = new ArrayList<int>();
+    private ArrayList<int> biomeScoring = new ArrayList<int>();
     private int natureTokens = 0;
 
     public PlayerBoard() {
@@ -116,17 +118,23 @@ public class PlayerBoard {
         int maxForest = 0;
         int maxMountain = 0;
         int maxPrairie = 0;
+        firstTileBiomeScoring.add(3);
+        firstTileBiomeScoring.add(1);
+        firstTileBiomeScoring.add(2);
+        biomeScoring.add(1);
+        biomeScoring.add(2);
         for(int i = 0; i < 20; i++){
             for(int j = 0; j < 20; j++){
                 if(board[i][j].getHabitatTile() != null){
                     if(firstTile == true){
-                        board[i][j].getHabitatTile().getBiomes().get(3); // call recursion, set biome = scored
-                        board[i][j].getHabitatTile().getBiomes().get(1); // call recursion
-                        board[i][j].getHabitatTile().getBiomes().get(2); // call recursion
+                        for(int z = 0; z < 3; z++){
+                            biomeRecurssion(i, j, firstTile, z);
+                        }
                         firstTile = false;
                     } else {
-                        board[i][j].getHabitatTile().getBiomes().get(1); // call recursion
-                        board[i][j].getHabitatTile().getBiomes().get(2); // call recursion
+                        for(int z = 0; z < 2; z++){
+                            biomeRecurssion(i, j, firstTile, z);
+                        }
                         if(j == 19){
                             firstTile = true;
                         }
@@ -137,15 +145,13 @@ public class PlayerBoard {
         return maxRiver + maxWetland + maxForest + maxMountain + maxPrairie;
     }
 
-    public void biomeRecurssion(int i, int j, boolean firstTile){
+    public int biomeRecurssion(int i, int j, boolean firstTile, int z){
         if(firstTile){
-            board[i][j].getHabitatTile().getBiomes().get(3); // call recursion, set biome = scored
+            if() // call recursion
+        } else {
             board[i][j].getHabitatTile().getBiomes().get(1); // call recursion
             board[i][j].getHabitatTile().getBiomes().get(2); // call recursion
-        } else {
-
         }
-
     }
 
     public int calculateElk(int rC, int cC){}
