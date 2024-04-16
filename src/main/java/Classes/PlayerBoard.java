@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class PlayerBoard {
     private Hexagon[][] board;
-    private int natureTokens;
     // use of odd or even array depends on hexagon row
     private int oddC[] = {0, 1, 1, 1, 0, -1};
     private int oddR[] = {-1, -1, 0, 1, 1, 0};
@@ -104,15 +103,43 @@ public class PlayerBoard {
         return natureTokens;
     }
 
-    public void setNatureTokens(int i) {
-        natureTokens = i ;
+    private int elkConnected(int rC, int cC){
+
     }
 
-    private int calculateElk(int rC, int cC){ }
+    public int calculateSalmon(int rC, int cC){
+        int numConnected = 1;
+        ArrayList<Hexagon> h = this.getAdjacentHexagons(rC, cC);
 
-    public int calculateSalmon(int rC, int cC){ }
+        numConnected += surroundingTokens(rC, cC, h);
+        return numConnected;
+    }
 
-    public int calculateHawk(){}
+    public int surroundingTokens(int rC, int cC, ArrayList<Hexagon> h){
+        int salmonTokens = 0;
+        int sideWithSalmon;
+        int nonSalmon = 0;
+        for(int i =0; i <6; i++){
+            if(h.get(i).getHabitatTile()!= null && h.get(i).getHabitatTile().getTokenPlaced().getType() ==3){
+                salmonTokens++;
+                sideWithSalmon = i;
+            }
+            if(h.get(i).getHabitatTile()!= null && h.get(i).getHabitatTile().getTokenPlaced().getType() !=3){
+                nonSalmon++;
+            }
+        }
+        board[rC][cC].getHabitatTile().getTokenPlaced()
+        if(salmonTokens == 2 && sideWithSalmon > 3){
+            return 1 + surroundingTokens(rC, cC, h);
+        } else {
+            return 0;
+        }
+    }
+
+
+    public int calculateHawk(){
+        //if no animal token pair (hawk)
+    }
 
     public int calculateBear(){}
 
