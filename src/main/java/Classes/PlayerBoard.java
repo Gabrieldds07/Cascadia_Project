@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class PlayerBoard {
     private Hexagon[][] board;
+    private int natureTokens;
     // use of odd or even array depends on hexagon row
     private int oddC[] = {0, 1, 1, 1, 0, -1};
     private int oddR[] = {-1, -1, 0, 1, 1, 0};
@@ -103,43 +104,55 @@ public class PlayerBoard {
         return natureTokens;
     }
 
-    private int elkConnected(int rC, int cC){
-
+    public void setNatureTokens(int i) {
+        natureTokens = i ;
     }
 
-    public int calculateSalmon(int rC, int cC){
-        int numConnected = 1;
-        ArrayList<Hexagon> h = this.getAdjacentHexagons(rC, cC);
-
-        numConnected += surroundingTokens(rC, cC, h);
-        return numConnected;
-    }
-
-    public int surroundingTokens(int rC, int cC, ArrayList<Hexagon> h){
-        int salmonTokens = 0;
-        int sideWithSalmon;
-        int nonSalmon = 0;
-        for(int i =0; i <6; i++){
-            if(h.get(i).getHabitatTile()!= null && h.get(i).getHabitatTile().getTokenPlaced().getType() ==3){
-                salmonTokens++;
-                sideWithSalmon = i;
-            }
-            if(h.get(i).getHabitatTile()!= null && h.get(i).getHabitatTile().getTokenPlaced().getType() !=3){
-                nonSalmon++;
+    public int scoreBiomes(){
+        boolean firstTile = true;
+        //1 river, 2 wetland, 3 forest, 4 mountain, 5 prairie
+        int maxRiver = 0;
+        int maxWetland = 0;
+        int maxForest = 0;
+        int maxMountain = 0;
+        int maxPrairie = 0;
+        for(int i = 0; i < 20; i++){
+            for(int j = 0; j < 20; j++){
+                if(board[i][j].getHabitatTile() != null){
+                    if(firstTile == true){
+                        board[i][j].getHabitatTile().getBiomes().get(3); // call recursion, set biome = scored
+                        board[i][j].getHabitatTile().getBiomes().get(1); // call recursion
+                        board[i][j].getHabitatTile().getBiomes().get(2); // call recursion
+                        firstTile = false;
+                    } else {
+                        board[i][j].getHabitatTile().getBiomes().get(1); // call recursion
+                        board[i][j].getHabitatTile().getBiomes().get(2); // call recursion
+                        if(j == 19){
+                            firstTile = true;
+                        }
+                    }
+                }
             }
         }
-        board[rC][cC].getHabitatTile().getTokenPlaced()
-        if(salmonTokens == 2 && sideWithSalmon > 3){
-            return 1 + surroundingTokens(rC, cC, h);
+        return maxRiver + maxWetland + maxForest + maxMountain + maxPrairie;
+    }
+
+    public void biomeRecurssion(int i, int j, boolean firstTile){
+        if(firstTile){
+            board[i][j].getHabitatTile().getBiomes().get(3); // call recursion, set biome = scored
+            board[i][j].getHabitatTile().getBiomes().get(1); // call recursion
+            board[i][j].getHabitatTile().getBiomes().get(2); // call recursion
         } else {
-            return 0;
+
         }
+
     }
 
+    public int calculateElk(int rC, int cC){}
 
-    public int calculateHawk(){
-        //if no animal token pair (hawk)
-    }
+    public int calculateSalmon(int rC, int cC){ }
+
+    public int calculateHawk(){}
 
     public int calculateBear(){}
 
