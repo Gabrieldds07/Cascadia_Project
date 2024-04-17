@@ -36,8 +36,9 @@ public class Game {
     private  ArrayList <ScoringCard> scoringCards = new ArrayList();;
     private Stack<HabitatTile> tiles;
     private Stack<HabitatTile> starterTiles;
+    private Stack<HabitatTile> keyStoneTiles;
 
-    public Game(int numOfPlayers) {
+    public Game(int numOfPlayers) throws IOException{
         initializeImages();
         turn = 0;
 
@@ -206,7 +207,23 @@ public class Game {
             tiles.push(new HabitatTile("55",4, 1, 3, 4,            ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile55.png")))));
             tiles.push(new HabitatTile("56",5, 4, 1, 3,            ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile56.png")))));
 
-            starterTiles.push(new HabitatTile("1", 3, 3, 2, true, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile56.png")))));
+            starterTiles.push(new HabitatTile("1", 3, 2, true, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/ST Tiles Individual/ST 1 Individual Top.png")))));
+            starterTiles.push(new HabitatTile("1", 2, 5, 5, 3, false, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/ST Tiles Individual/ST 1 Individual Right.png")))));
+            starterTiles.push(new HabitatTile("1", 1, 4, 4, 2, 1, false, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/ST Tiles Individual/ST 1 Individual Left.png")))));
+            starterTiles.push(new HabitatTile("2", 5,5, true, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/ST Tiles Individual/ST 2 Individual Top.png")))));
+            starterTiles.push(new HabitatTile("2", 3, 4, 1, 2, false, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/ST Tiles Individual/ST 2 Individual Left.png")))));
+            starterTiles.push(new HabitatTile("2", 4, 2, 3, 4, 5, false, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/ST Tiles Individual/ST 2 Individual Right.png")))));
+            starterTiles.push(new HabitatTile("3", 2,4, true, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/ST Tiles Individual/ST 3 Individual Top.png")))));
+            starterTiles.push(new HabitatTile("3", 5, 4, 1, 5, false, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/ST Tiles Individual/ST 3 Individual Left.png")))));
+            starterTiles.push(new HabitatTile("3", 3, 1, 3, 2, 4, false, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/ST Tiles Individual/ST 3 Individual Right.png")))));
+            starterTiles.push(new HabitatTile("4", 4,1, true, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/ST Tiles Individual/ST 4 Individual Top.png")))));
+            starterTiles.push(new HabitatTile("4", 1, 5, 3, 1, false, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/ST Tiles Individual/ST 4 Individual Left.png")))));
+            starterTiles.push(new HabitatTile("4", 2, 3, 4, 2, 5, false, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/ST Tiles Individual/ST 4 Individual Right.png")))));
+            starterTiles.push(new HabitatTile("5", 1,3, true, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/ST Tiles Individual/ST 5 Individual Top.png")))));
+            starterTiles.push(new HabitatTile("5", 4, 2, 5, 4, false, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/ST Tiles Individual/ST 5 Individual Left.png")))));
+            starterTiles.push(new HabitatTile("5", 3, 5, 3, 2, 1, false, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/ST Tiles Individual/ST 5 Individual Right.png")))));
+
+            keyStoneTiles.push(new HabitatTile("1", 3, 2, true, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/ST Tiles Individual/ST 1 Individual Top.png")))));
 
             //1 Bear, 2 Elk, 3 Salmon, 4 Hawk, 5 Fox
             //1 river, 2 wetland, 3 forest, 4 mountain, 5 prairie
