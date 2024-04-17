@@ -127,13 +127,17 @@ public class PlayerBoard {
             for(int j = 0; j < 20; j++){
                 if(board[i][j].getHabitatTile() != null){
                     if(firstTile == true){
-                        for(int z = 0; z < 3; z++){
-                            biomeRecurssion(i, j, firstTile, z);
+                        int biomeCount =0;
+                        for(int z = 1; z < 4; z++){
+                            biomeCount = biomeRecurssion(i, j, firstTile);
+                            if(biomeCount > maxRiver){
+                                maxRiver = biomeCount;
+                            }
                         }
                         firstTile = false;
                     } else {
                         for(int z = 0; z < 2; z++){
-                            biomeRecurssion(i, j, firstTile, z);
+                            biomeRecurssion(i, j, firstTile);
                         }
                         if(j == 19){
                             firstTile = true;
@@ -145,9 +149,10 @@ public class PlayerBoard {
         return maxRiver + maxWetland + maxForest + maxMountain + maxPrairie;
     }
 
-    public int biomeRecurssion(int i, int j, boolean firstTile, int z){
+    public int biomeRecurssion(int i, int j, boolean firstTile){
         if(firstTile){
-            if() // call recursion
+            if() {// call recursion
+            }
         } else {
             board[i][j].getHabitatTile().getBiomes().get(1); // call recursion
             board[i][j].getHabitatTile().getBiomes().get(2); // call recursion
@@ -158,11 +163,90 @@ public class PlayerBoard {
 
     public int calculateSalmon(int rC, int cC){}
 
-    public int calculateHawk(){}
+    public int hawkHelper(int rC, int cC){
+        ArrayList<Hexagon> hexes = getAdjacentHexagons(rC, cC);
 
-    public int calculateBear(){}
+        for(Hexagon h : hexes){
+            if(h.getHabitatTile() != null){
+                if(h.getHabitatTile().getTokenPlaced().getType() == 4){
+                    return 0;
+                }
+            }
+        }
+        return 1;
+    }
 
-    public int calculateFox(){}
+    public int calculateHawk(){
+        int hawkCnt = 0;
+        for(int i = 0; i < 20; i++) {
+            for (int j = 0; j < 20; j++) {
+
+            }
+        }
+    }
+
+    public int calculateBear(){
+        int pairs = 0;
+        for(int i = 0; i < 20; i++){
+            for(int j = 0; j < 20; j++){
+                Hexagon h = board[i][j];
+                if(h.getHabitatTile() != null && h.getHabitatTile().getTokenPlaced().getType() == 1 && !h.getHabitatTile().getTokenPlaced().getScored()){
+                    boolean pair = bearPair(i, j);
+                    if(pair){
+                        board[i][j].getHabitatTile().getTokenPlaced().setScored(true);
+                        pairs++;
+                    }
+                }
+            }
+        }
+        if(pairs < 1) {
+            return 0;
+        } else if (pairs < 2) {
+            return 4;
+        } else if (pairs < 3) {
+            return 11;
+        } else if (pairs < 4) {
+            return 19;
+        } else {
+            return 27;
+        }
+    }
+
+    public boolean bearPair(int rC, int cC){
+        ArrayList<Hexagon> hexes = getAdjacentHexagons(rC, cC);
+        int numOfAdjacentBears = 0;
+        ArrayList<Hexagon> match = new ArrayList<>();
+        for(Hexagon h : hexes){
+            if(h.getHabitatTile() != null){
+                if(h.getHabitatTile().getTokenPlaced().getType() == 1){
+                    if(!h.getHabitatTile().getTokenPlaced().getScored()){
+                        numOfAdjacentBears++;
+                        match.add(h);
+                    }
+                }
+            }
+            if(numOfAdjacentBears == 0){
+                Hexagon hex = match.get(0);
+                ArrayList<Hexagon> match2 = getAdjacentHexagons(hex.getRow(), hex.getColumn());
+                int numAdjacentBearstoMatchingBear = 0;
+                for(Hexagon h2 : match2){
+                    if(h2.getHabitatTile() != null){
+                        if(h2.getHabitatTile().getTokenPlaced().getType() == 1){
+                            numAdjacentBearstoMatchingBear++;
+                        }
+                    }
+                }
+                if(numAdjacentBearstoMatchingBear == 1){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public int calculateFox(int rC, int cC){
+
+    }
 
     //public int tokenLineOfSight(){}
 

@@ -32,7 +32,6 @@ public class Game {
     private  ArrayList <AnimalToken> allTokens = new ArrayList();;
     private  ArrayList <HabitatTile> allHabitats = new ArrayList();;
     private  HabitatDashBoard availableHabitats;;
-    private  ArrayList <ScoringCard> scoringCards = new ArrayList();;
 
     public Game(int numOfPlayers) {
         initializeImages();
@@ -63,61 +62,6 @@ public class Game {
             int num = (int)(Math.random() *(allHabitats.size()));
             availableHabitats.addHabitat(allHabitats.get(num));
         }
-
-        //card instantiation: 1 bear, 2 elk, 3 salmon, 4 hawk, 5 fox
-        TreeMap<Integer, Integer> s = new TreeMap<>();
-
-        //bear
-        s.put(1,4);
-        s.put(2,11);
-        s.put(3,15);
-        s.put(4,27);
-        scoringCards.add(new ScoringCard(1, s));
-
-        //elk
-        s = new TreeMap<>();
-        s.put(1,2);
-        s.put(2,4);
-        s.put(3,7);
-        s.put(4,10);
-        s.put(5,14);
-        s.put(6,18);
-        s.put(7,22);
-        s.put(8,28);
-        scoringCards.add(new ScoringCard(2, s));
-
-        //salmon
-        s = new TreeMap<>();
-        s.put(1,2);
-        s.put(2,4);
-        s.put(3,7);
-        s.put(4,11);
-        s.put(5,15);
-        s.put(6,20);
-        s.put(7,26);
-        // 7+ is all 26
-        scoringCards.add(new ScoringCard(3, s));
-
-        //hawk
-        s = new TreeMap<>();
-        s.put(1,2);
-        s.put(2,5);
-        s.put(3,8);
-        s.put(4,11);
-        s.put(5,14);
-        s.put(6,18);
-        s.put(7,22);
-        s.put(8,26);
-        scoringCards.add(new ScoringCard(4, s));
-
-        //fox
-        s = new TreeMap<>();
-        s.put(1,1);
-        s.put(2,2);
-        s.put(3,3);
-        s.put(4,4);
-        s.put(5,5);
-        scoringCards.add(new ScoringCard(5, s));
     }
 
     public void initializeImages() {
@@ -222,9 +166,6 @@ public class Game {
         return allTokens;
     }
 
-    public ArrayList<ScoringCard> getScoringCards() {
-        return scoringCards;
-    }
 
     public int getTurn() {
         return turn;
