@@ -13,7 +13,7 @@ public class StartPanel extends JPanel implements MouseListener	{
 
     public StartPanel(CascadiaFrame frame) {
         try {
-            startScreen = ImageIO.read(StartPanel.class.getResource("/Images/StartScreen.png"));
+            startScreen = ImageIO.read(StartPanel.class.getResource("/Images/Screens/StartScreen.png"));
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return;
@@ -22,7 +22,7 @@ public class StartPanel extends JPanel implements MouseListener	{
     }
     public void paint(Graphics g) {
         super.paint(g);
-
+        drawBackground(g);
 
     }
 
