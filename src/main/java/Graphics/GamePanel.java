@@ -13,7 +13,7 @@ public class GamePanel extends JPanel implements MouseListener{
 	private CascadiaFrame frame;
 	public GamePanel(int playerCount, CascadiaFrame frame) {
         try {
-            background = ImageIO.read(GamePanel.class.getResource("/Images/GameBoard.png"));
+            background = ImageIO.read(GamePanel.class.getResource("/Images/Screens/GameBoard.png"));
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return;
@@ -36,10 +36,15 @@ public class GamePanel extends JPanel implements MouseListener{
 	        int y = e.getY();
 	
 	        System.out.println(x +", "+ y);
-	        
-	        if(x>= 706 && x<=1212 && y>=538 && y <= 736) {
+	        //arrows(up,right,down,left)
+	        if(x>= 430 && x<=460 && y>=900 && y <= 945) {
 	         
-	         }
+	        }
+	        
+	        
+	        if(x>= 430 && x<=460 && y>=900 && y <= 945) {
+		         
+	        }
 	    }
 
 	    public void mousePressed(MouseEvent e) {
