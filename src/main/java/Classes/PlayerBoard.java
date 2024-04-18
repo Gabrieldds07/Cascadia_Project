@@ -150,7 +150,7 @@ public class PlayerBoard {
 
     public int calculateElk(int rC, int cC){}
 
-    public int calculateSalmon(int rC, int cC){}
+    public int calculateSalmon(int rC, int cC){ }
 
     public int calculateHawk(){}
 

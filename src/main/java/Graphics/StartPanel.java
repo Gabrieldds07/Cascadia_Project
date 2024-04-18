@@ -15,6 +15,7 @@ public class StartPanel extends JPanel implements MouseListener	{
     public StartPanel(CascadiaFrame frame) {
         try {
             startScreen = ImageIO.read(StartPanel.class.getResource("/Images/Screens/StartScreen.png"));
+
             close = ImageIO.read(StartPanel.class.getResource("/Images/Screens/close.png"));
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -27,6 +28,7 @@ public class StartPanel extends JPanel implements MouseListener	{
     public void paint(Graphics g) {
         super.paint(g);
         drawBackground(g);
+
         if(rulesPressed == true) {
         	drawRules(g);
         }else {
