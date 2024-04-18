@@ -37,6 +37,7 @@ public class Game {
     private Stack<HabitatTile> tiles;
     private Stack<HabitatTile> starterTiles;
     private Stack<HabitatTile> keyStoneTiles;
+    private Stack<AnimalToken> animalTokens;
 
     public Game(int numOfPlayers) throws IOException{
         initializeImages();
@@ -223,7 +224,37 @@ public class Game {
             starterTiles.push(new HabitatTile("5", 4, 2, 5, 4, false, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/ST Tiles Individual/ST 5 Individual Left.png")))));
             starterTiles.push(new HabitatTile("5", 3, 5, 3, 2, 1, false, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/ST Tiles Individual/ST 5 Individual Right.png")))));
 
-            keyStoneTiles.push(new HabitatTile("1", 3, 2, true, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/ST Tiles Individual/ST 1 Individual Top.png")))));
+            keyStoneTiles.push(new HabitatTile("1", 5, 2, true, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 1.png")))));
+            keyStoneTiles.push(new HabitatTile("2", 5, 3, true, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 2.png")))));
+            keyStoneTiles.push(new HabitatTile("3", 5, 5, true, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 3.png")))));
+            keyStoneTiles.push(new HabitatTile("4", 5, 3, true, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 4.png")))));
+            keyStoneTiles.push(new HabitatTile("5", 5, 2, true, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 5.png")))));
+            keyStoneTiles.push(new HabitatTile("6", 1, 1, true, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 6.png")))));
+            keyStoneTiles.push(new HabitatTile("7", 1, 3, true, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 7.png")))));
+            keyStoneTiles.push(new HabitatTile("8", 1, 4, true, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 8.png")))));
+            keyStoneTiles.push(new HabitatTile("9", 1, 4, true, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 9.png")))));
+            keyStoneTiles.push(new HabitatTile("10", 1, 1, true, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 10.png")))));
+            keyStoneTiles.push(new HabitatTile("11", 2, 5, true, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 11.png")))));
+            keyStoneTiles.push(new HabitatTile("12", 2, 3, true, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 12.png")))));
+            keyStoneTiles.push(new HabitatTile("13", 2, 5, true, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 13.png")))));
+            keyStoneTiles.push(new HabitatTile("14", 2, 4, true, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 14.png")))));
+            keyStoneTiles.push(new HabitatTile("15", 2, 3, true, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 15.png")))));
+            keyStoneTiles.push(new HabitatTile("16", 3, 2, true, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 16.png")))));
+            keyStoneTiles.push(new HabitatTile("17", 3, 5, true, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 17.png")))));
+            keyStoneTiles.push(new HabitatTile("18", 3, 5, true, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 18.png")))));
+            keyStoneTiles.push(new HabitatTile("19", 3, 1, true, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 19.png")))));
+            keyStoneTiles.push(new HabitatTile("20", 3, 1, true, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 20.png")))));
+            keyStoneTiles.push(new HabitatTile("21", 4, 2, true, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 21.png")))));
+            keyStoneTiles.push(new HabitatTile("22", 4, 2, true, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 22.png")))));
+            keyStoneTiles.push(new HabitatTile("23", 4, 4, true, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 23.png")))));
+            keyStoneTiles.push(new HabitatTile("24", 4, 4, true, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 24.png")))));
+            keyStoneTiles.push(new HabitatTile("25", 4, 1, true, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 25.png")))));
+
+            animalTokens.push(new AnimalToken(1, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Animal Tokens/bear.png")))));
+            animalTokens.push(new AnimalToken(2, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Animal Tokens/elk.png")))));
+            animalTokens.push(new AnimalToken(3, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Animal Tokens/salmon.png")))));
+            animalTokens.push(new AnimalToken(4, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Animal Tokens/hawk.png")))));
+            animalTokens.push(new AnimalToken(5, ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Animal Tokens/fox.png")))));
 
             //1 Bear, 2 Elk, 3 Salmon, 4 Hawk, 5 Fox
             //1 river, 2 wetland, 3 forest, 4 mountain, 5 prairie
