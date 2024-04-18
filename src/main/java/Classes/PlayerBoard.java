@@ -161,7 +161,16 @@ public class PlayerBoard {
 
     public int calculateElk(int rC, int cC){}
 
-    public int calculateSalmon(int rC, int cC){ }
+    public int calculateSalmon(int rC, int cC){
+        int SalmonCnt = 0;
+        for(int i = 0; i < 20; i++){
+            for(int j = 0; j < 20; j++){
+                if(board[i][j].getHabitatTile() != null){
+                    if(board[i][j].getHabitatTile().){}
+                }
+            }
+        }
+    }
 
     public int hawkHelper(int rC, int cC){
         ArrayList<Hexagon> hexes = getAdjacentHexagons(rC, cC);
