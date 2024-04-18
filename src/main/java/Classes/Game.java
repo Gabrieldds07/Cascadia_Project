@@ -31,7 +31,7 @@ public class Game {
     private ArrayList <Player> playerList = new ArrayList();;
     private  ArrayList <AnimalToken> allTokens = new ArrayList();;
     private  ArrayList <HabitatTile> allHabitats = new ArrayList();;
-    private  HabitatDashBoard availableHabitats;;
+    private  HabitatDashBoard availableHabitats;
 
     public Game(int numOfPlayers) {
         initializeImages();

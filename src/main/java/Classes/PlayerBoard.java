@@ -10,8 +10,8 @@ public class PlayerBoard {
     private int oddR[] = {-1, -1, 0, 1, 1, 0};
     private int evenC[] = {-1, 0, 1, 0, -1, -1};
     private int evenR[] = {-1, -1, 0, 1, 1, 0};
-    private ArrayList<int> firstTileBiomeScoring = new ArrayList<int>();
-    private ArrayList<int> biomeScoring = new ArrayList<int>();
+    private ArrayList<Integer> firstTileBiomeScoring = new ArrayList<>();
+    private ArrayList<Integer> biomeScoring = new ArrayList<>();
     private int natureTokens = 0;
 
     public PlayerBoard() {
@@ -180,8 +180,31 @@ public class PlayerBoard {
         int hawkCnt = 0;
         for(int i = 0; i < 20; i++) {
             for (int j = 0; j < 20; j++) {
-
+                if(board[i][j].getHabitatTile() != null){
+                    if(board[i][j].getHabitatTile().getTokenPlaced().getType() == 4){
+                        hawkCnt += hawkHelper(i, j);
+                    }
+                }
             }
+        }
+        if(hawkCnt == 0){
+            return 0;
+        } else if(hawkCnt == 1){
+            return 2;
+        } else if(hawkCnt == 2){
+            return 5;
+        } else if(hawkCnt == 3){
+            return 8;
+        } else if(hawkCnt == 4){
+            return 11;
+        } else if(hawkCnt == 5){
+            return 14;
+        } else if(hawkCnt == 6){
+            return 18;
+        } else if(hawkCnt == 7){
+            return 22;
+        } else{
+            return 28;
         }
     }
 
@@ -245,9 +268,64 @@ public class PlayerBoard {
     }
 
     public int calculateFox(int rC, int cC){
-
+        int FoxCnt = 0;
+        for(int i = 0; i < 20; i++){
+            for(int j = 0; j < 20; j++){
+                if(board[i][j].getHabitatTile() != null && board[i][j].getHabitatTile().getTokenPlaced().getType() == 5){
+                    FoxCnt = surroundingFox(i, j);
+                }
+            }
+        }
+        return FoxCnt;
     }
 
+    public int surroundingFox(int rC, int cC){
+        ArrayList<Hexagon> hexes = getAdjacentHexagons(rC, cC);
+
+        boolean elk = false;
+        boolean salmon = false;
+        boolean hawk = false;
+        boolean bear = false;
+        boolean fox = false;
+        //1 Bear, 2 Elk, 3 Salmon, 4 Hawk, 5 Fox
+        for(Hexagon h : hexes){
+            if(h.getHabitatTile() != null){
+                if(h.getHabitatTile().getTokenPlaced().getType() == 1){
+                    bear = true;
+                }
+                if(h.getHabitatTile().getTokenPlaced().getType() == 2){
+                    elk = true;
+                }
+                if(h.getHabitatTile().getTokenPlaced().getType() == 3){
+                    salmon = true;
+                }
+                if(h.getHabitatTile().getTokenPlaced().getType() == 4){
+                    hawk = true;
+                }
+                if(h.getHabitatTile().getTokenPlaced().getType() == 5){
+                    fox = true;
+                    h.getHabitatTile().getTokenPlaced().setScored(true);
+                }
+            }
+        }
+        int num = 0;
+        if(bear){
+            num += 1;
+        }
+        if(fox){
+            num += 1;
+        }
+        if(hawk){
+            num += 1;
+        }
+        if(elk){
+            num += 1;
+        }
+        if(salmon){
+            num += 1;
+        }
+        return num;
+    }
     //public int tokenLineOfSight(){}
 
     //public int getTokenPairs(){}
