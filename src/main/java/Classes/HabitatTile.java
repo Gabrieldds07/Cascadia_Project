@@ -23,18 +23,19 @@ import java.util.ArrayList;
 import java.util.TreeMap;
 
 public class HabitatTile {
-    ArrayList<AnimalToken> tokens = new ArrayList<>();
-    ArrayList<Biome> biomes = new ArrayList<>();
-    AnimalToken tokenPlaced;
-    AnimalToken correspondingToken;
-    Boolean clicked;
-    Boolean placed;
-    Boolean keyStone;
-    int animal1, animal2, animal3;
-    int side0, side1, side2, side3, side4, side5;
+    private ArrayList<AnimalToken> tokens = new ArrayList<>();
+    private ArrayList<Biome> biomes = new ArrayList<>();
+    private AnimalToken tokenPlaced;
+    private AnimalToken correspondingToken;
+    private Boolean clicked;
+    private Boolean placed;
+    private Boolean keyStone;
+    private int animal1, animal2, animal3;
+    private int side0, side1, side2, side3, side4, side5;
     private BufferedImage image;
     private ArrayList <BufferedImage> tiles = new ArrayList<BufferedImage>();
-    String tileNumber;
+    private String tileNumber;
+    private BufferedImage img;
 
     public HabitatTile(ArrayList<AnimalToken> t, ArrayList<Biome> b, boolean k, BufferedImage i) {
         tokens = t;

@@ -43,7 +43,6 @@ public class StartPanel extends JPanel implements MouseListener	{
     public void drawPlayerScreen(Graphics g) {
         g.drawImage(playerScreen, 0, 0, 1366, 768, null);
 
-
     }
     
     public void drawRules(Graphics g) {
@@ -65,12 +64,12 @@ public class StartPanel extends JPanel implements MouseListener	{
         if(x>=750 && x<=1168 && y>=789 && y <= 927) {
 	         rulesPressed = true;
 	         repaint();
-       }
+        }
         
         if(x>=1740 && x<=1800 && y>=120 && y <= 180 && rulesPressed == true) {
 	        rulesPressed = false;
 	        repaint();
-      }
+        }
     }
     public void mousePressed(MouseEvent e) {
 
