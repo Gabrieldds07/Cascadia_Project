@@ -33,9 +33,7 @@ public class Game {
     private ArrayList <Player> playerList = new ArrayList();;
     private  ArrayList <AnimalToken> allTokens = new ArrayList();;
     private  ArrayList <HabitatTile> allHabitats = new ArrayList();;
-    private  HabitatDashBoard availableHabitats;;
-    //private  Map<String, ArrayList<ScoringCard>> allCards;
-    private  ArrayList <ScoringCard> scoringCards = new ArrayList();;
+    private  HabitatDashBoard availableHabitats;
     private Stack<HabitatTile> tiles;
     private Stack<HabitatTile> starterTiles;
     private Stack<HabitatTile> keyStoneTiles;
@@ -71,8 +69,7 @@ public class Game {
             availableHabitats.addHabitat(allHabitats.get(num));
         }
 
-        //card instantiation
-        //1 bear, 2 elk, 3 salmon, 4 hawk, 5 fox
+        //card instantiation: 1 bear, 2 elk, 3 salmon, 4 hawk, 5 fox
         TreeMap<Integer, Integer> s = new TreeMap<>();
 
         //bear
@@ -85,21 +82,25 @@ public class Game {
         //elk
         s = new TreeMap<>();
         s.put(1,2);
-        s.put(2,5);
-        s.put(3,9);
-        s.put(4,13);
+        s.put(2,4);
+        s.put(3,7);
+        s.put(4,10);
+        s.put(5,14);
+        s.put(6,18);
+        s.put(7,22);
+        s.put(8,28);
         scoringCards.add(new ScoringCard(2, s));
 
         //salmon
         s = new TreeMap<>();
         s.put(1,2);
-        s.put(2,5);
-        s.put(3,8);
-        s.put(4,12);
-        s.put(5,16);
+        s.put(2,4);
+        s.put(3,7);
+        s.put(4,11);
+        s.put(5,15);
         s.put(6,20);
-        s.put(7,25);
-        // 7+ is all 25
+        s.put(7,26);
+        // 7+ is all 26
         scoringCards.add(new ScoringCard(3, s));
 
         //hawk
@@ -116,38 +117,12 @@ public class Game {
 
         //fox
         s = new TreeMap<>();
-        s.put(1,2);
-        s.put(2,5);
-        s.put(3,8);
-        s.put(4,11);
-        s.put(5,14);
-        s.put(6,18);
-        s.put(7,22);
-        s.put(8,26);
-        scoringCards.add(new ScoringCard(4, s));
-
-        //scoring cards instantiation
-        /*
-        String s = "Bear";
-        int num = (int)(Math.random() *(allCards.get(s).size()));
-        scoringCards.add(allCards.get(s, num));
-
-        s = "Fox";
-        num = (int)(Math.random() *(allCards.get(s).size()));
-        scoringCards.add(allCards.get(s, num));
-
-        s = "Salmon";
-        num = (int)(Math.random() *(allCards.get(s).size()));
-        scoringCards.add(allCards.get(s, num));
-
-        s = "Hawk";
-        num = (int)(Math.random() *(allCards.get(s).size()));
-        scoringCards.add(allCards.get(s, num));
-
-        s = "Elk";
-        num = (int)(Math.random() *(allCards.get(s).size()));
-        scoringCards.add(allCards.get(s, num));
-        */
+        s.put(1,1);
+        s.put(2,2);
+        s.put(3,3);
+        s.put(4,4);
+        s.put(5,5);
+        scoringCards.add(new ScoringCard(5, s));
     }
 
         public void initializeImages() throws IOException{
@@ -369,11 +344,11 @@ public class Game {
             }
         }
 
-        public ArrayList<AnimalToken> getAllTokens () {
-            return allTokens;
-        }
+    public ArrayList<AnimalToken> getAllTokens () {
+        return allTokens;
+    }
 
-    public ArrayList<Card> getScoringCards() {
+    public ArrayList<ScoringCard> getScoringCards() {
         return scoringCards;
     }
 
