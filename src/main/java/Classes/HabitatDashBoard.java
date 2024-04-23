@@ -19,6 +19,8 @@ public class HabitatDashBoard {
         return dashboard.get(HabitatTile);
     }
 
+    public void replaceToken(int i, AnimalToken h){dashboard.get(i).setCorrespondingToken(h);}
+
     public void addHabitat(HabitatTile h){
         dashboard.add(h);
     }

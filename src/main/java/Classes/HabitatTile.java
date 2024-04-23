@@ -15,9 +15,7 @@ import java.nio.channels.ReadableByteChannel;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-
 import static java.lang.System.*;
-
 import java.util.Iterator;
 import java.util.ArrayList;
 import java.util.TreeMap;
@@ -187,9 +185,6 @@ public class HabitatTile {
     }
 
     //get methods
-    public ArrayList<Biome> getBiomes() {
-        return biomes;
-    }
 
     public Biome getBiome1() {
         return biome1;
@@ -197,6 +192,10 @@ public class HabitatTile {
 
     public Biome getBiome2() {
         return biome2;
+    }
+
+    public ArrayList<Biome> getBiomes() {
+        return biomes;
     }
 
     public ArrayList<AnimalToken> getTokens() {
