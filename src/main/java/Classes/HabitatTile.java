@@ -191,6 +191,14 @@ public class HabitatTile {
         return biomes;
     }
 
+    public Biome getBiome1() {
+        return biome1;
+    }
+
+    public Biome getBiome2() {
+        return biome2;
+    }
+
     public ArrayList<AnimalToken> getTokens() {
         return tokens;
     }

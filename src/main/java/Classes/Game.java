@@ -354,4 +354,16 @@ public class Game {
         availableHabitats.addHabitat(allHabitats.get(num));
         return availableHabitats;
     }
+
+    public void replaceFourSameTokens(){
+
+    }
+
+    public void generateThreeSameTokens(){
+
+    }
+
+    public void replaceThreeSameTokens(){
+
+    }
 }

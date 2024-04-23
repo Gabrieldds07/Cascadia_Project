@@ -31,18 +31,6 @@ public class HabitatDashBoard {
         dashboard.set(index, h);
     }
 
-    public void replaceFourSameTokens(){
-
-    }
-
-    public void generateThreeSameTokens(){
-
-    }
-
-    public void replaceThreeSameTokens(){
-
-    }
-
     public ArrayList<HabitatTile> getDashboard() {
         return dashboard;
     }
