@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.TreeMap;
 
 public class HabitatTile {
+    private Biome biome1;
+    private Biome biome2;
     private ArrayList<AnimalToken> tokens = new ArrayList<>();
     private ArrayList<Biome> biomes = new ArrayList<>();
     private AnimalToken tokenPlaced;
@@ -52,13 +54,13 @@ public class HabitatTile {
         //1 Bear, 2 Elk, 3 Salmon, 4 Hawk, 5 Fox
         //1 river, 2 wetland, 3 forest, 4 mountain, 5 prairie
         this.tileNumber=tileNumber;
-        Biome b = new Biome(type1);
+        biome1 = new Biome(type1);
         for(int i =0; i < 3; i++){
-            biomes.add(b);
+            biomes.add(biome1);
         }
-        b = new Biome(type2);
+        biome2 = new Biome(type2);
         for(int i =0; i < 3; i++){
-            biomes.add(b);
+            biomes.add(biome2);
         }
         AnimalToken a = new AnimalToken(animal1);
         tokens.add(a);
@@ -73,13 +75,13 @@ public class HabitatTile {
         //1 Bear, 2 Elk, 3 Salmon, 4 Hawk, 5 Fox
         //1 river, 2 wetland, 3 forest, 4 mountain, 5 prairie
         this.tileNumber=tileNumber;
-        Biome b = new Biome(type1);
+        biome1 = new Biome(type1);
         for(int i =0; i < 3; i++){
-            biomes.add(b);
+            biomes.add(biome1);
         }
-        b = new Biome(type2);
+        biome2 = new Biome(type2);
         for(int i =0; i < 3; i++){
-            biomes.add(b);
+            biomes.add(biome2);
         }
         AnimalToken a = new AnimalToken(animal1);
         tokens.add(a);
@@ -94,9 +96,10 @@ public class HabitatTile {
         //1 Bear, 2 Elk, 3 Salmon, 4 Hawk, 5 Fox
         //1 river, 2 wetland, 3 forest, 4 mountain, 5 prairie
         this.tileNumber=keyStoneTileNumber;
-        Biome b = new Biome(type1);
+        biome1 = new Biome(type1);
+        biome2 = biome1;
         for(int i =0; i < 6; i++){
-            biomes.add(b);
+            biomes.add(biome1);
         }
         AnimalToken a = new AnimalToken(animal1);
         tokens.add(a);
@@ -109,18 +112,18 @@ public class HabitatTile {
         //1 river, 2 wetland, 3 forest, 4 mountain, 5 prairie
         this.tileNumber=habitatTileNumber;
         //adds sides 0 and 1 for the 2nd starter tile habitat tile into the arraylist
-        Biome b = new Biome(type1);
+        biome1 = new Biome(type1);
         for(int i =0; i < 2; i++){
-            biomes.add(b);
+            biomes.add(biome1);
         }
         //adds sides 2, 3 and 4 for the 2nd starter tile habitat tile into the arraylist
-        b = new Biome(type2);
+        biome2 = new Biome(type2);
         for(int i =2; i <5 ; i++){
-            biomes.add(b);
+            biomes.add(biome2);
         }
         //adds side 4 for the 2nd starter tile habitat tile into the arraylist
-        b = new Biome(type1);
-        biomes.add(b);
+        biome1 = new Biome(type1);
+        biomes.add(biome1);
 
         AnimalToken a = new AnimalToken(animal1);
         tokens.add(a);
@@ -134,15 +137,15 @@ public class HabitatTile {
         //1 Bear, 2 Elk, 3 Salmon, 4 Hawk, 5 Fox
         //1 river, 2 wetland, 3 forest, 4 mountain, 5 prairie
         this.tileNumber=habitatTileNumber;
-        Biome b = new Biome(type2);
-        biomes.add(b);
-        b = new Biome(type1);
+        biome2 = new Biome(type2);
+        biomes.add(biome2);
+        biome1 = new Biome(type1);
         for(int i =1; i < 4; i++) {
-            biomes.add(b);
+            biomes.add(biome1);
         }
-        b = new Biome(type2);
+        biome2 = new Biome(type2);
         for(int i =4; i <6 ; i++){
-            biomes.add(b);
+            biomes.add(biome2);
         }
         AnimalToken a = new AnimalToken(animal1);
         tokens.add(a);
