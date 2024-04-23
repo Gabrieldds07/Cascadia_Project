@@ -238,37 +238,37 @@ public class Game {
                 Tile56 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile56.png")));
                 Tile57 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile57.png")));
 
-                keyStoneTile1 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 1.png")));
-                keyStoneTile2 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 2.png")));
-                keyStoneTile3 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 3.png")));
-                keyStoneTile4 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 4.png")));
-                keyStoneTile5 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 5.png")));
-                keyStoneTile6 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 6.png")));
-                keyStoneTile7 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 7.png")));
-                keyStoneTile8 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 8.png")));
-                keyStoneTile9 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 9.png")));
-                keyStoneTile10 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 10.png")));
-                keyStoneTile11 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 11.png")));
-                keyStoneTile12 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 12.png")));
-                keyStoneTile13 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 13.png")));
-                keyStoneTile14 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 14.png")));
-                keyStoneTile15 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 15.png")));
-                keyStoneTile16 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 16.png")));
-                keyStoneTile17 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 17.png")));
-                keyStoneTile18 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 18.png")));
-                keyStoneTile19 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 19.png")));
-                keyStoneTile20 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 20.png")));
-                keyStoneTile21 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 21.png")));
-                keyStoneTile22 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 22.png")));
-                keyStoneTile23 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 23.png")));
-                keyStoneTile24 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 24.png")));
-                keyStoneTile25 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 25.png")));
+            keyStoneTile1 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 1.png")));
+            keyStoneTile2 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 2.png")));
+            keyStoneTile3 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 3.png")));
+            keyStoneTile4 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 4.png")));
+            keyStoneTile5 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 5.png")));
+            keyStoneTile6 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 6.png")));
+            keyStoneTile7 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 7.png")));
+            keyStoneTile8 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 8.png")));
+            keyStoneTile9 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 9.png")));
+            keyStoneTile10 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 10.png")));
+            keyStoneTile11 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 11.png")));
+            keyStoneTile12 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 12.png")));
+            keyStoneTile13 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 13.png")));
+            keyStoneTile14 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 14.png")));
+            keyStoneTile15 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 15.png")));
+            keyStoneTile16 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 16.png")));
+            keyStoneTile17 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 17.png")));
+            keyStoneTile18 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 18.png")));
+            keyStoneTile19 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 19.png")));
+            keyStoneTile20 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 20.png")));
+            keyStoneTile21 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 21.png")));
+            keyStoneTile22 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 22.png")));
+            keyStoneTile23 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 23.png")));
+            keyStoneTile24 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 24.png")));
+            keyStoneTile25 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 25.png")));
 
-                starterTile1 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Starter Tile 1.png")));
-                starterTile2 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Starter Tile 2.png")));
-                starterTile3 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Starter Tile 3.png")));
-                starterTile4 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Starter Tile 4.png")));
-                starterTile5 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Starter Tile 5.png")));
+            starterTile1 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Starter Tile 1.png")));
+            starterTile2 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Starter Tile 2.png")));
+            starterTile3 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Starter Tile 3.png")));
+            starterTile4 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Starter Tile 4.png")));
+            starterTile5 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Starter Tile 5.png")));
 
                 elkScoringCard = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Scoring Cards/elk-large.png")));
                 salmonScoringCard = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Scoring Cards/salmon-large.png")));
@@ -288,6 +288,8 @@ public class Game {
             }
         }
 
+
+
     public ArrayList<AnimalToken> getAllTokens () {
         return allTokens;
     }
@@ -306,5 +308,51 @@ public class Game {
 
     public HabitatDashBoard getAvailableHabitats() {
         return availableHabitats;
+    }
+
+    public HabitatDashBoard clickedAnimalToken(int n){
+        AnimalToken a = availableHabitats.get(n).getCorrespondingToken();
+        a.setClicked(true);
+        availableHabitats.get(n).setClicked(true);
+        return availableHabitats;
+    }
+
+    public HabitatDashBoard clickedHabitatTile(int n){
+        AnimalToken a = availableHabitats.get(n).getCorrespondingToken();
+        a.setClicked(true);
+        availableHabitats.get(n).setClicked(true);
+        return availableHabitats;
+    }
+
+    public HabitatDashBoard usedNatureToken(int animalToken, int habitatTile){
+        PlayerBoard p = playerList.get(turn).getPlayerBoard();
+        if(p.getNatureTokens() > 0){
+            p.setNatureTokens(p.getNatureTokens()- 1);
+            availableHabitats.get(habitatTile).setClicked(true);
+            AnimalToken a = availableHabitats.get(habitatTile).getCorrespondingToken();
+            AnimalToken b = availableHabitats.get(animalToken).getCorrespondingToken();
+            availableHabitats.get(habitatTile).setCorrespondingToken(b);
+            availableHabitats.get(animalToken).setCorrespondingToken(a);
+        }
+        return availableHabitats;
+    }
+
+    public HabitatDashBoard placedHabitat (int n) {
+        availableHabitats.removeHabitat(n);
+        int num = (int)(Math.random() *(allHabitats.size()));
+        availableHabitats.addHabitat(allHabitats.get(num));
+        return availableHabitats;
+    }
+
+    public void replaceFourSameTokens(){
+
+    }
+
+    public void generateThreeSameTokens(){
+
+    }
+
+    public void replaceThreeSameTokens(){
+
     }
 }

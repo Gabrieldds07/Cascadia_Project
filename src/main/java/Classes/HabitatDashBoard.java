@@ -15,7 +15,7 @@ public class HabitatDashBoard {
         dashboard.get(HabitatTile2).setCorrespondingToken(temp);
     }
 
-    public HabitatTile getDashboard(int HabitatTile){
+    public HabitatTile get(int HabitatTile){
         return dashboard.get(HabitatTile);
     }
 
@@ -23,24 +23,12 @@ public class HabitatDashBoard {
         dashboard.add(h);
     }
 
-    public void removeHabitat(HabitatTile h){
+    public void removeHabitat(int h){
         dashboard.remove(h);
     }
 
     public void replaceHabitat(int index, HabitatTile h){
         dashboard.set(index, h);
-    }
-
-    public void replaceFourSameTokens(){
-
-    }
-
-    public void generateThreeSameTokens(){
-
-    }
-
-    public void replaceThreeSameTokens(){
-
     }
 
     public ArrayList<HabitatTile> getDashboard() {
