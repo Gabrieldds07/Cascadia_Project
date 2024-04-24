@@ -12,7 +12,7 @@ public class PlayerBoard {
     private ArrayList<Integer> firstTileBiomeScoring = new ArrayList<>();
     private ArrayList<Integer> biomeScoring = new ArrayList<>();
     private int natureTokens = 0;
-    private int max
+    private int max;
 
     public PlayerBoard() {
         board = new Hexagon[20][20];
@@ -112,9 +112,82 @@ public class PlayerBoard {
 
     //biome scoring
 
+    public int calculateBiomes(int biomeType) {
+        int max = 0;
+        for (int r = 0; r < 42; r++) {
+            for (int c = 0; c < 42; c++) {
+                Hexagon h = board[r][c];
+                if (!(h.getHabitatTile() == null)) {
+                    if (h.getHabitatTile().getBiome1().getType()== biomeType){
+                        if(!h.getHabitatTile().getBiome1().isScored()){
+                            int size = 1 + getSize(r, c, 1, biomeType);
+                            if (size > max) {
+                                max = size;
+                            }
+                        }
+                    }
+                    if(h.getHabitatTile().getBiome2().getType()== biomeType){
+                        if(!h.getHabitatTile().getBiome2().isScored()){
+                            int size = 1 + getSize(r, c, 2 , biomeType);
+                            if (size > max) {
+                                max = size;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return max;
+    }
+
+
+    public int getSize(int r, int c, int biome, int type) {
+        if(biome == 1){
+            board[r][c].getHabitatTile().getBiome1().setScored(true);
+        } else {
+            board[r][c].getHabitatTile().getBiome2().setScored(true);
+        }
+        int cnt = 0;
+        for (int i=0; i<6; i++) {
+            int x = i+3;
+            if (i==0) {
+                x = 3;
+            }
+            if (i==1) {
+                x = 4;
+            }
+            if (i==2) {
+                x = 5;
+            }
+            if (i==3) {
+                x = 0;
+            }
+            if (i==4) {
+                x = 1;
+            }
+            if (i==5) {
+                x = 2;
+            }
+            Hexagon hex = getAdjacentHexagon(r, c, i);
+            if (hex != null) {
+                if(hex.getHabitatTile() != null){
+                    if(hex.getHabitatTile().getBiomes().get(x).getType() == type){
+                        if(hex.getHabitatTile().getBiomes().get(x).getType() == board[r][c].getHabitatTile().getBiome1().getType()){
+                            cnt += 1 + getSize(hex.getRow(), hex.getColumn(), 1, type);
+                        } else if(hex.getHabitatTile().getBiomes().get(x).getType() == board[r][c].getHabitatTile().getBiome2().getType()){
+                            cnt += 1 + getSize(hex.getRow(), hex.getColumn(), 2, type);
+                        }
+                    }
+                }
+            }
+        }
+        return cnt;
+    }
+
+
 
     //animal scoring
-    public int calculateElk(int rC, int cC){
+    public int calculateElk(){
         int elkCnt = 0;
         //1 Bear, 2 Elk, 3 Salmon, 4 Hawk, 5 Fox
         for(int i = 0; i < 20; i++) {
@@ -159,7 +232,7 @@ public class PlayerBoard {
         }
     }
 
-    public int calculateSalmon(int rC, int cC){
+    public int calculateSalmon(){
         int salmonCnt = 0;
         //1 Bear, 2 Elk, 3 Salmon, 4 Hawk, 5 Fox
         for(int i = 0; i < 20; i++){
@@ -407,7 +480,7 @@ public class PlayerBoard {
         return false;
     }
 
-    public int calculateFox(int rC, int cC){
+    public int calculateFox(){
         int FoxCnt = 0;
         for(int i = 0; i < 20; i++){
             for(int j = 0; j < 20; j++){
