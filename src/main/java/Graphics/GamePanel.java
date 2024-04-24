@@ -39,7 +39,7 @@ public class GamePanel extends JPanel implements MouseListener{
             background = ImageIO.read(GamePanel.class.getResource("/Images/Screens/GameBoard.png"));
             ntButtons = ImageIO.read(GamePanel.class.getResource("/Images/Screens/buttons.png"));
 			elkScoringCard = ImageIO.read(Objects.requireNonNull(GamePanel .class.getResource("/Images/Scoring Cards/elk-large.jpg")));
-			salmonScoringCard = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Scoring Cards/salmon-large.png")));
+			salmonScoringCard = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Scoring Cards/salmon-large.jpg")));
 			foxScoringCard = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Scoring Cards/fox-large.jpg")));
 			hawkScoringCard = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Scoring Cards/hawk-large.jpg")));
 			bearScoringCard = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Scoring Cards/bear-large.jpg")));
