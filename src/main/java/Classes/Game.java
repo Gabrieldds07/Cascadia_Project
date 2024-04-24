@@ -1,26 +1,11 @@
 package Classes;
 
-import Classes.*;
-
-import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.image.*;
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.io.*;
-import java.net.URL;
-import java.nio.channels.Channels;
-import java.nio.channels.ReadableByteChannel;
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
-import static java.lang.System.*;
-
-import java.util.Iterator;
 import java.util.ArrayList;
-import java.util.TreeMap;
 
 public class Game {
     //Things needed to place files into
@@ -30,11 +15,10 @@ public class Game {
     BufferedImage starterTile1, starterTile2, starterTile3, starterTile4, starterTile5;
     BufferedImage elkScoringCard, foxScoringCard, salmonScoringCard, bearScoringCard, hawkScoringCard;
     BufferedImage elkAnimalToken, foxAnimalToken, salmonAnimalToken, bearAnimalToken, hawkAnimalToken;
-    private ArrayList <Player> playerList = new ArrayList();;
-    private  ArrayList <AnimalToken> allTokens = new ArrayList();;
-    private  ArrayList <HabitatTile> allHabitats = new ArrayList();;
-    private  HabitatDashBoard availableHabitats;;
-    //private  Map<String, ArrayList<ScoringCard>> allCards;
+    private ArrayList <Player> playerList = new ArrayList();
+    private  ArrayList <AnimalToken> allTokens = new ArrayList();
+    private  ArrayList <HabitatTile> allHabitats = new ArrayList();
+    private  HabitatDashBoard availableHabitats;
 
 
     //Initializes All images and image objects
@@ -278,6 +262,12 @@ public class Game {
             p = new Player(false);
             playerList.add(p);
         }
+
+        //availableHabitats instantiation
+        for(int i=0;i<4;i++){
+            int num = (int)(Math.random() *(allHabitats.size()));
+            availableHabitats.addHabitat(allHabitats.get(num));
+        }
     }
 
     public ArrayList<AnimalToken> getAllTokens () {
@@ -321,16 +311,22 @@ public class Game {
             availableHabitats.get(habitatTile).setClicked(true);
             AnimalToken a = availableHabitats.get(habitatTile).getCorrespondingToken();
             AnimalToken b = availableHabitats.get(animalToken).getCorrespondingToken();
+            b.setClicked(true);
             availableHabitats.get(habitatTile).setCorrespondingToken(b);
             availableHabitats.get(animalToken).setCorrespondingToken(a);
         }
         return availableHabitats;
     }
 
-    public HabitatDashBoard placedHabitat (int n) {
-        availableHabitats.removeHabitat(n);
-        int num = (int)(Math.random() *(allHabitats.size()));
-        availableHabitats.addHabitat(allHabitats.get(num));
+    public HabitatDashBoard placedHabitat (int num, int row, int col, Player p) {
+        availableHabitats.get(num).setClicked(false);
+        availableHabitats.get(num).getCorrespondingToken().setClicked(false);
+        availableHabitats.get(num).setTokenPlaced(availableHabitats.get(num).getCorrespondingToken());
+        Hexagon[][] b = p.getPlayerBoard().getBoard();
+        b[row][col].setHabitatTile(availableHabitats.get(num));
+        availableHabitats.removeHabitat(num);
+        int rand = (int)(Math.random() *(allHabitats.size()));
+        availableHabitats.addHabitat(allHabitats.get(rand));
         return availableHabitats;
     }
 
@@ -372,4 +368,48 @@ public class Game {
             }
         }
     }
+
+    //1 river, 2 wetland, 3 forest, 4 mountain, 5 prairie
+    public int getRiverScoring(Player p){
+        return p.getPlayerBoard().calculateBiomes(1);
+    }
+
+    public int getWetlandScoring(Player p){
+        return p.getPlayerBoard().calculateBiomes(2);
+    }
+
+    public int getForestScoring(Player p){
+        return p.getPlayerBoard().calculateBiomes(3);
+    }
+
+    public int getMountainScoring(Player p){
+        return p.getPlayerBoard().calculateBiomes(4);
+    }
+
+    public int getPrairieScoring(Player p){
+        return p.getPlayerBoard().calculateBiomes(5);
+    }
+
+    //1 Bear, 2 Elk, 3 Salmon, 4 Hawk, 5 Fox
+    public int getSalmonScoring(Player p){
+        return p.getPlayerBoard().calculateSalmon();
+    }
+
+    public int getElkScoring(Player p){
+        return p.getPlayerBoard().calculateElk();
+    }
+
+    public int getBearScoring(Player p){
+        return p.getPlayerBoard().calculateBear();
+    }
+
+    public int getHawkScoring(Player p){
+        return p.getPlayerBoard().calculateHawk();
+    }
+
+    public int getFoxScoring(Player p){
+        return p.getPlayerBoard().calculateFox();
+    }
+
+
 }
