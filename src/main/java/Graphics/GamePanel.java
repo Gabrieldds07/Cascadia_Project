@@ -1,17 +1,33 @@
 package Graphics;
+//import Classes.Game;
+
+import Classes.*;
+
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import javax.swing.*;
+import java.awt.event.MouseListener;
 import java.awt.image.*;
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.io.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.net.URL;
+import java.nio.channels.Channels;
+import java.nio.channels.ReadableByteChannel;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import static java.lang.System.*;
+
+import java.util.Iterator;
+import java.util.ArrayList;
+import java.util.TreeMap;
+
+
 public class GamePanel extends JPanel implements MouseListener{
 
 	private BufferedImage background, ntButtons, scoreCards;
 	private CascadiaFrame frame;
-	private Tile frontendBoard[][];
 	
 	public GamePanel(int playerCount, CascadiaFrame frame) {
         try {
