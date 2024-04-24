@@ -319,14 +319,26 @@ public class Game {
     }
 
     public HabitatDashBoard placedHabitat (int num, int row, int col, Player p) {
-        availableHabitats.get(num).setClicked(false);
-        availableHabitats.get(num).getCorrespondingToken().setClicked(false);
-        availableHabitats.get(num).setTokenPlaced(availableHabitats.get(num).getCorrespondingToken());
-        Hexagon[][] b = p.getPlayerBoard().getBoard();
-        b[row][col].setHabitatTile(availableHabitats.get(num));
-        availableHabitats.removeHabitat(num);
-        int rand = (int)(Math.random() *(allHabitats.size()));
-        availableHabitats.addHabitat(allHabitats.get(rand));
+        if(p.getTurnsLeft() > 0){ // if they have turns left
+            availableHabitats.get(num).setClicked(false);
+            availableHabitats.get(num).getCorrespondingToken().setClicked(false);
+            availableHabitats.get(num).setTokenPlaced(availableHabitats.get(num).getCorrespondingToken());
+            Hexagon[][] b = p.getPlayerBoard().getBoard();
+            b[row][col].setHabitatTile(availableHabitats.get(num));
+            availableHabitats.removeHabitat(num);
+            int rand = (int)(Math.random() *(allHabitats.size()));
+            availableHabitats.addHabitat(allHabitats.get(rand));
+
+            //decreases turn left by one
+            p.setTurnsLeft(p.getTurnsLeft() - 1);
+            p.setTurn(false);
+
+            //set next player turn
+            if(turn == playerList.size() -1){
+                turn = 0;
+            }
+            playerList.get(turn + 1);
+        }
         return availableHabitats;
     }
 

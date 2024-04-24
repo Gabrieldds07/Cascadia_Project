@@ -1,9 +1,5 @@
 package Classes;
 
-import javax.imageio.ImageIO;
-import java.io.IOException;
-import java.util.*;
-import java.util.stream.Collectors;
 public class Player {
     private PlayerBoard playerBoard;
     private int turnsLeft;
@@ -11,6 +7,8 @@ public class Player {
 
     public Player(boolean b){
         isTurn = b;
+        turnsLeft = 0;
+        playerBoard = new PlayerBoard();
     }
 
     public PlayerBoard getPlayerBoard() {

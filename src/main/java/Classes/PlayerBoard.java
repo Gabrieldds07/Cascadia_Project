@@ -539,9 +539,4 @@ public class PlayerBoard {
         }
         return num;
     }
-    //public int tokenLineOfSight(){}
-
-    //public int getTokenPairs(){}
-
-    //public int getTokenShape(){}
 }

@@ -11,6 +11,7 @@ public class GamePanel extends JPanel implements MouseListener{
 
 	private BufferedImage background, ntButtons, scoreCards;
 	private CascadiaFrame frame;
+	private Tile frontendBoard[][];
 	
 	public GamePanel(int playerCount, CascadiaFrame frame) {
         try {
