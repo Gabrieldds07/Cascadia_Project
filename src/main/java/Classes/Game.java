@@ -318,6 +318,34 @@ public class Game {
         return availableHabitats;
     }
 
+    public HabitatDashBoard placedHabitat (int num, int row, int col, Player p, boolean usedCorrespondingToken) {
+        if(p.getTurnsLeft() > 0) {
+            availableHabitats.get(num).setClicked(false);
+            availableHabitats.get(num).getCorrespondingToken().setClicked(false);
+
+            //if they used the corresponding animal token and didn't discard it
+            if (usedCorrespondingToken) {
+                availableHabitats.get(num).setTokenPlaced(availableHabitats.get(num).getCorrespondingToken());
+            }
+
+            //placing habitat in board
+            Hexagon[][] b = p.getPlayerBoard().getBoard();
+            b[row][col].setHabitatTile(availableHabitats.get(num));
+
+            //updating habitatDashboard
+            availableHabitats.get(num).setPlaced(true);
+            availableHabitats.removeHabitat(num);
+            int rand = (int) (Math.random() * (allHabitats.size()));
+            availableHabitats.addHabitat(allHabitats.get(rand));
+        }
+            //updating player turn
+            p.setTurnsLeft(p.getTurnsLeft() - 1);
+            p.setTurn(false);
+            turn++;
+            if (turn == playerList.size()) {
+                turn = 0;
+            }
+            playerList.get(turn).setTurn(true);
     public HabitatDashBoard placedHabitat (int num, int row, int col, Player p) {
         if(p.getTurnsLeft() > 0){ // if they have turns left
             availableHabitats.get(num).setClicked(false);

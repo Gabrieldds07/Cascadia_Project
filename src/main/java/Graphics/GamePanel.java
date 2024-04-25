@@ -26,13 +26,23 @@ import java.util.TreeMap;
 
 public class GamePanel extends JPanel implements MouseListener{
 
-	private BufferedImage background, ntButtons, scoreCards;
+	private BufferedImage background, ntButtons;
 	private CascadiaFrame frame;
+	private BufferedImage elkScoringCard;
+	private BufferedImage salmonScoringCard;
+	private BufferedImage foxScoringCard;
+	private BufferedImage hawkScoringCard;
+	private BufferedImage bearScoringCard;
 	
 	public GamePanel(int playerCount, CascadiaFrame frame) {
         try {
             background = ImageIO.read(GamePanel.class.getResource("/Images/Screens/GameBoard.png"));
             ntButtons = ImageIO.read(GamePanel.class.getResource("/Images/Screens/buttons.png"));
+			elkScoringCard = ImageIO.read(Objects.requireNonNull(GamePanel .class.getResource("/Images/Scoring Cards/elk-large.jpg")));
+			salmonScoringCard = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Scoring Cards/salmon-large.jpg")));
+			foxScoringCard = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Scoring Cards/fox-large.jpg")));
+			hawkScoringCard = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Scoring Cards/hawk-large.jpg")));
+			bearScoringCard = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Scoring Cards/bear-large.jpg")));
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return;
@@ -48,8 +58,14 @@ public class GamePanel extends JPanel implements MouseListener{
 	}
 	
 	public void drawBackground(Graphics g) {
+		//g.drawImage(Game.elkScoringCard, )
 		g.drawImage(background, 0, 0, 1920, 1080, null);
 		g.drawImage(ntButtons, 34, 917, 281, 123, null);
+		g.drawImage(elkScoringCard, 1300, 800, 150, 150, null);
+		g.drawImage(foxScoringCard, 1450, 800, 150, 150, null);
+		g.drawImage(hawkScoringCard, 1600, 800, 150, 150, null);
+		g.drawImage(bearScoringCard, 1750, 800, 150, 150, null);
+		g.drawImage(salmonScoringCard, 1900, 800, 150, 150, null);
 	}
 	
 	public void drawNatureTokenMenu(Graphics g) {
