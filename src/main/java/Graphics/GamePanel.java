@@ -32,140 +32,144 @@ public class GamePanel extends JPanel implements MouseListener{
 
 	public GamePanel(int playerCount, CascadiaFrame frame) {
 		try {
-			background = ImageIO.read(GamePanel.class.getResource("/Images/Screens/GameBoard.png"));
-			ntButtons = ImageIO.read(GamePanel.class.getResource("/Images/Screens/buttons.png"));
+			background = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Screens/GameBoard.png")));
+			ntButtons = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Screens/buttons.png")));
+			System.out.println("wha");
 
-			Tile1 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile1.png")));
-			Tile2 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile2.png")));
-			Tile3 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile3.png")));
-			Tile4 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile4.png")));
-			Tile5 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile5.png")));
-			Tile6 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile6.png")));
-			Tile7 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile7.png")));
-			Tile8 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile8.png")));
-			Tile9 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile9.png")));
-			Tile10 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile10.png")));
-			Tile11 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile11.png")));
-			Tile12 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile12.png")));
-			Tile13 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile13.png")));
-			Tile14 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile14.png")));
-			Tile15 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile15.png")));
-			Tile16 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile16.png")));
-			Tile17 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile17.png")));
-			Tile18 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile18.png")));
-			Tile19 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile19.png")));
-			Tile20 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile20.png")));
-			Tile21 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile21.png")));
-			Tile22 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile22.png")));
-			Tile23 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile23.png")));
-			Tile24 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile24.png")));
-			Tile25 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile25.png")));
-			Tile26 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile26.png")));
-			Tile27 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile27.png")));
-			Tile28 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile28.png")));
-			Tile29 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile29.png")));
-			Tile30 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile30.png")));
-			Tile31 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile31.png")));
-			Tile32 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile32.png")));
-			Tile33 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile33.png")));
-			Tile34 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile34.png")));
-			Tile35 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile35.png")));
-			Tile36 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile36.png")));
-			Tile37 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile37.png")));
-			Tile38 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile38.png")));
-			Tile39 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile39.png")));
-			Tile40 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile40.png")));
-			Tile41 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile41.png")));
-			Tile42 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile42.png")));
-			Tile43 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile43.png")));
-			Tile44 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile44.png")));
-			Tile45 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile45.png")));
-			Tile46 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile46.png")));
-			Tile47 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile47.png")));
-			Tile48 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile48.png")));
-			Tile49 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile49.png")));
-			Tile50 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile50.png")));
-			Tile51 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile51.png")));
-			Tile52 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile52.png")));
-			Tile53 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile53.png")));
-			Tile54 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile54.png")));
-			Tile55 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile55.png")));
-			Tile56 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile56.png")));
-			Tile57 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Tile57.png")));
+			Tile1 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 1.png")));
+			System.out.println("wha");
 
-
-
-
-			keyStoneTile1 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 1.png")));
-			keyStoneTile2 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 2.png")));
-			keyStoneTile3 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 3.png")));
-			keyStoneTile4 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 4.png")));
-			keyStoneTile5 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 5.png")));
-			keyStoneTile6 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 6.png")));
-			keyStoneTile7 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 7.png")));
-			keyStoneTile8 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 8.png")));
-			keyStoneTile9 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 9.png")));
-			keyStoneTile10 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 10.png")));
-			keyStoneTile11 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 11.png")));
-			keyStoneTile12 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 12.png")));
-			keyStoneTile13 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 13.png")));
-			keyStoneTile14 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 14.png")));
-			keyStoneTile15 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 15.png")));
-			keyStoneTile16 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 16.png")));
-			keyStoneTile17 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 17.png")));
-			keyStoneTile18 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 18.png")));
-			keyStoneTile19 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 19.png")));
-			keyStoneTile20 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 20.png")));
-			keyStoneTile21 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 21.png")));
-			keyStoneTile22 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 22.png")));
-			keyStoneTile23 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 23.png")));
-			keyStoneTile24 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 24.png")));
-			keyStoneTile25 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/KeyStone Tile 25.png")));
+			Tile2 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 2.png")));
+			Tile3 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 3.png")));
+			Tile4 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 4.png")));
+			Tile5 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 5.png")));
+			Tile6 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 6.png")));
+			Tile7 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 7.png")));
+			Tile8 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 8.png")));
+			Tile9 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 9.png")));
+			Tile10 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 10.png")));
+			Tile11 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 11.png")));
+			Tile12 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 12.png")));
+			Tile13 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 13.png")));
+			Tile14 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 14.png")));
+			Tile15 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 15.png")));
+			Tile16 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 16.png")));
+			Tile17 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 17.png")));
+			Tile18 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 18.png")));
+			Tile19 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 19.png")));
+			Tile20 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 20.png")));
+			Tile21 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 21.png")));
+			Tile22 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 22.png")));
+			Tile23 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 23.png")));
+			Tile24 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 24.png")));
+			Tile25 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 25.png")));
+			Tile26 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 26.png")));
+			Tile27 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 27.png")));
+			Tile28 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 28.png")));
+			Tile29 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 29.png")));
+			Tile30 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 30.png")));
+			Tile31 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 31.png")));
+			Tile32 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 32.png")));
+			Tile33 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 33.png")));
+			Tile34 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 34.png")));
+			Tile35 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 35.png")));
+			Tile36 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 36.png")));
+			Tile37 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 37.png")));
+			Tile38 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 38.png")));
+			Tile39 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 39.png")));
+			Tile40 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 40.png")));
+			Tile41 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 41.png")));
+			Tile42 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 42.png")));
+			Tile43 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 43.png")));
+			Tile44 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 44.png")));
+			Tile45 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 45.png")));
+			Tile46 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 46.png")));
+			Tile47 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 47.png")));
+			Tile48 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 48.png")));
+			Tile49 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 49.png")));
+			Tile50 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 50.png")));
+			Tile51 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 51.png")));
+			Tile52 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 52.png")));
+			Tile53 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 53.png")));
+			Tile54 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 54.png")));
+			Tile55 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 55.png")));
+			Tile56 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 56.png")));
+			Tile57 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Tile 57.png")));
+			System.out.println("wha2");
 
 
 
+			keyStoneTile1 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/KeyStone Tile 1.png")));
+			keyStoneTile2 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/KeyStone Tile 2.png")));
+			keyStoneTile3 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/KeyStone Tile 3.png")));
+			keyStoneTile4 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/KeyStone Tile 4.png")));
+			keyStoneTile5 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/KeyStone Tile 5.png")));
+			keyStoneTile6 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/KeyStone Tile 6.png")));
+			keyStoneTile7 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/KeyStone Tile 7.png")));
+			keyStoneTile8 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/KeyStone Tile 8.png")));
+			keyStoneTile9 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/KeyStone Tile 9.png")));
+			keyStoneTile10 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/KeyStone Tile 10.png")));
+			keyStoneTile11 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/KeyStone Tile 11.png")));
+			keyStoneTile12 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/KeyStone Tile 12.png")));
+			keyStoneTile13 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/KeyStone Tile 13.png")));
+			keyStoneTile14 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/KeyStone Tile 14.png")));
+			keyStoneTile15 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/KeyStone Tile 15.png")));
+			keyStoneTile16 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/KeyStone Tile 16.png")));
+			keyStoneTile17 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/KeyStone Tile 17.png")));
+			keyStoneTile18 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/KeyStone Tile 18.png")));
+			keyStoneTile19 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/KeyStone Tile 19.png")));
+			keyStoneTile20 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/KeyStone Tile 20.png")));
+			keyStoneTile21 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/KeyStone Tile 21.png")));
+			keyStoneTile22 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/KeyStone Tile 22.png")));
+			keyStoneTile23 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/KeyStone Tile 23.png")));
+			keyStoneTile24 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/KeyStone Tile 24.png")));
+			keyStoneTile25 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/KeyStone Tile 25.png")));
+			System.out.println("wha3");
 
-			starterTile1 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Starter Tile 1.png")));
-			starterTile2 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Starter Tile 2.png")));
-			starterTile3 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Starter Tile 3.png")));
-			starterTile4 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Starter Tile 4.png")));
-			starterTile5 = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/Starter Tile 5.png")));
+
+
+			starterTile1 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Starter Tile 1.png")));
+			starterTile2 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Starter Tile 2.png")));
+			starterTile3 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Starter Tile 3.png")));
+			starterTile4 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Starter Tile 4.png")));
+			starterTile5 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/Starter Tile 5.png")));
+			System.out.println("wha4");
 
 
 
+			elkScoringCard = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Scoring Cards/elk-large.png")));
+			salmonScoringCard = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Scoring Cards/salmon-large.png")));
+			foxScoringCard = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Scoring Cards/fox-large.png")));
+			hawkScoringCard = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Scoring Cards/hawk-large.png")));
+			bearScoringCard = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Scoring Cards/bear-large.png")));
+			System.out.println("wha5");
 
-			elkScoringCard = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Scoring Cards/elk-large.png")));
-			salmonScoringCard = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Scoring Cards/salmon-large.png")));
-			foxScoringCard = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Scoring Cards/fox-large.png")));
-			hawkScoringCard = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Scoring Cards/hawk-large.png")));
-			bearScoringCard = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Scoring Cards/bear-large.png")));
+			elkAnimalToken = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Animal Tokens/elk.png")));
+			salmonAnimalToken = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Animal Tokens/salmon.png")));
+			foxAnimalToken = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Animal Tokens/fox.png")));
+			hawkAnimalToken = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Animal Tokens/hawk.png")));
+			bearAnimalToken = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Animal Tokens/bear.png")));
+			System.out.println("wha6");
 
+			st1IndividualTop = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/ST 1 Individual Top.png")));
+			st1IndividualRight = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/ST 1 Individual Right.png")));
+			st1IndividualLeft = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/ST 1 Individual Left.png")));
+			st2IndividualTop = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/ST 2 Individual Top.png")));
+			st2IndividualRight = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/ST 2 Individual Left.png")));
+			st2IndividualLeft = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/ST 2 Individual Right.png")));
+			st3IndividualTop = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/ST 3 Individual Top.png")));
+			st3IndividualRight = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/ST 3 Individual Right.png")));
+			st3IndividualLeft = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/ST 3 Individual Left.png")));
+			st4IndividualTop = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/ST 4 Individual Top.png")));
+			st4IndividualRight = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/ST 4 Individual Right.png")));
+			st4IndividualLeft = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/ST 4 Individual Left.png")));
+			st5IndividualTop = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/ST 5 Individual Top.png")));
+			st5IndividualRight = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/ST 5 Individual Right.png")));
+			st5IndividualLeft = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/ST Tiles Individual/ST 5 Individual Left.png")));
+			System.out.println("wha7");
 
-
-
-			elkAnimalToken = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Animal Tokens/elk.png")));
-			salmonAnimalToken = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Animal Tokens/salmon.png")));
-			foxAnimalToken = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Animal Tokens/fox.png")));
-			hawkAnimalToken = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Animal Tokens/hawk.png")));
-			bearAnimalToken = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Animal Tokens/bear.png")));
-
-			st1IndividualTop = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/ST Tiles Individual/ST 1 Individual Top.png")));
-			st1IndividualRight = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/ST Tiles Individual/ST 1 Individual Right.png")));
-			st1IndividualLeft = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/ST Tiles Individual/ST 1 Individual Left.png")));
-			st2IndividualTop = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/ST Tiles Individual/ST 2 Individual Top.png")));
-			st2IndividualRight = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/ST Tiles Individual/ST 2 Individual Left.png")));
-			st2IndividualLeft = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/ST Tiles Individual/ST 2 Individual Right.png")));
-			st3IndividualTop = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/ST Tiles Individual/ST 3 Individual Top.png")));
-			st3IndividualRight = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/ST Tiles Individual/ST 3 Individual Right.png")));
-			st3IndividualLeft = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/ST Tiles Individual/ST 3 Individual Left.png")));
-			st4IndividualTop = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/ST Tiles Individual/ST 4 Individual Top.png")));
-			st4IndividualRight = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/ST Tiles Individual/ST 4 Individual Right.png")));
-			st4IndividualLeft = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/ST Tiles Individual/ST 4 Individual Left.png")));
-			st5IndividualTop = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/ST Tiles Individual/ST 5 Individual Top.png")));
-			st5IndividualRight = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/ST Tiles Individual/ST 5 Individual Right.png")));
-			st5IndividualLeft = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/ST Tiles Individual/ST 5 Individual Left.png")));
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println(e.getMessage() + " panel error ");
 			return;
 		}
 		addMouseListener(this);
