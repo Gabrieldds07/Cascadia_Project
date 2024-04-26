@@ -29,11 +29,15 @@ public class GamePanel extends JPanel implements MouseListener{
 	public static BufferedImage elkScoringCard, foxScoringCard, salmonScoringCard, bearScoringCard, hawkScoringCard;
 	public static BufferedImage elkAnimalToken, foxAnimalToken, salmonAnimalToken, bearAnimalToken, hawkAnimalToken;
 	public static BufferedImage st1IndividualTop, st1IndividualRight, st1IndividualLeft, st2IndividualTop, st2IndividualRight, st2IndividualLeft, st3IndividualTop, st3IndividualRight, st3IndividualLeft, st4IndividualTop, st4IndividualRight, st4IndividualLeft, st5IndividualTop, st5IndividualRight, st5IndividualLeft;
+	private BufferedImage close, scoringCardsBackground;
+	private boolean scoringCardsPressed = false;
 
 	public GamePanel(int playerCount, CascadiaFrame frame) {
 		try {
+			close = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Screens/close.png")));
 			background = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Screens/GameBoard.png")));
 			ntButtons = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Screens/buttons.png")));
+			scoringCardsBackground = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Screens/Scoring Cards Background.png")));
 			System.out.println("wha");
 
 			Tile1 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/Tile 1.png")));
@@ -135,10 +139,10 @@ public class GamePanel extends JPanel implements MouseListener{
 
 
 			elkScoringCard = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Scoring Cards/elk-large.jpg")));
-			salmonScoringCard = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Scoring Cards/salmon-large.png")));
-			foxScoringCard = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Scoring Cards/fox-large.png")));
-			hawkScoringCard = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Scoring Cards/hawk-large.png")));
-			bearScoringCard = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Scoring Cards/bear-large.png")));
+			salmonScoringCard = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Scoring Cards/salmon-large.jpg")));
+			foxScoringCard = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Scoring Cards/fox-large.jpg")));
+			hawkScoringCard = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Scoring Cards/hawk-large.jpg")));
+			bearScoringCard = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Scoring Cards/bear-large.jpg")));
 			System.out.println("wha5");
 
 			elkAnimalToken = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Animal Tokens/elk.png")));
@@ -194,19 +198,38 @@ public class GamePanel extends JPanel implements MouseListener{
 		drawBackground(g);
 		//drawTiles(g);
 		g.drawImage(test, 800,460,100,116,null);
-		if(canUseToken == true) {
+		if(canUseToken) {
 			drawNatureTokenMenu(g);
 		}
 		drawPlayerBoard(g, turn);
 
-		if(rotateRight == true) {
+		if(rotateRight) {
 			rotateImage(g, test, 800, 460, 100, 116, 180);
 			rotateRight = false;
 		}
+		if(scoringCardsPressed){
+			drawScoringCards(g);
+		}
+		else{
+			scoringCardsPressed=false;
+		}
 	}
+	public void drawScoringCards(Graphics g) {
+		g.setColor(Color.WHITE);
+		//g.fillRect(100, 100, 1720, 880);
+		g.drawImage(scoringCardsBackground, 100, 100, 1720, 880, null);
+		g.drawImage(close, 1760, 100,60,60, null);
+		g.drawImage(elkScoringCard, 180, 180, 350, 350, null);
+		g.drawImage(foxScoringCard, 480, 580, 350, 350, null);
+		g.drawImage(hawkScoringCard, 780, 180, 350, 350, null);
+		g.drawImage(bearScoringCard, 1080, 580, 350, 350, null);
+		g.drawImage(salmonScoringCard, 1380, 180, 350, 350, null);
+	}
+
 	public void drawBackground(Graphics g) {
 		g.drawImage(background, 0, 0, 1920, 1080, null);
 		g.drawImage(ntButtons, 34, 917, 281, 123, null);
+
 	}
 
 	public void drawNatureTokenMenu(Graphics g) {
@@ -219,6 +242,7 @@ public class GamePanel extends JPanel implements MouseListener{
 		g.drawString("xd", 100,100);
 
 	}
+
 
 
 	public void mouseClicked(MouseEvent e) {
@@ -270,6 +294,15 @@ public class GamePanel extends JPanel implements MouseListener{
 		}
 		if(x>= 1305 && x <= 1910  && y >= 435 && y <= 755) {
 
+		}
+		if(x>=1314 && x<=1903 && y>=781 && y <= 976) {
+			scoringCardsPressed = true;
+			repaint();
+		}
+
+		if(x>=1760 && x<=1820 && y>=100 && y <= 160 && scoringCardsPressed == true) {
+			scoringCardsPressed = false;
+			repaint();
 		}
 
 	}
