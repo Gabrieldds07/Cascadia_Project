@@ -144,10 +144,13 @@ public class Game {
         }
 
         //availableHabitats instantiation
+
+        ArrayList<HabitatTile> h = new ArrayList<>();
         for(int i=0;i<4;i++){
             int num = (int)(Math.random() *(allHabitats.size()));
-            availableHabitats.addHabitat(allHabitats.get(num));
+            h.add(allHabitats.get(num));
         }
+        availableHabitats = new HabitatDashBoard(h);
     }
 
     public ArrayList<AnimalToken> getAllTokens () {
