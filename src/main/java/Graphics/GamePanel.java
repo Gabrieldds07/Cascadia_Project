@@ -1,37 +1,27 @@
 package Graphics;
-//import Classes.Game;
-
-
-import Classes.*;
-
-
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import javax.swing.*;
+import Classes.Game;
+import Classes.Hexagon;
+import Classes.PlayerBoard;
 import java.awt.image.*;
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.io.*;
-import java.net.URL;
-import java.nio.channels.Channels;
-import java.nio.channels.ReadableByteChannel;
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import static java.lang.System.*;
-import java.util.Iterator;
-import java.util.ArrayList;
-import java.util.TreeMap;
-
-
-
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.geom.AffineTransform;
+import java.awt.Graphics2D;
+import java.awt.Graphics;
+import java.util.Objects;
 
 public class GamePanel extends JPanel implements MouseListener{
-
-
-	private BufferedImage background, ntButtons;
+	private BufferedImage background, ntButtons, scoreCards, test;
 	private CascadiaFrame frame;
+	private boolean canUseToken;
 	private Game game;
+	private int turn;
+	private boolean rotateRight;
 	private Tile[][] tileMatrix = new Tile[20][20];
 	public static BufferedImage Tile1, Tile2, Tile3, Tile4, Tile5, Tile6, Tile7, Tile8, Tile9, Tile10, Tile11, Tile12, Tile13, Tile14, Tile15, Tile16, Tile17, Tile18, Tile19, Tile20, Tile21, Tile22, Tile23, Tile24, Tile25, Tile26, Tile27, Tile28, Tile29, Tile30, Tile31, Tile32, Tile33, Tile34, Tile35, Tile36, Tile37, Tile38, Tile39, Tile40, Tile41, Tile42, Tile43, Tile44, Tile45, Tile46, Tile47, Tile48, Tile49, Tile50, Tile51, Tile52, Tile53, Tile54, Tile55, Tile56, Tile57;
 	public static BufferedImage keyStoneTile1, keyStoneTile2, keyStoneTile3, keyStoneTile4, keyStoneTile5, keyStoneTile6, keyStoneTile7, keyStoneTile8, keyStoneTile9, keyStoneTile10, keyStoneTile11, keyStoneTile12, keyStoneTile13, keyStoneTile14, keyStoneTile15, keyStoneTile16, keyStoneTile17, keyStoneTile18, keyStoneTile19, keyStoneTile20, keyStoneTile21, keyStoneTile22, keyStoneTile23, keyStoneTile24, keyStoneTile25;
@@ -41,7 +31,6 @@ public class GamePanel extends JPanel implements MouseListener{
 	public static BufferedImage st1IndividualTop, st1IndividualRight, st1IndividualLeft, st2IndividualTop, st2IndividualRight, st2IndividualLeft, st3IndividualTop, st3IndividualRight, st3IndividualLeft, st4IndividualTop, st4IndividualRight, st4IndividualLeft, st5IndividualTop, st5IndividualRight, st5IndividualLeft;
 
 	public GamePanel(int playerCount, CascadiaFrame frame) {
-		Scanner input = new Scanner(System.in);
 		try {
 			background = ImageIO.read(GamePanel.class.getResource("/Images/Screens/GameBoard.png"));
 			ntButtons = ImageIO.read(GamePanel.class.getResource("/Images/Screens/buttons.png"));
@@ -166,8 +155,15 @@ public class GamePanel extends JPanel implements MouseListener{
 			st2IndividualTop = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/ST Tiles Individual/ST 2 Individual Top.png")));
 			st2IndividualRight = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/ST Tiles Individual/ST 2 Individual Left.png")));
 			st2IndividualLeft = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/ST Tiles Individual/ST 2 Individual Right.png")));
-			st3IndividualTop =
-
+			st3IndividualTop = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/ST Tiles Individual/ST 3 Individual Top.png")));
+			st3IndividualRight = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/ST Tiles Individual/ST 3 Individual Right.png")));
+			st3IndividualLeft = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/ST Tiles Individual/ST 3 Individual Left.png")));
+			st4IndividualTop = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/ST Tiles Individual/ST 4 Individual Top.png")));
+			st4IndividualRight = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/ST Tiles Individual/ST 4 Individual Right.png")));
+			st4IndividualLeft = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/ST Tiles Individual/ST 4 Individual Left.png")));
+			st5IndividualTop = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/ST Tiles Individual/ST 5 Individual Top.png")));
+			st5IndividualRight = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/ST Tiles Individual/ST 5 Individual Right.png")));
+			st5IndividualLeft = ImageIO.read(Objects.requireNonNull(Game.class.getResource("/Images/Tiles/ST Tiles Individual/ST 5 Individual Left.png")));
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			return;
@@ -175,11 +171,7 @@ public class GamePanel extends JPanel implements MouseListener{
 		addMouseListener(this);
 		this.frame = frame;
 
-
-
 		game = new Game(3);
-
-
 		for(int i = 0; i < 20; i++) {
 			for(int j = 0; j < 20; j++) {
 				Tile t = new Tile(i, j);
@@ -187,36 +179,46 @@ public class GamePanel extends JPanel implements MouseListener{
 		}
 	}
 
-
+	//figure out tiles
 	public void drawTiles(Graphics g) {
+		//coordinates
+		tileMatrix[0][0].instantiateHex(870, 612);
 
-
+		Hexagon[][] h = game.getPlayerList().get(turn).getPlayerBoard().getBoard();
+		g.drawImage(h[0][0].getHabitatTile().getImg(), 870, 612, 20, 20, null);
 	}
 
 
 	public void paint(Graphics g) {
 		drawBackground(g);
+		//drawTiles(g);
+		g.drawImage(test, 800,460,100,116,null);
+		if(canUseToken == true) {
+			drawNatureTokenMenu(g);
+		}
+		drawPlayerBoard(g, turn);
 
+		if(rotateRight == true) {
+			rotateImage(g, test, 800, 460, 100, 116, 180);
+			rotateRight = false;
+		}
 	}
-
 	public void drawBackground(Graphics g) {
-		//g.drawImage(Game.elkScoringCard, )
 		g.drawImage(background, 0, 0, 1920, 1080, null);
 		g.drawImage(ntButtons, 34, 917, 281, 123, null);
-		g.drawImage(elkScoringCard, 1300, 800, 150, 150, null);
-		g.drawImage(foxScoringCard, 1450, 800, 150, 150, null);
-		g.drawImage(hawkScoringCard, 1600, 800, 150, 150, null);
-		g.drawImage(bearScoringCard, 1750, 800, 150, 150, null);
-		g.drawImage(salmonScoringCard, 1900, 800, 150, 150, null);
 	}
 
 	public void drawNatureTokenMenu(Graphics g) {
-
+		g.setColor(Color.WHITE);
+		g.fillRect(100,100,1720,880);
+		//g.set
 	}
 
 	public void drawPlayerBoard(Graphics g, int i) {
+		g.drawString("xd", 100,100);
 
 	}
+
 
 	public void mouseClicked(MouseEvent e) {
 		int x = e.getX();
@@ -236,11 +238,11 @@ public class GamePanel extends JPanel implements MouseListener{
 		if(x>= 385 && x<=430 && y>=945 && y <= 975) {
 
 		}
-
-
 		//rotate cw, ccw, place, cancel
 		if(x>= 720 && x<= 970 && y>= 925 && y <= 950) {
-
+			rotateRight = true;
+			repaint();
+			//rotateImage(, ntButtons, 50, 50, 100, 100, 60);
 		}
 		if(x>= 990 && x<= 1240 && y>= 925 && y <= 950) {
 
@@ -253,36 +255,52 @@ public class GamePanel extends JPanel implements MouseListener{
 
 		}
 
-		// if(x>=)
+		//get Nature Token & replace tokens
+		if(x>= 33 && x <= 315  && y >= 915 && y <= 965 && canUseToken == true) {
+			repaint();
+		}
 
+		if(x>= 33 && x <= 315  && y >= 995 && y <= 1045) {
+			canUseToken = true;
+		}
+		//player boards
+		if(x>= 1305 && x <= 1910  && y >= 55 && y <= 385) {
+
+		}
+		if(x>= 1305 && x <= 1910  && y >= 435 && y <= 755) {
+
+		}
 
 	}
 
-
+	public void rotateImage(Graphics g, BufferedImage image, int x, int y , int w, int h, int degree) {
+		Graphics2D g2 = (Graphics2D)g;
+		double rotationRequired = Math.toRadians(degree);
+		double xCor = image.getWidth()/2;
+		double yCor = image.getHeight()/2;
+		AffineTransform tx = AffineTransform.getRotateInstance(rotationRequired, xCor, yCor);
+		AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+		g2.drawImage(op.filter(image, null), x, y, w, h, null);
+	}
 	public void mousePressed(MouseEvent e) {
-
 	}
-
-
 	public void mouseReleased(MouseEvent e) {
-
-
 	}
-
-
 	public void mouseEntered(MouseEvent e) {
-
-
+	}
+	public void mouseExited(MouseEvent e) {
 	}
 
+	public boolean canUseToken() {
 
-	public void mouseExited(MouseEvent e) {
+		if(game.getPlayerList().get(turn).getPlayerBoard().getNatureTokens() > 0) {
+			canUseToken = true;
+		}else {
+			canUseToken = false;
+		}
 
-
+		return canUseToken;
 	}
 }
-
-
-
 
 

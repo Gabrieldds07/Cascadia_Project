@@ -13,6 +13,7 @@ public class Tile {
         this.c = c;
     }
 
+    //x and y coord on panel
     public void instantiateHex(int x, int y){
         hexgaon = new Polygon();
         for(int i =0; i < 6; i++){
@@ -29,5 +30,6 @@ public class Tile {
     }
 
     public int getR(){return r;}
+
     public int getC(){return c;}
 }
