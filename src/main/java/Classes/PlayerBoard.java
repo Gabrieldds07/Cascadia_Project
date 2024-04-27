@@ -110,7 +110,6 @@ public class PlayerBoard {
     }
 
     //biome scoring
-
     public int calculateBiomes(int biomeType) {
         int max = 0;
         for (int r = 0; r < 42; r++) {
@@ -138,7 +137,6 @@ public class PlayerBoard {
         }
         return max;
     }
-
 
     public int getSize(int r, int c, int biome, int type) {
         if(biome == 1){
@@ -182,8 +180,6 @@ public class PlayerBoard {
         }
         return cnt;
     }
-
-
 
     //animal scoring
     public int calculateElk(){
@@ -538,5 +534,4 @@ public class PlayerBoard {
         }
         return num;
     }
-
 }

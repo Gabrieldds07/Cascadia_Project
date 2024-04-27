@@ -1,10 +1,6 @@
 package Classes;
 
 import Graphics.GamePanel;
-import java.awt.image.*;
-import javax.imageio.ImageIO;
-import java.io.*;
-import java.util.*;
 
 import java.util.ArrayList;
 
@@ -335,5 +331,141 @@ public class Game {
         return p.getPlayerBoard().calculateFox();
     }
 
+    public ArrayList<Integer> calculatePlacePointsForBiome(int biome){
+        ArrayList<Integer> points = new ArrayList<>();
+        //1 river, 2 wetland, 3 forest, 4 mountain, 5 prairie
+        int player1Max = playerList.get(0).getPlayerBoard().calculateBiomes(biome);
+        int player2Max = playerList.get(1).getPlayerBoard().calculateBiomes(biome);
+        int player3Max = playerList.get(2).getPlayerBoard().calculateBiomes(biome);
+
+        boolean p1p2tie = (player1Max == player2Max);
+        boolean p1p3tie = (player1Max == player3Max);
+        boolean p2p3tie = (player2Max == player3Max);
+        boolean p1p2p3tie = (player1Max == player3Max) && (player2Max == player3Max);
+
+        //3 way tie
+        if(p1p2p3tie){
+            points.add(1);
+            points.add(1);
+            points.add(1);
+        }
+
+        if(p1p2tie || p2p3tie || p1p3tie){
+            if(p1p2tie){
+                points.add(2);
+                points.add(2);
+                points.add(0);
+            }
+            else if(p1p3tie){
+                points.add(2);
+                points.add(0);
+                points.add(2);
+            }
+            else if(p2p3tie){
+                points.add(0);
+                points.add(2);
+                points.add(2);
+            }
+        }
+
+        //one player has most
+        if(player1Max > player2Max && player1Max > player3Max){
+            points.add(3);
+            if(p2p3tie){
+                points.add(0);
+                points.add(0);
+            } else if (player2Max > player3Max){
+                points.add(1);
+                points.add(0);
+            } else {
+                points.add(0);
+                points.add(1);
+            }
+        }
+
+        if(player2Max > player1Max && player2Max > player3Max){
+            if(p1p3tie){
+                points.add(0);
+                points.add(3);
+                points.add(0);
+            } else if (player1Max > player3Max){
+                points.add(1);
+                points.add(3);
+                points.add(0);
+            } else {
+                points.add(0);
+                points.add(3);
+                points.add(1);
+            }
+        }
+
+        if(player3Max > player2Max && player3Max > player1Max){
+            if(p1p2tie){
+                points.add(0);
+                points.add(0);
+            } else if (player1Max > player2Max){
+                points.add(1);
+                points.add(0);
+            } else {
+                points.add(0);
+                points.add(1);
+            }
+            points.add(3);
+        }
+        return points;
+    }
+
+    public ArrayList<Integer> totalBiome(){
+        ArrayList<Integer> points = new ArrayList<>();
+
+        for(int i = 0; i < 4; i++){
+            Player p = playerList.get(i);
+            int total = 0;
+            for(int j = 1; j < 6; j++){
+                total += p.getPlayerBoard().calculateBiomes(j);
+                total += calculatePlacePointsForBiome(j).get(i);
+            }
+            points.add(total);
+        }
+        return points;
+    }
+
+    public ArrayList<Integer> totalAnimalTokens(){
+        ArrayList<Integer> points = new ArrayList<>();
+
+        for(int i = 0; i < 4; i++) {
+            Player p = playerList.get(i);
+            int total = 0;
+            total += p.getPlayerBoard().calculateBear();
+            total += p.getPlayerBoard().calculateFox();
+            total += p.getPlayerBoard().calculateHawk();
+            total += p.getPlayerBoard().calculateElk();
+            total += p.getPlayerBoard().calculateSalmon();
+
+            points.add(total);
+        }
+        return points;
+    }
+
+    public ArrayList<Integer> totalNatureTokens(){
+        ArrayList<Integer> points = new ArrayList<>();
+        for(int i = 0; i < 4; i++){
+            points.add(playerList.get(i).getPlayerBoard().getNatureTokens());
+        }
+        return points;
+    }
+
+    public ArrayList<Integer> getFinalScore(){
+        ArrayList<Integer> points = new ArrayList<>();
+        for(int i = 0; i < 4; i++){
+            int total = 0;
+            total += totalNatureTokens().get(i);
+            total += totalAnimalTokens().get(i);
+            total += totalBiome().get(i);
+
+            points.add(total);
+        }
+        return points;
+    }
 
 }
