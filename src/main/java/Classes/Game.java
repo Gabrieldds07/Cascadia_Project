@@ -235,7 +235,17 @@ public class Game {
     }
 
     public void replaceFourSameTokens(){
-        //checks if all animal tokens are the same
+        int num1 = -1;
+        for(int i = 0; i < 4; i++){
+            int num = (int)(Math.random() *(allTokens.size()));
+            availableHabitats.replaceToken(i, allTokens.get(num));
+        }
+        if(checkFourSameToken()){
+            replaceFourSameTokens();
+        }
+    }
+
+    public boolean checkFourSameToken(){
         boolean same = true;
         int type = availableHabitats.get(0).getCorrespondingToken().getType();
         for(int i = 0; i < 4; i++){
@@ -243,33 +253,43 @@ public class Game {
                 same = false;
             }
         }
-        if(same){
-            for(int i = 0; i < 4; i++){
+        return same;
+    }
+
+    public int checkThreeSameToken(){
+        int same = -1;
+        int j1 = 0;
+        int type = availableHabitats.get(0).getCorrespondingToken().getType();
+        int j2 = 0;
+        int type2 = availableHabitats.get(1).getCorrespondingToken().getType();
+        for(int i = 0; i < 4; i++){
+            if(availableHabitats.get(i).getCorrespondingToken().getType() == type){
+                j1++;
+            }
+            if(availableHabitats.get(i).getCorrespondingToken().getType() == type2){
+                j2++;
+            }
+        }
+        if(j1 == 3){
+            same = type;
+        }
+        if(j2 == 3){
+            same = type2;
+        }
+        return same;
+    }
+
+    public void replaceThreeSameTokens(int type){
+        for(int i = 0; i < 4; i++){
+            if(availableHabitats.get(i).getCorrespondingToken().getType() == type){
                 int num = (int)(Math.random() *(allTokens.size()));
                 availableHabitats.replaceToken(i, allTokens.get(num));
             }
         }
-    }
 
-    public void replaceThreeSameTokens(){
-        boolean same = true;
-        int j = 0;
-        int type = availableHabitats.get(0).getCorrespondingToken().getType();
-        for(int i = 0; i < 4; i++){
-            if(availableHabitats.get(i).getCorrespondingToken().getType() != type){
-                j++;
-                if(j > 1){
-                    same = false;
-                }
-            }
-        }
-        if(same){
-            for(int i = 0; i < 4; i++){
-                if(availableHabitats.get(i).getCorrespondingToken().getType() == type){
-                    int num = (int)(Math.random() *(allTokens.size()));
-                    availableHabitats.replaceToken(i, allTokens.get(num));
-                }
-            }
+        int number = checkThreeSameToken();
+        if(number != -1){
+            replaceThreeSameTokens(number);
         }
     }
 

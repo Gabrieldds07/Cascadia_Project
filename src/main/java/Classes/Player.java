@@ -11,6 +11,7 @@ public class Player {
 
     public Player(boolean b){
         isTurn = b;
+        playerBoard = new PlayerBoard();
     }
 
     public PlayerBoard getPlayerBoard() {
