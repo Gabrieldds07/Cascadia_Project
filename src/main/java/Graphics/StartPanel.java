@@ -42,7 +42,6 @@ public class StartPanel extends JPanel implements MouseListener	{
 
     public void drawPlayerScreen(Graphics g) {
         g.drawImage(playerScreen, 0, 0, 1366, 768, null);
-
     }
     
     public void drawRules(Graphics g) {

@@ -1,10 +1,6 @@
 package Classes;
 
 import Graphics.GamePanel;
-import java.awt.image.*;
-import javax.imageio.ImageIO;
-import java.io.*;
-import java.util.*;
 
 import java.util.ArrayList;
 
@@ -149,6 +145,9 @@ public class Game {
         for(int i=0;i<4;i++){
             int num = (int)(Math.random() *(allHabitats.size()));
             h.add(allHabitats.get(num));
+            int rand = (int) ((Math.random() * (4)) + 1);
+            AnimalToken a = new AnimalToken(rand);
+            h.get(i).setCorrespondingToken(a);
         }
         availableHabitats = new HabitatDashBoard(h);
     }
@@ -206,6 +205,7 @@ public class Game {
     public HabitatDashBoard placedHabitat (int num, int row, int col, Player p, boolean usedCorrespondingToken) {
         if(p.getTurnsLeft() > 0) {
             availableHabitats.get(num).setClicked(false);
+            p.getPlayerBoard().getBoard()[row][col].setGray(false);
             availableHabitats.get(num).getCorrespondingToken().setClicked(false);
 
             //if they used the corresponding animal token and didn't discard it
@@ -222,12 +222,15 @@ public class Game {
             availableHabitats.removeHabitat(num);
             int rand = (int) (Math.random() * (allHabitats.size()));
             availableHabitats.addHabitat(allHabitats.get(rand));
+            rand = (int) ((Math.random() * (4)) + 1);
+            AnimalToken a = new AnimalToken(rand);
+            availableHabitats.get(num).setCorrespondingToken(a);
         }
             //updating player turn
             p.setTurnsLeft(p.getTurnsLeft() - 1);
             p.setTurn(false);
             turn++;
-            if (turn == playerList.size()) {
+            if (turn == 4) {
                 turn = 0;
             }
             playerList.get(turn).setTurn(true);
@@ -256,7 +259,17 @@ public class Game {
     }
 
     public void replaceFourSameTokens(){
-        //checks if all animal tokens are the same
+        int num1 = -1;
+        for(int i = 0; i < 4; i++){
+            int num = (int)(Math.random() *(allTokens.size()));
+            availableHabitats.replaceToken(i, allTokens.get(num));
+        }
+        if(checkFourSameToken()){
+            replaceFourSameTokens();
+        }
+    }
+
+    public boolean checkFourSameToken(){
         boolean same = true;
         int type = availableHabitats.get(0).getCorrespondingToken().getType();
         for(int i = 0; i < 4; i++){
@@ -264,33 +277,43 @@ public class Game {
                 same = false;
             }
         }
-        if(same){
-            for(int i = 0; i < 4; i++){
+        return same;
+    }
+
+    public int checkThreeSameToken(){
+        int same = -1;
+        int j1 = 0;
+        int type = availableHabitats.get(0).getCorrespondingToken().getType();
+        int j2 = 0;
+        int type2 = availableHabitats.get(1).getCorrespondingToken().getType();
+        for(int i = 0; i < 4; i++){
+            if(availableHabitats.get(i).getCorrespondingToken().getType() == type){
+                j1++;
+            }
+            if(availableHabitats.get(i).getCorrespondingToken().getType() == type2){
+                j2++;
+            }
+        }
+        if(j1 == 3){
+            same = type;
+        }
+        if(j2 == 3){
+            same = type2;
+        }
+        return same;
+    }
+
+    public void replaceThreeSameTokens(int type){
+        for(int i = 0; i < 4; i++){
+            if(availableHabitats.get(i).getCorrespondingToken().getType() == type){
                 int num = (int)(Math.random() *(allTokens.size()));
                 availableHabitats.replaceToken(i, allTokens.get(num));
             }
         }
-    }
 
-    public void replaceThreeSameTokens(){
-        boolean same = true;
-        int j = 0;
-        int type = availableHabitats.get(0).getCorrespondingToken().getType();
-        for(int i = 0; i < 4; i++){
-            if(availableHabitats.get(i).getCorrespondingToken().getType() != type){
-                j++;
-                if(j > 1){
-                    same = false;
-                }
-            }
-        }
-        if(same){
-            for(int i = 0; i < 4; i++){
-                if(availableHabitats.get(i).getCorrespondingToken().getType() == type){
-                    int num = (int)(Math.random() *(allTokens.size()));
-                    availableHabitats.replaceToken(i, allTokens.get(num));
-                }
-            }
+        int number = checkThreeSameToken();
+        if(number != -1){
+            replaceThreeSameTokens(number);
         }
     }
 
@@ -336,5 +359,141 @@ public class Game {
         return p.getPlayerBoard().calculateFox();
     }
 
+    public ArrayList<Integer> calculatePlacePointsForBiome(int biome){
+        ArrayList<Integer> points = new ArrayList<>();
+        //1 river, 2 wetland, 3 forest, 4 mountain, 5 prairie
+        int player1Max = playerList.get(0).getPlayerBoard().calculateBiomes(biome);
+        int player2Max = playerList.get(1).getPlayerBoard().calculateBiomes(biome);
+        int player3Max = playerList.get(2).getPlayerBoard().calculateBiomes(biome);
+
+        boolean p1p2tie = (player1Max == player2Max);
+        boolean p1p3tie = (player1Max == player3Max);
+        boolean p2p3tie = (player2Max == player3Max);
+        boolean p1p2p3tie = (player1Max == player3Max) && (player2Max == player3Max);
+
+        //3 way tie
+        if(p1p2p3tie){
+            points.add(1);
+            points.add(1);
+            points.add(1);
+        }
+
+        if(p1p2tie || p2p3tie || p1p3tie){
+            if(p1p2tie){
+                points.add(2);
+                points.add(2);
+                points.add(0);
+            }
+            else if(p1p3tie){
+                points.add(2);
+                points.add(0);
+                points.add(2);
+            }
+            else if(p2p3tie){
+                points.add(0);
+                points.add(2);
+                points.add(2);
+            }
+        }
+
+        //one player has most
+        if(player1Max > player2Max && player1Max > player3Max){
+            points.add(3);
+            if(p2p3tie){
+                points.add(0);
+                points.add(0);
+            } else if (player2Max > player3Max){
+                points.add(1);
+                points.add(0);
+            } else {
+                points.add(0);
+                points.add(1);
+            }
+        }
+
+        if(player2Max > player1Max && player2Max > player3Max){
+            if(p1p3tie){
+                points.add(0);
+                points.add(3);
+                points.add(0);
+            } else if (player1Max > player3Max){
+                points.add(1);
+                points.add(3);
+                points.add(0);
+            } else {
+                points.add(0);
+                points.add(3);
+                points.add(1);
+            }
+        }
+
+        if(player3Max > player2Max && player3Max > player1Max){
+            if(p1p2tie){
+                points.add(0);
+                points.add(0);
+            } else if (player1Max > player2Max){
+                points.add(1);
+                points.add(0);
+            } else {
+                points.add(0);
+                points.add(1);
+            }
+            points.add(3);
+        }
+        return points;
+    }
+
+    public ArrayList<Integer> totalBiome(){
+        ArrayList<Integer> points = new ArrayList<>();
+
+        for(int i = 0; i < 4; i++){
+            Player p = playerList.get(i);
+            int total = 0;
+            for(int j = 1; j < 6; j++){
+                total += p.getPlayerBoard().calculateBiomes(j);
+                total += calculatePlacePointsForBiome(j).get(i);
+            }
+            points.add(total);
+        }
+        return points;
+    }
+
+    public ArrayList<Integer> totalAnimalTokens(){
+        ArrayList<Integer> points = new ArrayList<>();
+
+        for(int i = 0; i < 4; i++) {
+            Player p = playerList.get(i);
+            int total = 0;
+            total += p.getPlayerBoard().calculateBear();
+            total += p.getPlayerBoard().calculateFox();
+            total += p.getPlayerBoard().calculateHawk();
+            total += p.getPlayerBoard().calculateElk();
+            total += p.getPlayerBoard().calculateSalmon();
+
+            points.add(total);
+        }
+        return points;
+    }
+
+    public ArrayList<Integer> totalNatureTokens(){
+        ArrayList<Integer> points = new ArrayList<>();
+        for(int i = 0; i < 4; i++){
+            points.add(playerList.get(i).getPlayerBoard().getNatureTokens());
+        }
+        return points;
+    }
+
+    public ArrayList<Integer> getFinalScore(){
+        ArrayList<Integer> points = new ArrayList<>();
+        for(int i = 0; i < 4; i++){
+            int total = 0;
+            total += totalNatureTokens().get(i);
+            total += totalAnimalTokens().get(i);
+            total += totalBiome().get(i);
+
+            points.add(total);
+        }
+        return points;
+    }
 
 }
