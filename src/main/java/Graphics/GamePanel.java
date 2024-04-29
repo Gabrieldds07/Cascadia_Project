@@ -572,7 +572,7 @@ public class GamePanel extends JPanel implements MouseListener{
 		}
 		if(scoringCardsPressed){
 			drawScoringCards(g);
-			scoringCardsPressed=false;
+			//scoringCardsPressed=false;
 		}
 	}
 
@@ -713,11 +713,11 @@ public class GamePanel extends JPanel implements MouseListener{
 			//}
 
 			//view scoring cards
-			if (x >= 1314 && x <= 1903 && y >= 781 && y <= 976) {
+			if (x >= 1400 && x <= 1805 && y >= 690 && y <= 720) {
 				scoringCardsPressed = true;
 				repaint();
 			}
-			if (x >= 1760 && x <= 1820 && y >= 100 && y <= 160 && scoringCardsPressed == true) {
+			if (x >= 1760 && x <= 1820 && y >= 100 && y <= 160 && scoringCardsPressed) {
 				scoringCardsPressed = false;
 				repaint();
 			}
@@ -782,5 +782,3 @@ public class GamePanel extends JPanel implements MouseListener{
 		return canUseToken;
 	}
 }
-
-
