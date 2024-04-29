@@ -145,6 +145,9 @@ public class Game {
         for(int i=0;i<4;i++){
             int num = (int)(Math.random() *(allHabitats.size()));
             h.add(allHabitats.get(num));
+            int rand = (int) ((Math.random() * (4)) + 1);
+            AnimalToken a = new AnimalToken(rand);
+            h.get(i).setCorrespondingToken(a);
         }
         availableHabitats = new HabitatDashBoard(h);
     }
@@ -202,6 +205,7 @@ public class Game {
     public HabitatDashBoard placedHabitat (int num, int row, int col, Player p, boolean usedCorrespondingToken) {
         if(p.getTurnsLeft() > 0) {
             availableHabitats.get(num).setClicked(false);
+            p.getPlayerBoard().getBoard()[row][col].setGray(false);
             availableHabitats.get(num).getCorrespondingToken().setClicked(false);
 
             //if they used the corresponding animal token and didn't discard it
@@ -218,12 +222,15 @@ public class Game {
             availableHabitats.removeHabitat(num);
             int rand = (int) (Math.random() * (allHabitats.size()));
             availableHabitats.addHabitat(allHabitats.get(rand));
+            rand = (int) ((Math.random() * (4)) + 1);
+            AnimalToken a = new AnimalToken(rand);
+            availableHabitats.get(num).setCorrespondingToken(a);
         }
             //updating player turn
             p.setTurnsLeft(p.getTurnsLeft() - 1);
             p.setTurn(false);
             turn++;
-            if (turn == playerList.size()) {
+            if (turn == 4) {
                 turn = 0;
             }
             playerList.get(turn).setTurn(true);
