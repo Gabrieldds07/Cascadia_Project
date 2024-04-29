@@ -641,8 +641,8 @@ public class GamePanel extends JPanel implements MouseListener{
 			HabitatTile h = game.getAvailableHabitats().get(i);
 			AnimalToken a = h.getCorrespondingToken();
 
-			g.drawImage(h.getImg(), 250, 300 + i * 175, 25, 25, null);
-			g.drawImage(a.getImg(), 90, 300 + i * 175, 25, 25, null);
+			g.drawImage(h.getImg(), 250, 300 + i * 175, 75, 75, null);
+			g.drawImage(a.getImg(), 90, 300 + i * 175, 75, 75, null);
 		}
 	}
 
