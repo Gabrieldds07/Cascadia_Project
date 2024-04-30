@@ -5,8 +5,6 @@ import javax.swing.*;
 import Classes.*;
 import java.awt.image.*;
 import javax.imageio.ImageIO;
-import java.io.*;
-import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.AffineTransform;
 import java.awt.Graphics2D;
@@ -250,24 +248,29 @@ public class GamePanel extends JPanel implements MouseListener{
 			drawNatureTokenMenu(g);
 		}
 		if(gameState != 0){
-			drawPlayerInfo(g, turn);
 			if(gameState == 1){
+				if(gameState2 == 0){
+					drawPlayerBoard(g, game.getPlayerList().get(turn).getPlayerBoard().getBoard());
+				}
 				if(gameState2 == 1){
 					drawPlayerBoard(g, tempboard);
+					g.drawPolygon(r3c3);
 				}
-				drawPlayerBoard(g, game.getPlayerList().get(turn).getPlayerBoard().getBoard());
 			}
 			else if(gameState == 2){
+				if(gameState2 == 0){
+					drawPlayerBoard(g, game.getPlayerList().get(turn).getPlayerBoard().getBoard());
+				}
 				if(gameState2 == 1){
 					drawPlayerBoard(g, tempboard);
 				}
-				drawPlayerBoard(g, game.getPlayerList().get(turn).getPlayerBoard().getBoard());
 			}
+			drawPlayerInfo(g);
 			drawTiles(g);
 			drawHabitatDashboard(g);
 		}
 		if(rotateRight) {
-			rotateImage(g, test, 800, 460, 100, 116, 180);
+			rotateImage(g, game.getAvailableHabitats().getDashboard().get(habitatNum).getImg(), 800, 460, 100, 116, 180);
 			rotateRight = false;
 		}
 		if(scoringCardsPressed){
@@ -286,7 +289,7 @@ public class GamePanel extends JPanel implements MouseListener{
 	public void drawTiles(Graphics g) {
 		for(int i = 0; i < 8; i++) {
 			if(i ==0){
-				instantiateHex(480 + 100 * i, 220, r0c0);
+				instantiateHex(480, 220, r0c0);
 			}
 			if(i ==1){
 				instantiateHex(480 + 100 * i, 220, r0c1);
@@ -313,7 +316,7 @@ public class GamePanel extends JPanel implements MouseListener{
 
 		for(int i = 0; i < 8; i++) {
 			if(i ==0){
-				instantiateHex(430 + 100 * i, 305, r1c0);
+				instantiateHex(430, 305, r1c0);
 			}
 			if(i ==1){
 				instantiateHex(430 + 100 * i, 305, r1c1);
@@ -341,7 +344,7 @@ public class GamePanel extends JPanel implements MouseListener{
 
 		for(int i = 0; i < 8; i++) {
 			if(i ==0){
-				instantiateHex(480 + 100 * i, 390, r2c0);
+				instantiateHex(480, 390, r2c0);
 			}
 			if(i ==1){
 				instantiateHex(480 + 100 * i, 390, r2c1);
@@ -369,7 +372,7 @@ public class GamePanel extends JPanel implements MouseListener{
 
 		for(int i = 0; i < 8; i++) {
 			if(i ==0){
-				instantiateHex(430 + 100 * i, 480, r3c0);
+				instantiateHex(430, 480, r3c0);
 			}
 			if(i ==1){
 				instantiateHex(430 + 100 * i, 480, r3c1);
@@ -397,7 +400,7 @@ public class GamePanel extends JPanel implements MouseListener{
 
 		for(int i = 0; i < 8; i++) {
 			if(i ==0){
-				instantiateHex(480 + 100 * i, 565, r4c0);
+				instantiateHex(480, 565, r4c0);
 			}
 			if(i ==1){
 				instantiateHex(480 + 100 * i, 565, r4c1);
@@ -425,7 +428,7 @@ public class GamePanel extends JPanel implements MouseListener{
 
 		for(int i = 0; i < 8; i++) {
 			if(i ==0){
-				instantiateHex(430 + 100 * i, 650, r5c0);
+				instantiateHex(430, 650, r5c0);
 			}
 			if(i ==1){
 				instantiateHex(430 + 100 * i, 650, r5c1);
@@ -453,7 +456,7 @@ public class GamePanel extends JPanel implements MouseListener{
 
 		for(int i = 0; i < 8; i++) {
 			if(i ==0){
-				instantiateHex(480 + 100 * i, 740, r6c0);
+				instantiateHex(480, 740, r6c0);
 			}
 			if(i ==1){
 				instantiateHex(480 + 100 * i, 740, r6c1);
@@ -481,7 +484,7 @@ public class GamePanel extends JPanel implements MouseListener{
 
 		for(int i = 0; i < 8; i++) {
 			if(i ==0){
-				instantiateHex(430 + 100 * i, 830, r7c0);
+				instantiateHex(430, 830, r7c0);
 			}
 			if(i ==1){
 				instantiateHex(430 + 100 * i, 830, r7c1);
@@ -509,7 +512,6 @@ public class GamePanel extends JPanel implements MouseListener{
 
 	public void drawScoringCards(Graphics g) {
 		g.setColor(Color.WHITE);
-		//g.fillRect(100, 100, 1720, 880);
 		g.drawImage(scoringCardsBackground, 100, 100, 1720, 880, null);
 		g.drawImage(close, 1760, 100,60,60, null);
 		g.drawImage(elkScoringCard, 180, 180, 350, 350, null);
@@ -524,7 +526,7 @@ public class GamePanel extends JPanel implements MouseListener{
 		int x = 0;
 		int y = 0;
 		for(int r = top; r < bottom; r++){
-            even = y % 2 == 0;
+            even = (y % 2 == 0);
 			for(int c = left; c < right; c++){
 				if(b[r][c].getHabitatTile() != null) {
 					if(notStarterTileLeftorRight(b[r][c].getHabitatTile())) {
@@ -582,7 +584,7 @@ public class GamePanel extends JPanel implements MouseListener{
 		g.fillRect(100,100,1720,880);
 	}
 
-	public void drawPlayerInfo(Graphics g, int i) {
+	public void drawPlayerInfo(Graphics g) {
 		g.drawString("Player " + (turn + 1), 50,65);
 		g.drawString("Turns Left: " + game.getPlayerList().get(turn).getTurnsLeft(), 50,95);
 		g.drawString("Nature Tokes: " + game.getPlayerList().get(turn).getPlayerBoard().getNatureTokens(), 50,125);
@@ -592,7 +594,6 @@ public class GamePanel extends JPanel implements MouseListener{
 		for(int i = 0; i < 4; i++){
 			HabitatTile h = game.getAvailableHabitats().get(i);
 			AnimalToken a = h.getCorrespondingToken();
-
 			if(h.getClicked()){
 				g.drawRect(80, 190 + i * 175, 250, 95);
 			}
@@ -668,10 +669,12 @@ public class GamePanel extends JPanel implements MouseListener{
 
 		}
 
-		if(gameState == 1) { //picking habitat Tile and animal token
+		if(gameState == 1) {
+			//picking habitat Tile and animal token
 			if(gameState2 == 0){
 				tempboard = game.getPlayerList().get(turn).getPlayerBoard().getBoard();
 			}
+
 			//get Nature Token & replace tokens
 			if (x >= 33 && x <= 315 && y >= 915 && y <= 965 && canUseToken) {
 				repaint();
@@ -680,6 +683,7 @@ public class GamePanel extends JPanel implements MouseListener{
 				canUseToken = true;
 			}
 
+			//pick habitatTile and animalToken
 			if((y > 198 && y < 272 && x > 90 && x < 164)|| (x > 251 && x < 325 && y < 270 && y > 198)){
 				habitatNum = 0;
 				game.clickedHabitatTile(habitatNum);
@@ -705,8 +709,8 @@ public class GamePanel extends JPanel implements MouseListener{
 				repaint();
 			}
 
+			//placing on board
 			if(gameState2 == 1){
-				polygonContains(false, x, y);
 				//rotate cw, ccw, place, cancel
 				if (x >= 990 && x <= 1240 && y >= 925 && y <= 950) {
 					repaint();
@@ -721,13 +725,12 @@ public class GamePanel extends JPanel implements MouseListener{
 				}
 				if (x >= 720 && x <= 970 && y >= 965 && y <= 990) {
 					polygonContains(true, x, y);
-					gameState = 2;
-					gameState2 = 0;
 					repaint();
 				}
 				if (x >= 990 && x <= 1240 && y >= 965 && y <= 990) {
 
 				}
+				polygonContains(false, x, y);
 				repaint();
 			}
 		}
@@ -739,6 +742,7 @@ public class GamePanel extends JPanel implements MouseListener{
 	public void setTempboard(int r, int c){
 		tempboard = game.getPlayerList().get(turn).getPlayerBoard().getBoard();
 		tempboard[r][c].setHabitatTile(game.getAvailableHabitats().getDashboard().get(habitatNum));
+		System.out.println("temp");
 	}
 
 	public void polygonContains(boolean place, int x, int y){
@@ -966,13 +970,14 @@ public class GamePanel extends JPanel implements MouseListener{
 		if(r3c3.contains(x, y)){
 			if (place) {
 				place(top + 3, left + 3);
+				System.out.println("r3c3 place");
 			}else {
 				setTempboard(top + 3, left + 3);
+				System.out.println("r3c3 temp method");
 			}
 			repaint();
 		}
 		if(r3c4.contains(x, y)){
-			System.out.print(game.habitatCanBePlaced(top + 3, left + 4, game.getPlayerList().get(turn)));
 			if (place) {
 				place(top + 3, left + 4);
 			}else {
@@ -1267,8 +1272,11 @@ public class GamePanel extends JPanel implements MouseListener{
 
 	public void place (int row, int col) {
 		if(gameState == 1){
+			System.out.println(game.habitatCanBePlaced(row, col, game.getPlayerList().get(turn)));
 			if(game.habitatCanBePlaced(row, col, game.getPlayerList().get(turn))){
 				game.placedHabitat(habitatNum, row, col, game.getPlayerList().get(turn));
+				gameState = 2;
+				gameState2 = 0;
 			}
 		}
 		if(gameState == 2){
@@ -1281,8 +1289,8 @@ public class GamePanel extends JPanel implements MouseListener{
 					turn = 0;
 				}
 				habitatNum = -1;
-				System.out.println("DONE" + turn);
 				gameState = 1;
+				System.out.println("DONE");
 			}
 		}
 	}
@@ -1304,7 +1312,6 @@ public class GamePanel extends JPanel implements MouseListener{
 	}
 	public void mouseExited(MouseEvent e) {
 	}
-
 	public boolean canUseToken() {
         canUseToken = game.getPlayerList().get(turn).getPlayerBoard().getNatureTokens() > 0;
 		return canUseToken;

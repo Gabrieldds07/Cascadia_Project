@@ -231,7 +231,7 @@ public class Game {
         ArrayList<Hexagon> surrounding = pb.getAdjacentHexagons(row, col);
         if(pb.getBoard()[row][col].getHabitatTile() == null){
             for(Hexagon h : surrounding){
-                if(!h.getGray()){
+                if(!h.getGray() || h.getHabitatTile() != null){
                     return true;
                 }
             }
