@@ -2,6 +2,7 @@ package Classes;
 
 import Graphics.GamePanel;
 
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class Game {
@@ -146,7 +147,19 @@ public class Game {
             int num = (int)(Math.random() *(allHabitats.size()));
             h.add(allHabitats.get(num));
             int rand = (int) ((Math.random() * (4)) + 1);
-            AnimalToken a = new AnimalToken(rand);
+            //1 Bear, 2 Elk, 3 Salmon, 4 Hawk, 5 Fox
+            AnimalToken a;
+            if(rand == 1){
+                a = new AnimalToken(rand, GamePanel.bearAnimalToken);
+            } else if(rand == 2){
+                a = new AnimalToken(rand, GamePanel.elkAnimalToken);
+            } else if(rand == 3){
+                a = new AnimalToken(rand, GamePanel.salmonAnimalToken);
+            } else if(rand == 4){
+                a = new AnimalToken(rand, GamePanel.hawkAnimalToken);
+            } else {
+                a = new AnimalToken(rand, GamePanel.foxAnimalToken);
+            }
             h.get(i).setCorrespondingToken(a);
         }
         availableHabitats = new HabitatDashBoard(h);
@@ -223,8 +236,19 @@ public class Game {
             int rand = (int) (Math.random() * (allHabitats.size()));
             availableHabitats.addHabitat(allHabitats.get(rand));
             rand = (int) ((Math.random() * (4)) + 1);
-            AnimalToken a = new AnimalToken(rand);
-            availableHabitats.get(num).setCorrespondingToken(a);
+            AnimalToken a;
+            if(rand == 1){
+                a = new AnimalToken(rand, GamePanel.bearAnimalToken);
+            } else if(rand == 2){
+                a = new AnimalToken(rand, GamePanel.elkAnimalToken);
+            } else if(rand == 3){
+                a = new AnimalToken(rand, GamePanel.salmonAnimalToken);
+            } else if(rand == 4){
+                a = new AnimalToken(rand, GamePanel.hawkAnimalToken);
+            } else {
+                a = new AnimalToken(rand, GamePanel.foxAnimalToken);
+            }
+            availableHabitats.get(availableHabitats.getDashboard().size()- 1).setCorrespondingToken(a);
         }
             //updating player turn
             p.setTurnsLeft(p.getTurnsLeft() - 1);
