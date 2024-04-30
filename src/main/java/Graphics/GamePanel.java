@@ -967,13 +967,11 @@ public class GamePanel extends JPanel implements MouseListener{
 			}
 			repaint();
 		}
-		if(r3c3.contains(x, y)){
+		if(x > 700 && x < 766 && y > 440 && y < 520){
 			if (place) {
-				place(top + 3, left + 3);
-				System.out.println("r3c3 place");
-			}else {
-				setTempboard(top + 3, left + 3);
-				System.out.println("r3c3 temp method");
+				place(top + 3, left + 2);
+			} else {
+				setTempboard(top + 3, left + 2);
 			}
 			repaint();
 		}
