@@ -131,6 +131,7 @@ public class Game {
     public Game(int numOfPlayers){
         initializeImages();
         turn = 0;
+
         //player instantiation
         Player p;
         for(int i=0;i<3;i++){

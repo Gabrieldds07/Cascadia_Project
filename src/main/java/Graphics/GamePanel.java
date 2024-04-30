@@ -19,6 +19,7 @@ public class GamePanel extends JPanel implements MouseListener{
 	private Game game;
 	private int turn;
 	private boolean rotateRight;
+	private Tile[][] tileMatrix = new Tile[20][20];
 	public static BufferedImage Tile1, Tile2, Tile3, Tile4, Tile5, Tile6, Tile7, Tile8, Tile9, Tile10, Tile11, Tile12, Tile13, Tile14, Tile15, Tile16, Tile17, Tile18, Tile19, Tile20, Tile21, Tile22, Tile23, Tile24, Tile25, Tile26, Tile27, Tile28, Tile29, Tile30, Tile31, Tile32, Tile33, Tile34, Tile35, Tile36, Tile37, Tile38, Tile39, Tile40, Tile41, Tile42, Tile43, Tile44, Tile45, Tile46, Tile47, Tile48, Tile49, Tile50, Tile51, Tile52, Tile53, Tile54, Tile55, Tile56;
 	public static BufferedImage keyStoneTile1, keyStoneTile2, keyStoneTile3, keyStoneTile4, keyStoneTile5, keyStoneTile6, keyStoneTile7, keyStoneTile8, keyStoneTile9, keyStoneTile10, keyStoneTile11, keyStoneTile12, keyStoneTile13, keyStoneTile14, keyStoneTile15, keyStoneTile16, keyStoneTile17, keyStoneTile18, keyStoneTile19, keyStoneTile20, keyStoneTile21, keyStoneTile22, keyStoneTile23, keyStoneTile24, keyStoneTile25;
 	public static BufferedImage starterTile1, starterTile2, starterTile3, starterTile4, starterTile5;
@@ -214,6 +215,7 @@ public class GamePanel extends JPanel implements MouseListener{
 
 	public void drawScoringCards(Graphics g) {
 		g.setColor(Color.WHITE);
+		//g.fillRect(100, 100, 1720, 880);
 		g.drawImage(scoringCardsBackground, 100, 100, 1720, 880, null);
 		g.drawImage(close, 1760, 100,60,60, null);
 		g.drawImage(elkScoringCard, 180, 180, 350, 350, null);
@@ -233,19 +235,31 @@ public class GamePanel extends JPanel implements MouseListener{
 				if(b[r][c].getHabitatTile() != null) {
 					if(notStarterTileLeftorRight(b[r][c].getHabitatTile())) {
 						if (even) {
-							g.drawImage(b[r][c].getHabitatTile().getImg(), 515 + 100 * x, 176 + 83 * y, 100, 110, null);
+							g.drawImage(b[r][c].getHabitatTile().getImg(), 530 + 100 * x, 176 + 83 * y, 100, 110, null);
+							if(b[r][c].getHabitatTile().getTokenPlaced() != null){
+								g.drawImage(b[r][c].getHabitatTile().getTokenPlaced().getImg(), 530 + 100 * x, 176 + 83 * y, 25, 25, null);
+							}
 						}
 						if (!even) {
 							g.drawImage(b[r][c].getHabitatTile().getImg(), 480 + 100 * x, 176 + 83 * y, 100, 110, null);
+							if(b[r][c].getHabitatTile().getTokenPlaced() != null){
+								g.drawImage(b[r][c].getHabitatTile().getTokenPlaced().getImg(), 480 + 100 * x, 176 + 83 * y, 25, 25, null);
+							}
 						}
 						//System.out.println("row " + b[r][c].getRow());
 						//System.out.println("col " + b[r][c].getColumn());
 					} else {
 						if (even) {
 							g.drawImage(b[r][c].getHabitatTile().getImg(), 413 + 99 * x, 166 + 83 * y, 140, 140, null);
+							if(b[r][c].getHabitatTile().getTokenPlaced() != null){
+								g.drawImage(b[r][c].getHabitatTile().getTokenPlaced().getImg(), 413 + 99 * x, 166 + 83 * y, 25, 25, null);
+							}
 						}
 						if (!even) {
-							g.drawImage(b[r][c].getHabitatTile().getImg(), 375 + 99 * x, 166 + 83 * y, 140, 140, null);
+							g.drawImage(b[r][c].getHabitatTile().getImg(), 365 + 99 * x, 166 + 83 * y, 140, 140, null);
+							if(b[r][c].getHabitatTile().getTokenPlaced() != null){
+								g.drawImage(b[r][c].getHabitatTile().getTokenPlaced().getImg(), 365 + 99 * x, 166 + 83 * y, 25, 25, null);
+							}
 						}
 					}
 				}
@@ -281,6 +295,7 @@ public class GamePanel extends JPanel implements MouseListener{
 	public void drawBackground(Graphics g) {
 		g.drawImage(background, 0, 0, 1920, 1080, null);
 		g.drawImage(ntButtons, 34, 917, 281, 123, null);
+
 	}
 
 	public void drawNatureTokenMenu(Graphics g) {
@@ -418,23 +433,20 @@ public class GamePanel extends JPanel implements MouseListener{
 				//rotate cw, ccw, place, cancel
 				if (x >= 990 && x <= 1240 && y >= 925 && y <= 950) {
 					repaint();
-				}
-				if (x >= 720 && x <= 970 && y >= 925 && y <= 950) {
+				} else if (x >= 720 && x <= 970 && y >= 925 && y <= 950) {
 					rotateRight = true;
 					repaint();
-				}
-				if (x >= 990 && x <= 1240 && y >= 925 && y <= 950) {
+				} else if (x >= 990 && x <= 1240 && y >= 925 && y <= 950) {
 
-				}
-				if (x >= 720 && x <= 970 && y >= 965 && y <= 990) {
+				} else if (x >= 720 && x <= 970 && y >= 965 && y <= 990) {
 					polygonContains(true, x, y);
 					repaint();
-				}
-				if (x >= 990 && x <= 1240 && y >= 965 && y <= 990) {
+				} else if (x >= 990 && x <= 1240 && y >= 965 && y <= 990) {
 
+				} else {
+					polygonContains(false, x, y);
+					repaint();
 				}
-				polygonContains(false, x, y);
-				repaint();
 			}
 		}
 		if(gameState == 2) {
@@ -443,21 +455,79 @@ public class GamePanel extends JPanel implements MouseListener{
 	}
 
 	public void setTempBoard(int r, int c){
-		tempboard = game.getPlayerList().get(turn).getPlayerBoard().getBoard();
-		tempboard[r][c].setHabitatTile(game.getAvailableHabitats().getDashboard().get(habitatNum));
+		System.out.println(game.habitatCanBePlaced(r, c, game.getPlayerList().get(turn)));
+		if(game.habitatCanBePlaced(r, c, game.getPlayerList().get(turn))){
+			tempboard = game.getPlayerList().get(turn).getPlayerBoard().getBoard();
+			tempboard[r][c].setHabitatTile(game.getAvailableHabitats().getDashboard().get(habitatNum));
+		}
+	}
+
+	public int getRow(int x, int y){
+		if(y > 175 && y < 260){
+			return top;
+		}
+		if(y > 265 && y < 345){
+			return top + 1;
+		}
+		if(y > 349 && y < 434){
+			return top + 2;
+		}
+		if(y > 442 && y < 515){
+			return top + 3;
+		}
+		if(y > 526 && y < 598){
+			return top + 4;
+		}
+		if(y > 606 && y < 695){
+			return top + 5;
+		}
+		if(y > 695 && y < 785){
+			return top + 6;
+		}
+		if(y > 785 && y < 866){
+			return top + 7;
+		}
+
+		return -1;
+	}
+
+	public int getColumn(int x, int y){
+		if(x > 450 && x < 500){
+			return left - 1;
+		}
+		if(x > 555 && x < 605){
+			return left;
+		}
+		if(x > 660 && x < 710 ){
+			return left + 1;
+		}
+		if(x > 765 && x < 815){
+			return left + 2;
+		}
+		if(x > 870 && x < 920 ){
+			return left + 3;
+		}
+		if(x > 975 && x < 1025){
+			return left + 4;
+		}
+		if(x > 1080 && x < 1130){
+			return left + 5;
+		}
+		if(x > 1185 && x < 1235){
+			return left + 6;
+		}
+		return -1;
 	}
 
 	public void polygonContains(boolean place, int x, int y){
-		//add all
-		if(x > 700 && x < 766 && y > 440 && y < 520){
-			//r3c3
+		if(getRow(x, y) != -1 && getColumn(x, y) != -1){
 			if (place) {
-				place(top + 3, left + 2);
+				place(getRow(x, y), getColumn(x, y));
 			} else {
-				setTempBoard(top + 3, left + 2);
+				setTempBoard(getRow(x, y), getColumn(x, y));
 			}
-			repaint();
 		}
+		repaint();
 	}
 
 	public void place (int row, int col) {
@@ -503,9 +573,11 @@ public class GamePanel extends JPanel implements MouseListener{
 	}
 	public void mouseExited(MouseEvent e) {
 	}
+
 	public boolean canUseToken() {
         canUseToken = game.getPlayerList().get(turn).getPlayerBoard().getNatureTokens() > 0;
 		return canUseToken;
 	}
 }
+
 
