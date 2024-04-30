@@ -2,9 +2,7 @@ package Graphics;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import javax.swing.*;
-
 import Classes.*;
-
 import java.awt.image.*;
 import javax.imageio.ImageIO;
 import java.io.*;
@@ -15,6 +13,7 @@ import java.awt.Graphics2D;
 import java.awt.Graphics;
 import java.util.Objects;
 
+
 public class GamePanel extends JPanel implements MouseListener{
 	private BufferedImage background, ntButtons, scoreCards, test;
 	private CascadiaFrame frame;
@@ -22,7 +21,6 @@ public class GamePanel extends JPanel implements MouseListener{
 	private Game game;
 	private int turn;
 	private boolean rotateRight;
-	private Tile[][] tileMatrix = new Tile[20][20];
 	public static BufferedImage Tile1, Tile2, Tile3, Tile4, Tile5, Tile6, Tile7, Tile8, Tile9, Tile10, Tile11, Tile12, Tile13, Tile14, Tile15, Tile16, Tile17, Tile18, Tile19, Tile20, Tile21, Tile22, Tile23, Tile24, Tile25, Tile26, Tile27, Tile28, Tile29, Tile30, Tile31, Tile32, Tile33, Tile34, Tile35, Tile36, Tile37, Tile38, Tile39, Tile40, Tile41, Tile42, Tile43, Tile44, Tile45, Tile46, Tile47, Tile48, Tile49, Tile50, Tile51, Tile52, Tile53, Tile54, Tile55, Tile56;
 	public static BufferedImage keyStoneTile1, keyStoneTile2, keyStoneTile3, keyStoneTile4, keyStoneTile5, keyStoneTile6, keyStoneTile7, keyStoneTile8, keyStoneTile9, keyStoneTile10, keyStoneTile11, keyStoneTile12, keyStoneTile13, keyStoneTile14, keyStoneTile15, keyStoneTile16, keyStoneTile17, keyStoneTile18, keyStoneTile19, keyStoneTile20, keyStoneTile21, keyStoneTile22, keyStoneTile23, keyStoneTile24, keyStoneTile25;
 	public static BufferedImage starterTile1, starterTile2, starterTile3, starterTile4, starterTile5;
@@ -31,82 +29,83 @@ public class GamePanel extends JPanel implements MouseListener{
 	public static BufferedImage st1IndividualTop, st1IndividualRight, st1IndividualLeft, st2IndividualTop, st2IndividualRight, st2IndividualLeft, st3IndividualTop, st3IndividualRight, st3IndividualLeft, st4IndividualTop, st4IndividualRight, st4IndividualLeft, st5IndividualTop, st5IndividualRight, st5IndividualLeft;
 	private BufferedImage close, scoringCardsBackground;
 	private boolean scoringCardsPressed = false;
-	// 0 = game instantiation, 1 = pick habitat Tile & animal token, 2 = place habitatTile
+	// 0 = game instantiation, 1 = pick habitat Tile & animal token, place habitat, 2 = place animalToken
 	private int gameState = 0;
+	//0 = pick habitat Tile & animal token, 1=  place habitat
+	private int gameState2 = 0;
 	// num is the habitatTile + animal token selected
 	private int habitatNum = -1;
-	private boolean corToken = false;
+	private Hexagon[][] tempboard;
 
 	//board vars
-	private Polygon r0c0 = new Polygon();
-	private Polygon r0c1 = new Polygon();
-	private Polygon r0c2 = new Polygon();
-	private Polygon r0c3 = new Polygon();
-	private Polygon r0c4 = new Polygon();
-	private Polygon r0c5 = new Polygon();
-	private Polygon r0c6 = new Polygon();
-	private Polygon r0c7 = new Polygon();
-	private Polygon r1c0 = new Polygon();
-	private Polygon r1c1 = new Polygon();
-	private Polygon r1c2 = new Polygon();
-	private Polygon r1c3 = new Polygon();
-	private Polygon r1c4 = new Polygon();
-	private Polygon r1c5 = new Polygon();
-	private Polygon r1c6 = new Polygon();
-	private Polygon r1c7 = new Polygon();
-	private Polygon r2c0 = new Polygon();
-	private Polygon r2c1 = new Polygon();
-	private Polygon r2c2 = new Polygon();
-	private Polygon r2c3 = new Polygon();
-	private Polygon r2c4 = new Polygon();
-	private Polygon r2c5 = new Polygon();
-	private Polygon r2c6 = new Polygon();
-	private Polygon r2c7 = new Polygon();
-	private Polygon r3c0 = new Polygon();
-	private Polygon r3c1 = new Polygon();
-	private Polygon r3c2 = new Polygon();
-	private Polygon r3c3 = new Polygon();
-	private Polygon r3c4 = new Polygon();
-	private Polygon r3c5 = new Polygon();
-	private Polygon r3c6 = new Polygon();
-	private Polygon r3c7 = new Polygon();
-	private Polygon r4c0 = new Polygon();
-	private Polygon r4c1 = new Polygon();
-	private Polygon r4c2 = new Polygon();
-	private Polygon r4c3 = new Polygon();
-	private Polygon r4c4 = new Polygon();
-	private Polygon r4c5 = new Polygon();
-	private Polygon r4c6 = new Polygon();
-	private Polygon r4c7 = new Polygon();
-	private Polygon r5c0 = new Polygon();
-	private Polygon r5c1 = new Polygon();
-	private Polygon r5c2 = new Polygon();
-	private Polygon r5c3 = new Polygon();
-	private Polygon r5c4 = new Polygon();
-	private Polygon r5c5 = new Polygon();
-	private Polygon r5c6 = new Polygon();
-	private Polygon r5c7 = new Polygon();
-	private Polygon r6c0 = new Polygon();
-	private Polygon r6c1 = new Polygon();
-	private Polygon r6c2 = new Polygon();
-	private Polygon r6c3 = new Polygon();
-	private Polygon r6c4 = new Polygon();
-	private Polygon r6c5 = new Polygon();
-	private Polygon r6c6 = new Polygon();
-	private Polygon r6c7 = new Polygon();
-	private Polygon r7c0 = new Polygon();
-	private Polygon r7c1 = new Polygon();
-	private Polygon r7c2 = new Polygon();
-	private Polygon r7c3 = new Polygon();
-	private Polygon r7c4 = new Polygon();
-	private Polygon r7c5 = new Polygon();
-	private Polygon r7c6 = new Polygon();
-	private Polygon r7c7 = new Polygon();
+	private final Polygon r0c0 = new Polygon();
+	private final Polygon r0c1 = new Polygon();
+	private final Polygon r0c2 = new Polygon();
+	private final Polygon r0c3 = new Polygon();
+	private final Polygon r0c4 = new Polygon();
+	private final Polygon r0c5 = new Polygon();
+	private final Polygon r0c6 = new Polygon();
+	private final Polygon r0c7 = new Polygon();
+	private final Polygon r1c0 = new Polygon();
+	private final Polygon r1c1 = new Polygon();
+	private final Polygon r1c2 = new Polygon();
+	private final Polygon r1c3 = new Polygon();
+	private final Polygon r1c4 = new Polygon();
+	private final Polygon r1c5 = new Polygon();
+	private final Polygon r1c6 = new Polygon();
+	private final Polygon r1c7 = new Polygon();
+	private final Polygon r2c0 = new Polygon();
+	private final Polygon r2c1 = new Polygon();
+	private final Polygon r2c2 = new Polygon();
+	private final Polygon r2c3 = new Polygon();
+	private final Polygon r2c4 = new Polygon();
+	private final Polygon r2c5 = new Polygon();
+	private final Polygon r2c6 = new Polygon();
+	private final Polygon r2c7 = new Polygon();
+	private final Polygon r3c0 = new Polygon();
+	private final Polygon r3c1 = new Polygon();
+	private final Polygon r3c2 = new Polygon();
+	private final Polygon r3c3 = new Polygon();
+	private final Polygon r3c4 = new Polygon();
+	private final Polygon r3c5 = new Polygon();
+	private final Polygon r3c6 = new Polygon();
+	private final Polygon r3c7 = new Polygon();
+	private final Polygon r4c0 = new Polygon();
+	private final Polygon r4c1 = new Polygon();
+	private final Polygon r4c2 = new Polygon();
+	private final Polygon r4c3 = new Polygon();
+	private final Polygon r4c4 = new Polygon();
+	private final Polygon r4c5 = new Polygon();
+	private final Polygon r4c6 = new Polygon();
+	private final Polygon r4c7 = new Polygon();
+	private final Polygon r5c0 = new Polygon();
+	private final Polygon r5c1 = new Polygon();
+	private final Polygon r5c2 = new Polygon();
+	private final Polygon r5c3 = new Polygon();
+	private final Polygon r5c4 = new Polygon();
+	private final Polygon r5c5 = new Polygon();
+	private final Polygon r5c6 = new Polygon();
+	private final Polygon r5c7 = new Polygon();
+	private final Polygon r6c0 = new Polygon();
+	private final Polygon r6c1 = new Polygon();
+	private final Polygon r6c2 = new Polygon();
+	private final Polygon r6c3 = new Polygon();
+	private final Polygon r6c4 = new Polygon();
+	private final Polygon r6c5 = new Polygon();
+	private final Polygon r6c6 = new Polygon();
+	private final Polygon r6c7 = new Polygon();
+	private final Polygon r7c0 = new Polygon();
+	private final Polygon r7c1 = new Polygon();
+	private final Polygon r7c2 = new Polygon();
+	private final Polygon r7c3 = new Polygon();
+	private final Polygon r7c4 = new Polygon();
+	private final Polygon r7c5 = new Polygon();
+	private final Polygon r7c6 = new Polygon();
+	private final Polygon r7c7 = new Polygon();
 	private int left = 6;
 	private int right = 14;
 	private int top = 6;
 	private int bottom = 14;
-
 
 	public GamePanel(int playerCount, CascadiaFrame frame) {
 		try {
@@ -242,13 +241,41 @@ public class GamePanel extends JPanel implements MouseListener{
 
 		game = new Game(3);
 		gameState = 1;
-		for(int i = 0; i < 20; i++) {
-			for(int j = 0; j < 20; j++) {
-				Tile t = new Tile(i, j);
+	}
+
+	public void paint(Graphics g) {
+		drawBackground(g);
+		g.drawImage(test, 800,460,100,116,null);
+		if(canUseToken) {
+			drawNatureTokenMenu(g);
+		}
+		if(gameState != 0){
+			drawPlayerInfo(g, turn);
+			if(gameState == 1){
+				if(gameState2 == 1){
+					drawPlayerBoard(g, tempboard);
+				}
+				drawPlayerBoard(g, game.getPlayerList().get(turn).getPlayerBoard().getBoard());
 			}
+			else if(gameState == 2){
+				if(gameState2 == 1){
+					drawPlayerBoard(g, tempboard);
+				}
+				drawPlayerBoard(g, game.getPlayerList().get(turn).getPlayerBoard().getBoard());
+			}
+			drawTiles(g);
+			drawHabitatDashboard(g);
+		}
+		if(rotateRight) {
+			rotateImage(g, test, 800, 460, 100, 116, 180);
+			rotateRight = false;
+		}
+		if(scoringCardsPressed){
+			drawScoringCards(g);
 		}
 	}
 
+	//polygon methods
 	public void instantiateHex(int x, int y, Polygon p){
 		for(int i =0; i < 6; i++){
 			p.addPoint((int) (x + 50 * Math.cos(i * 2 * Math.PI / 6)), (int)( y + 50 * Math.sin(i * 2 * Math.PI / 6)));
@@ -282,16 +309,7 @@ public class GamePanel extends JPanel implements MouseListener{
 			if(i ==7){
 				instantiateHex(480 + 100 * i, 220, r0c7);
 			}
-			g.drawPolygon(r0c0);
-			g.drawPolygon(r0c1);
-			g.drawPolygon(r0c2);
-			g.drawPolygon(r0c3);
-			g.drawPolygon(r0c4);
-			g.drawPolygon(r0c5);
-			g.drawPolygon(r0c6);
-			g.drawPolygon(r0c7);
 		}
-
 
 		for(int i = 0; i < 8; i++) {
 			if(i ==0){
@@ -318,15 +336,6 @@ public class GamePanel extends JPanel implements MouseListener{
 			if(i ==7){
 				instantiateHex(430 + 100 * i, 305, r1c7);
 			}
-
-			g.drawPolygon(r1c0);
-			g.drawPolygon(r1c1);
-			g.drawPolygon(r1c2);
-			g.drawPolygon(r1c3);
-			g.drawPolygon(r1c4);
-			g.drawPolygon(r1c5);
-			g.drawPolygon(r1c6);
-			g.drawPolygon(r1c7);
 		}
 
 
@@ -355,15 +364,6 @@ public class GamePanel extends JPanel implements MouseListener{
 			if(i ==7){
 				instantiateHex(480 + 100 * i, 390, r2c7);
 			}
-
-			g.drawPolygon(r2c0);
-			g.drawPolygon(r2c1);
-			g.drawPolygon(r2c2);
-			g.drawPolygon(r2c3);
-			g.drawPolygon(r2c4);
-			g.drawPolygon(r2c5);
-			g.drawPolygon(r2c6);
-			g.drawPolygon(r2c7);
 		}
 
 
@@ -392,15 +392,6 @@ public class GamePanel extends JPanel implements MouseListener{
 			if(i ==7){
 				instantiateHex(430 + 100 * i, 480, r3c7);
 			}
-
-			g.drawPolygon(r3c0);
-			g.drawPolygon(r3c1);
-			g.drawPolygon(r3c2);
-			g.drawPolygon(r3c3);
-			g.drawPolygon(r3c4);
-			g.drawPolygon(r3c5);
-			g.drawPolygon(r3c6);
-			g.drawPolygon(r3c7);
 		}
 
 
@@ -429,15 +420,6 @@ public class GamePanel extends JPanel implements MouseListener{
 			if(i ==7){
 				instantiateHex(480 + 100 * i, 565, r4c7);
 			}
-
-			g.drawPolygon(r4c0);
-			g.drawPolygon(r4c1);
-			g.drawPolygon(r4c2);
-			g.drawPolygon(r4c3);
-			g.drawPolygon(r4c4);
-			g.drawPolygon(r4c5);
-			g.drawPolygon(r4c6);
-			g.drawPolygon(r4c7);
 		}
 
 
@@ -466,15 +448,6 @@ public class GamePanel extends JPanel implements MouseListener{
 			if(i ==7){
 				instantiateHex(430 + 100 * i, 650, r5c7);
 			}
-
-			g.drawPolygon(r5c0);
-			g.drawPolygon(r5c1);
-			g.drawPolygon(r5c2);
-			g.drawPolygon(r5c3);
-			g.drawPolygon(r5c4);
-			g.drawPolygon(r5c5);
-			g.drawPolygon(r5c6);
-			g.drawPolygon(r5c7);
 		}
 
 
@@ -503,15 +476,6 @@ public class GamePanel extends JPanel implements MouseListener{
 			if(i ==7){
 				instantiateHex(480 + 100 * i, 740, r6c7);
 			}
-
-			g.drawPolygon(r6c0);
-			g.drawPolygon(r6c1);
-			g.drawPolygon(r6c2);
-			g.drawPolygon(r6c3);
-			g.drawPolygon(r6c4);
-			g.drawPolygon(r6c5);
-			g.drawPolygon(r6c6);
-			g.drawPolygon(r6c7);
 		}
 
 
@@ -540,39 +504,6 @@ public class GamePanel extends JPanel implements MouseListener{
 			if(i ==7){
 				instantiateHex(430 + 100 * i, 830, r7c7);
 			}
-
-			g.drawPolygon(r7c0);
-			g.drawPolygon(r7c1);
-			g.drawPolygon(r7c2);
-			g.drawPolygon(r7c3);
-			g.drawPolygon(r7c4);
-			g.drawPolygon(r7c5);
-			g.drawPolygon(r7c6);
-			g.drawPolygon(r7c7);
-		}
-	}
-
-
-
-	public void paint(Graphics g) {
-		drawBackground(g);
-		g.drawImage(test, 800,460,100,116,null);
-		if(canUseToken) {
-			drawNatureTokenMenu(g);
-		}
-		if(gameState != 0){
-			drawPlayerInfo(g, turn);
-			drawPlayerBoard(g);
-			drawTiles(g);
-			drawHabitatDashboard(g);
-		}
-		if(rotateRight) {
-			rotateImage(g, test, 800, 460, 100, 116, 180);
-			rotateRight = false;
-		}
-		if(scoringCardsPressed){
-			drawScoringCards(g);
-			//scoringCardsPressed=false;
 		}
 	}
 
@@ -588,41 +519,62 @@ public class GamePanel extends JPanel implements MouseListener{
 		g.drawImage(salmonScoringCard, 1380, 180, 350, 350, null);
 	}
 
-	public void drawPlayerBoard(Graphics g){
-		//fix coordinates
-		Hexagon[][] b;
+	public void drawPlayerBoard(Graphics g, Hexagon[][] b ){
 		boolean even;
 		int x = 0;
 		int y = 0;
-		for(int r = top; r <= bottom; r++){
-			if(r % 2 ==0){
-				even = true;
-			} else{
-				even = false;
-			}
-			b = game.getPlayerList().get(turn).getPlayerBoard().getBoard();
-			for(int c = left; c <= right; c++){
-				if(x == 8){
-					x = 0;
-				}
+		for(int r = top; r < bottom; r++){
+            even = y % 2 == 0;
+			for(int c = left; c < right; c++){
 				if(b[r][c].getHabitatTile() != null) {
-					if (even) {
-						g.drawImage(b[r][c].getHabitatTile().getImg(), 400 + 100 * x, 200 + 85 * y, 50, 50, null);
-					}
-					if (!even) {
-						g.drawImage(b[r][c].getHabitatTile().getImg(), 350 + 100 * x, 200 + 85 * y, 50, 50, null);
+					if(notStarterTileLeftorRight(b[r][c].getHabitatTile())) {
+						if (even) {
+							g.drawImage(b[r][c].getHabitatTile().getImg(), 515 + 100 * x, 176 + 83 * y, 100, 110, null);
+						}
+						if (!even) {
+							g.drawImage(b[r][c].getHabitatTile().getImg(), 480 + 100 * x, 176 + 83 * y, 100, 110, null);
+						}
+					} else {
+						if (even) {
+							g.drawImage(b[r][c].getHabitatTile().getImg(), 413 + 99 * x, 166 + 83 * y, 140, 140, null);
+						}
+						if (!even) {
+							g.drawImage(b[r][c].getHabitatTile().getImg(), 375 + 99 * x, 166 + 83 * y, 140, 140, null);
+						}
 					}
 				}
 				x++;
+				if(x == 8){
+					x = 0;
+				}
 			}
 			y++;
 		}
 	}
 
+	public boolean notStarterTileLeftorRight (HabitatTile h){
+		BufferedImage img = h.getImg();
+		if(img == st1IndividualRight){
+			return false;
+		}
+		if(img == st1IndividualLeft){
+			return false;
+		}
+		if(img == st2IndividualLeft){
+			return false;
+		}
+		if(img == st2IndividualRight){
+			return false;
+		}
+		if(img == st3IndividualLeft){
+			return false;
+		}
+        return img != st3IndividualRight;
+    }
+
 	public void drawBackground(Graphics g) {
 		g.drawImage(background, 0, 0, 1920, 1080, null);
 		g.drawImage(ntButtons, 34, 917, 281, 123, null);
-
 	}
 
 	public void drawNatureTokenMenu(Graphics g) {
@@ -631,9 +583,9 @@ public class GamePanel extends JPanel implements MouseListener{
 	}
 
 	public void drawPlayerInfo(Graphics g, int i) {
-		g.drawString("Player" + (turn + 1), 50,65);
-		g.drawString("Turns Left:" + game.getPlayerList().get(turn).getTurnsLeft(), 50,95);
-		g.drawString("Nature Tokes:" + game.getPlayerList().get(turn).getPlayerBoard().getNatureTokens(), 50,125);
+		g.drawString("Player " + (turn + 1), 50,65);
+		g.drawString("Turns Left: " + game.getPlayerList().get(turn).getTurnsLeft(), 50,95);
+		g.drawString("Nature Tokes: " + game.getPlayerList().get(turn).getPlayerBoard().getNatureTokens(), 50,125);
 	}
 
 	public void drawHabitatDashboard(Graphics g){
@@ -641,114 +593,695 @@ public class GamePanel extends JPanel implements MouseListener{
 			HabitatTile h = game.getAvailableHabitats().get(i);
 			AnimalToken a = h.getCorrespondingToken();
 
-			g.drawImage(h.getImg(), 250, 300 + i * 175, 75, 75, null);
-			g.drawImage(a.getImg(), 90, 300 + i * 175, 75, 75, null);
+			if(h.getClicked()){
+				g.drawRect(80, 190 + i * 175, 250, 95);
+			}
+			g.drawImage(h.getImg(), 250, 200 + i * 175, 75, 75, null);
+			g.drawImage(a.getImg(), 90, 200 + i * 175, 75, 75, null);
 		}
 	}
 
 	public void mouseClicked(MouseEvent e) {
 		int x = e.getX();
 		int y = e.getY();
-
 		System.out.println(x +", "+ y);
-		//arrows(up,right,down,left)
+		System.out.println(gameState);
+		System.out.println(gameState2);
+
+		//arrows
 		//up
 		if(x>= 430 && x<=460 && y>=900 && y <= 945) {
-			if(bottom > 8){
-				bottom -= 1;
+			if(bottom < 19){
+				bottom += 2;
 			}
-			if(top > 0){
-				top -= 1;
+			if(top < 11){
+				top += 2;
 			}
+			repaint();
 		}
 		//down
 		if(x>= 430 && x<=460 && y>=970 && y <= 1015) {
-			if(bottom < 19){
-				bottom += 1;
+			if(bottom > 8){
+				bottom -= 2;
 			}
-			if(top < 11){
-				top += 1;
+			if(top > 0){
+				top -= 2;
 			}
-		}
-		//right
-		if(x>= 460 && x<=505 && y>=945 && y <= 975) {
-			if(right > 8){
-				right += 1;
-			}
-			if(left > 0){
-				left += 1;
-			}
+			repaint();
 		}
 		//left
-		if(x>= 385 && x<=430 && y>=945 && y <= 975) {
+		if(x>= 460 && x<=505 && y>=945 && y <= 975) {
 			if(right < 19){
 				right -=1;
 			}
 			if(left < 11){
 				left -=1;
 			}
+			repaint();
 		}
+		//right
+		if(x>= 385 && x<=430 && y>=945 && y <= 975) {
+			if(right > 8){
+				right += 1;
+			}
+			if(left > 0){
+				left += 1;
+			}
+			repaint();
+		}
+
+		//view scoring cards
+		if (x >= 1400 && x <= 1805 && y >= 690 && y <= 720) {
+			scoringCardsPressed = true;
+			repaint();
+		}
+		if (x >= 1760 && x <= 1820 && y >= 100 && y <= 160 && scoringCardsPressed) {
+			scoringCardsPressed = false;
+			repaint();
+		}
+
+		//viewing other player boards
+		if (x >= 1305 && x <= 1910 && y >= 55 && y <= 385) {
+
+		}
+		if (x >= 1305 && x <= 1910 && y >= 435 && y <= 755) {
+
+		}
+
 		if(gameState == 1) { //picking habitat Tile and animal token
+			if(gameState2 == 0){
+				tempboard = game.getPlayerList().get(turn).getPlayerBoard().getBoard();
+			}
 			//get Nature Token & replace tokens
-			if (x >= 33 && x <= 315 && y >= 915 && y <= 965 && canUseToken == true) {
+			if (x >= 33 && x <= 315 && y >= 915 && y <= 965 && canUseToken) {
 				repaint();
 			}
 			if (x >= 33 && x <= 315 && y >= 995 && y <= 1045) {
 				canUseToken = true;
-				corToken = true;
 			}
 
-			//viewing other player boards
-			if (x >= 1305 && x <= 1910 && y >= 55 && y <= 385) {
-
-			}
-			if (x >= 1305 && x <= 1910 && y >= 435 && y <= 755) {
-
-			}
-
-			//picking habitatTile and AnimalToken
-			//if(){
-				//habitatNum = 0;
-				//gameState = 2;
-			//}
-
-			//view scoring cards
-			if (x >= 1400 && x <= 1805 && y >= 690 && y <= 720) {
-				scoringCardsPressed = true;
+			if((y > 198 && y < 272 && x > 90 && x < 164)|| (x > 251 && x < 325 && y < 270 && y > 198)){
+				habitatNum = 0;
+				game.clickedHabitatTile(habitatNum);
+				gameState2 = 1;
 				repaint();
 			}
-			if (x >= 1760 && x <= 1820 && y >= 100 && y <= 160 && scoringCardsPressed) {
-				scoringCardsPressed = false;
+			if((y > 374 && y < 446 && x > 90 && x < 164)|| (x > 251 && x < 325 && y < 444 && y > 378)){
+				habitatNum = 1;
+				game.clickedHabitatTile(habitatNum);
+				gameState2 = 1;
+				repaint();
+			}
+			if((y > 550 && y < 622 && x > 90 && x < 164)|| (x > 251 && x < 325 && y < 614 && y > 550)){
+				habitatNum = 2;
+				game.clickedHabitatTile(habitatNum);
+				gameState2 = 1;
+				repaint();
+			}
+			if((y > 725 && y < 795 && x > 90 && x < 164)|| (x > 251 && x < 325 && y < 788 && y > 725)){
+				habitatNum = 3;
+				game.clickedHabitatTile(habitatNum);
+				gameState2 = 1;
+				repaint();
+			}
+
+			if(gameState2 == 1){
+				polygonContains(false, x, y);
+				//rotate cw, ccw, place, cancel
+				if (x >= 990 && x <= 1240 && y >= 925 && y <= 950) {
+					repaint();
+				}
+				if (x >= 720 && x <= 970 && y >= 925 && y <= 950) {
+					rotateRight = true;
+					repaint();
+					//rotateImage(ntButtons, 50, 50, 100, 100, 60);
+				}
+				if (x >= 990 && x <= 1240 && y >= 925 && y <= 950) {
+
+				}
+				if (x >= 720 && x <= 970 && y >= 965 && y <= 990) {
+					polygonContains(true, x, y);
+					gameState = 2;
+					gameState2 = 0;
+					repaint();
+				}
+				if (x >= 990 && x <= 1240 && y >= 965 && y <= 990) {
+
+				}
 				repaint();
 			}
 		}
-		//rotate cw, ccw, place, cancel
 		if(gameState == 2) {
-			//rotate
-			if (x >= 720 && x <= 970 && y >= 925 && y <= 950) {
-				rotateRight = true;
-				repaint();
-				//rotateImage(, ntButtons, 50, 50, 100, 100, 60);
-			}
-			if (x >= 990 && x <= 1240 && y >= 925 && y <= 950) {
 
-			}
-			if (x >= 720 && x <= 970 && y >= 965 && y <= 990) {
+		}
+	}
 
-			}
-			if (x >= 990 && x <= 1240 && y >= 965 && y <= 990) {
+	public void setTempboard(int r, int c){
+		tempboard = game.getPlayerList().get(turn).getPlayerBoard().getBoard();
+		tempboard[r][c].setHabitatTile(game.getAvailableHabitats().getDashboard().get(habitatNum));
+	}
 
+	public void polygonContains(boolean place, int x, int y){
+		//placing on PlayerBoard
+		if(r0c0.contains(x, y)){
+			if (place) {
+				place(top, left);
+			} else {
+				setTempboard(top, left);
 			}
+			repaint();
+		}
+		if(r0c1.contains(x, y)){
+			if (place) {
+				place(top, left + 1);
+			}else {
+				setTempboard(top, left + 1);
+			}
+			repaint();
+		}
+		if(r0c2.contains(x, y)){
+			if (place) {
+				place(top, left + 2);
+			} else {
+				setTempboard(top, left + 2);
+			}
+			repaint();
+		}
+		if(r0c3.contains(x, y)){
+			if (place) {
+				place(top, left + 3);
+			}else {
+				setTempboard(top, left + 3);
+			}
+			repaint();
+		}
+		if(r0c4.contains(x, y)){
+			if (place) {
+				place(top, left + 4);
+			}else {
+				setTempboard(top, left + 4);
+			}
+			repaint();
+		}
+		if(r0c5.contains(x, y)){
+			if (place) {
+				place(top, left + 5);
+			}else {
+				setTempboard(top, left + 5);
+			}
+			repaint();
+		}
+		if(r0c6.contains(x, y)){
+			if (place) {
+				place(top, left + 6);
+			}else {
+				setTempboard(top, left + 6);
+			}
+			repaint();
+		}
+		if(r0c7.contains(x, y)){
+			if (place) {
+				place(top, left + 7);
+			}else {
+				setTempboard(top, left + 7);
+			}
+			repaint();
+		}
 
-			//placing on PlayerBoard
-			Player p = game.getPlayerList().get(turn);
-			if(r0c0.contains(x, y)){
-				game.placedHabitat(habitatNum, left, top, p, corToken);
+
+		if(r1c0.contains(x, y)){
+			if (place) {
+				place(top + 1, left);
+			} else {
+				setTempboard(top + 1, left);
+			}
+			repaint();
+		}
+		if(r1c1.contains(x, y)){
+			if (place) {
+				place(top + 1, left + 1);
+			} else {
+				setTempboard(top + 1, left + 1);
+			}
+			repaint();
+		}
+		if(r1c2.contains(x, y)){
+			if (place) {
+				place(top + 1, left + 2);
+			} else {
+				setTempboard(top + 1, left + 2);
+			}
+			repaint();
+		}
+		if(r1c3.contains(x, y)){
+			if (place) {
+				place(top + 1, left + 3);
+			} else {
+				setTempboard(top + 1, left + 3);
+			}
+			repaint();
+		}
+		if(r1c4.contains(x, y)){
+			if (place) {
+				place(top + 1, left + 4);
+			} else {
+				setTempboard(top + 1, left + 4);
+			}
+			repaint();
+		}
+		if(r1c5.contains(x, y)){
+			if (place) {
+				place(top + 1, left + 5);
+			} else {
+				setTempboard(top + 1, left + 5);
+			}
+			repaint();
+		}
+		if(r1c6.contains(x, y)){
+			if (place) {
+				place(top + 1, left + 6);
+			} else {
+				setTempboard(top + 1, left + 6);
+			}
+			repaint();
+		}
+		if(r1c7.contains(x, y)){
+			if (place) {
+				place(top + 1, left + 7);
+			} else {
+				setTempboard(top + 1, left + 7);
+			}
+			repaint();
+		}
+
+		if(r2c0.contains(x, y)){
+			if (place) {
+				place(top + 2, left);
+			} else {
+				setTempboard(top + 2, left);
+			}
+			repaint();
+		}
+		if(r2c1.contains(x, y)){
+			if (place) {
+				place(top + 2, left + 1);
+			}else {
+				setTempboard(top + 2, left + 1);
+			}
+			repaint();
+		}
+		if(r2c2.contains(x, y)){
+			if (place) {
+				place(top + 2, left + 2);
+			} else {
+				setTempboard(top + 2, left + 2);
+			}
+			repaint();
+		}
+		if(r2c3.contains(x, y)){
+			if (place) {
+				place(top + 2, left + 3);
+			}else {
+				setTempboard(top + 2, left + 3);
+			}
+			repaint();
+		}
+		if(r2c4.contains(x, y)){
+			if (place) {
+				place(top + 2, left + 4);
+			}else {
+				setTempboard(top + 2, left + 4);
+			}
+			repaint();
+		}
+		if(r2c5.contains(x, y)){
+			if (place) {
+				place(top + 2, left + 5);
+			}else {
+				setTempboard(top + 2, left + 5);
+			}
+			repaint();
+		}
+		if(r2c6.contains(x, y)){
+			if (place) {
+				place(top + 2, left + 6);
+			}else {
+				setTempboard(top + 2, left + 6);
+			}
+			repaint();
+		}
+		if(r2c7.contains(x, y)){
+			if (place) {
+				place(top + 2, left + 7);
+			}else {
+				setTempboard(top + 2, left + 7);
+			}
+			repaint();
+		}
+
+		if(r3c0.contains(x, y)){
+			if (place) {
+				place(top + 3, left);
+			} else {
+				setTempboard(top + 3, left);
+			}
+			repaint();
+		}
+		if(r3c1.contains(x, y)){
+			if (place) {
+				place(top + 3, left + 1);
+			}else {
+				setTempboard(top + 3, left + 1);
+			}
+			repaint();
+		}
+		if(r3c2.contains(x, y)){
+			if (place) {
+				place(top + 3, left + 2);
+			} else {
+				setTempboard(top + 3, left + 2);
+			}
+			repaint();
+		}
+		if(r3c3.contains(x, y)){
+			if (place) {
+				place(top + 3, left + 3);
+			}else {
+				setTempboard(top + 3, left + 3);
+			}
+			repaint();
+		}
+		if(r3c4.contains(x, y)){
+			System.out.print(game.habitatCanBePlaced(top + 3, left + 4, game.getPlayerList().get(turn)));
+			if (place) {
+				place(top + 3, left + 4);
+			}else {
+				setTempboard(top + 3, left + 4);
+			}
+			repaint();
+		}
+		if(r3c5.contains(x, y)){
+			System.out.print(game.habitatCanBePlaced(top + 3, left + 4, game.getPlayerList().get(turn)));
+			if (place) {
+				place(top + 3, left + 5);
+			}else {
+				setTempboard(top + 3, left + 5);
+			}
+			repaint();
+		}
+		if(r3c6.contains(x, y)){
+			if (place) {
+				place(top + 3, left + 6);
+			}else {
+				setTempboard(top + 3, left + 6);
+			}
+			repaint();
+		}
+		if(r3c7.contains(x, y)){
+			if (place) {
+				place(top + 3, left + 7);
+			}else {
+				setTempboard(top + 3, left + 7);
+			}
+			repaint();
+		}
+
+		if(r4c0.contains(x, y)){
+			if (place) {
+				place(top + 4, left);
+			} else {
+				setTempboard(top + 4, left);
+			}
+			repaint();
+		}
+		if(r4c1.contains(x, y)){
+			if (place) {
+				place(top + 4, left + 1);
+			}else {
+				setTempboard(top + 4, left + 1);
+			}
+			repaint();
+		}
+		if(r4c2.contains(x, y)){
+			if (place) {
+				place(top + 4, left + 2);
+			} else {
+				setTempboard(top + 4, left + 2);
+			}
+			repaint();
+		}
+		if(r4c3.contains(x, y)){
+			if (place) {
+				place(top + 4, left + 3);
+			}else {
+				setTempboard(top + 4, left + 3);
+			}
+			repaint();
+		}
+		if(r4c4.contains(x, y)){
+			if (place) {
+				place(top + 4, left + 4);
+			}else {
+				setTempboard(top + 4, left + 4);
+			}
+			repaint();
+		}
+		if(r4c5.contains(x, y)){
+			if (place) {
+				place(top + 4, left + 5);
+			}else {
+				setTempboard(top + 4, left + 5);
+			}
+			repaint();
+		}
+		if(r4c6.contains(x, y)){
+			if (place) {
+				place(top + 4, left + 6);
+			}else {
+				setTempboard(top + 4, left + 6);
+			}
+			repaint();
+		}
+		if(r4c7.contains(x, y)){
+			if (place) {
+				place(top + 4, left + 7);
+			}else {
+				setTempboard(top + 4, left + 7);
+			}
+			repaint();
+		}
+
+		if(r5c0.contains(x, y)){
+			if (place) {
+				place(top + 5, left);
+			} else {
+				setTempboard(top + 5, left);
+			}
+			repaint();
+		}
+		if(r5c1.contains(x, y)){
+			if (place) {
+				place(top + 5, left + 1);
+			}else {
+				setTempboard(top + 5, left + 1);
+			}
+			repaint();
+		}
+		if(r5c2.contains(x, y)){
+			if (place) {
+				place(top + 5, left + 2);
+			} else {
+				setTempboard(top + 5, left + 2);
+			}
+			repaint();
+		}
+		if(r5c3.contains(x, y)){
+			if (place) {
+				place(top + 5, left + 3);
+			}else {
+				setTempboard(top + 5, left + 3);
+			}
+			repaint();
+		}
+		if(r5c4.contains(x, y)){
+			if (place) {
+				place(top + 5, left + 4);
+			}else {
+				setTempboard(top + 5, left + 4);
+			}
+			repaint();
+		}
+		if(r5c5.contains(x, y)){
+			if (place) {
+				place(top + 5, left + 5);
+			}else {
+				setTempboard(top + 5, left + 5);
+			}
+			repaint();
+		}
+		if(r5c6.contains(x, y)){
+			if (place) {
+				place(top + 5, left + 6);
+			}else {
+				setTempboard(top + 5, left + 6);
+			}
+			repaint();
+		}
+		if(r5c7.contains(x, y)){
+			if (place) {
+				place(top + 5, left + 7);
+			}else {
+				setTempboard(top + 5, left + 7);
+			}
+			repaint();
+		}
+		if(r6c0.contains(x, y)){
+			if (place) {
+				place(top + 6, left);
+			} else {
+				setTempboard(top + 6, left);
+			}
+			repaint();
+		}
+		if(r6c1.contains(x, y)){
+			if (place) {
+				place(top + 6, left + 1);
+			}else {
+				setTempboard(top + 6, left + 1);
+			}
+			repaint();
+		}
+		if(r6c2.contains(x, y)){
+			if (place) {
+				place(top + 6, left + 2);
+			} else {
+				setTempboard(top + 6, left + 2);
+			}
+			repaint();
+		}
+		if(r6c3.contains(x, y)){
+			if (place) {
+				place(top + 6, left + 3);
+			}else {
+				setTempboard(top + 6, left + 3);
+			}
+			repaint();
+		}
+		if(r6c4.contains(x, y)){
+			if (place) {
+				place(top + 6, left + 4);
+			}else {
+				setTempboard(top + 6, left + 4);
+			}
+			repaint();
+		}
+		if(r6c5.contains(x, y)){
+			if (place) {
+				place(top + 6, left + 5);
+			}else {
+				setTempboard(top + 6, left + 5);
+			}
+			repaint();
+		}
+		if(r6c6.contains(x, y)){
+			if (place) {
+				place(top + 6, left + 6);
+			}else {
+				setTempboard(top + 6, left + 6);
+			}
+			repaint();
+		}
+		if(r6c7.contains(x, y)){
+			if (place) {
+				place(top + 6, left + 7);
+			}else {
+				setTempboard(top + 6, left + 7);
+			}
+			repaint();
+		}
+		if(r7c0.contains(x, y)){
+			if (place) {
+				place(top + 7, left);
+			} else {
+				setTempboard(top + 7, left);
+			}
+			repaint();
+		}
+		if(r7c1.contains(x, y)){
+			if (place) {
+				place(top + 7, left + 1);
+			}else {
+				setTempboard(top + 7, left + 1);
+			}
+			repaint();
+		}
+		if(r7c2.contains(x, y)){
+			if (place) {
+				place(top + 7, left + 2);
+			} else {
+				setTempboard(top + 7, left + 2);
+			}
+			repaint();
+		}
+		if(r7c3.contains(x, y)){
+			if (place) {
+				place(top + 7, left + 3);
+			}else {
+				setTempboard(top + 7, left + 3);
+			}
+			repaint();
+		}
+		if(r7c4.contains(x, y)){
+			if (place) {
+				place(top + 7, left + 4);
+			}else {
+				setTempboard(top + 7, left + 4);
+			}
+			repaint();
+		}
+		if(r7c5.contains(x, y)){
+			if (place) {
+				place(top + 7, left + 5);
+			}else {
+				setTempboard(top + 7, left + 5);
+			}
+			repaint();
+		}
+		if(r7c6.contains(x, y)){
+			if (place) {
+				place(top + 7, left + 6);
+			}else {
+				setTempboard(top + 7, left + 6);
+			}
+			repaint();
+		}
+		if(r7c7.contains(x, y)){
+			if (place) {
+				place(top + 7, left + 7);
+			}else {
+				setTempboard(top + 7, left + 7);
+			}
+			repaint();
+		}
+	}
+
+	public void place (int row, int col) {
+		if(gameState == 1){
+			if(game.habitatCanBePlaced(row, col, game.getPlayerList().get(turn))){
+				game.placedHabitat(habitatNum, row, col, game.getPlayerList().get(turn));
+			}
+		}
+		if(gameState == 2){
+			if(game.animalCanBePlaced(habitatNum, row, col, game.getPlayerList().get(turn))){
+				game.placedAnimalToken(habitatNum, row, col, game.getPlayerList().get(turn));
+				Player p = game.getPlayerList().get(turn);
+				p.setTurnsLeft( p.getTurnsLeft()- 1);
 				turn++;
-				if(turn == 4){
+				if(turn == 3){
 					turn = 0;
 				}
 				habitatNum = -1;
+				System.out.println("DONE" + turn);
 				gameState = 1;
 			}
 		}
@@ -757,8 +1290,8 @@ public class GamePanel extends JPanel implements MouseListener{
 	public void rotateImage(Graphics g, BufferedImage image, int x, int y , int w, int h, int degree) {
 		Graphics2D g2 = (Graphics2D)g;
 		double rotationRequired = Math.toRadians(degree);
-		double xCor = image.getWidth()/2;
-		double yCor = image.getHeight()/2;
+		double xCor = (double) image.getWidth() /2;
+		double yCor = (double) image.getHeight() /2;
 		AffineTransform tx = AffineTransform.getRotateInstance(rotationRequired, xCor, yCor);
 		AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
 		g2.drawImage(op.filter(image, null), x, y, w, h, null);
@@ -773,12 +1306,8 @@ public class GamePanel extends JPanel implements MouseListener{
 	}
 
 	public boolean canUseToken() {
-		if(game.getPlayerList().get(turn).getPlayerBoard().getNatureTokens() > 0) {
-			canUseToken = true;
-		}else {
-			canUseToken = false;
-		}
-
+        canUseToken = game.getPlayerList().get(turn).getPlayerBoard().getNatureTokens() > 0;
 		return canUseToken;
 	}
 }
+

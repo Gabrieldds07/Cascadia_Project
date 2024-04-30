@@ -11,6 +11,7 @@ public class Player {
 
     public Player(boolean b){
         isTurn = b;
+        turnsLeft = 20;
         playerBoard = new PlayerBoard();
     }
 

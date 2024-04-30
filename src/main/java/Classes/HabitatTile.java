@@ -65,6 +65,9 @@ public class HabitatTile {
         tokens.add(a);
         this.image=image;
         keyStone=false;
+        correspondingToken = null;
+        clicked = false;
+        placed = false;
     }
     public HabitatTile(String tileNumber, int type1, int type2, int animal1, int animal2, BufferedImage image){
         //1 Bear, 2 Elk, 3 Salmon, 4 Hawk, 5 Fox
@@ -84,6 +87,9 @@ public class HabitatTile {
         tokens.add(a);
         this.image=image;
         keyStone=false;
+        correspondingToken = null;
+        clicked = false;
+        placed = false;
     }
 
     //Instantiates tiles that have 1 animal type and have a keystone
@@ -100,6 +106,9 @@ public class HabitatTile {
         tokens.add(a);
         this.keyStone=keyStone;
         this.image=image;
+        correspondingToken = null;
+        clicked = false;
+        placed = false;
     }
     //Instantiates starter tiles that have 2 animal types
     public HabitatTile(String habitatTileNumber, int type1, int type2, int animal1, int animal2, Boolean keyStone, BufferedImage image){
@@ -126,6 +135,9 @@ public class HabitatTile {
         tokens.add(a);
         this.keyStone=keyStone;
         this.image=image;
+        correspondingToken = null;
+        clicked = false;
+        placed = false;
     }
     //Instantiates starter tiles that have 3 animal types
     public HabitatTile(String habitatTileNumber, int type1, int type2, int animal1, int animal2, int animal3, Boolean keyStone, BufferedImage image){
@@ -150,9 +162,10 @@ public class HabitatTile {
         tokens.add(a);
         this.keyStone=keyStone;
         this.image=image;
+        correspondingToken = null;
+        clicked = false;
+        placed = false;
     }
-
-
 
     public void rotateClockwise(){
         Biome temp = biomes.remove(biomes.size()-1);
