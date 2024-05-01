@@ -10,8 +10,6 @@ import java.awt.geom.AffineTransform;
 import java.awt.Graphics2D;
 import java.awt.Graphics;
 import java.util.Objects;
-import java.awt.Robot;
-import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
@@ -228,7 +226,6 @@ public class GamePanel extends JPanel implements MouseListener{
 		g.drawImage(salmonScoringCard, 1380, 180, 350, 350, null);
 	}
 	public void drawTopPlayerBoard(Graphics g){
-
 		g.setColor(Color.WHITE);
 		g.drawImage(scoringCardsBackground, 100, 100, 1720, 880, null);
 
@@ -244,28 +241,36 @@ public class GamePanel extends JPanel implements MouseListener{
 		int x = 0;
 		int y = 0;
 		for(int r = top; r < bottom; r++){
-            even = (y % 2 == 0);
+			even = (y % 2 == 0);
 			for(int c = left; c < right; c++){
 				if(b[r][c].getHabitatTile() != null) {
 					if(notStarterTileLeftorRight(b[r][c].getHabitatTile())) {
 						if (even) {
-							g.drawImage(b[r][c].getHabitatTile().getImg(), 515 + 100 * x, 176 + 83 * y, 100, 110, null);
-
+							g.drawImage(b[r][c].getHabitatTile().getImg(), 530 + 100 * x, 176 + 83 * y, 100, 110, null);
+							if(b[r][c].getHabitatTile().getTokenPlaced() != null){
+								g.drawImage(b[r][c].getHabitatTile().getTokenPlaced().getImg(), 530 + 100 * x, 176 + 83 * y, 25, 25, null);
+							}
 						}
 						if (!even) {
 							g.drawImage(b[r][c].getHabitatTile().getImg(), 480 + 100 * x, 176 + 83 * y, 100, 110, null);
-
+							if(b[r][c].getHabitatTile().getTokenPlaced() != null){
+								g.drawImage(b[r][c].getHabitatTile().getTokenPlaced().getImg(), 480 + 100 * x, 176 + 83 * y, 25, 25, null);
+							}
 						}
 						//System.out.println("row " + b[r][c].getRow());
 						//System.out.println("col " + b[r][c].getColumn());
 					} else {
 						if (even) {
 							g.drawImage(b[r][c].getHabitatTile().getImg(), 413 + 99 * x, 166 + 83 * y, 140, 140, null);
-
+							if(b[r][c].getHabitatTile().getTokenPlaced() != null){
+								g.drawImage(b[r][c].getHabitatTile().getTokenPlaced().getImg(), 413 + 99 * x, 166 + 83 * y, 25, 25, null);
+							}
 						}
 						if (!even) {
-							g.drawImage(b[r][c].getHabitatTile().getImg(), 375 + 99 * x, 166 + 83 * y, 140, 140, null);
-
+							g.drawImage(b[r][c].getHabitatTile().getImg(), 365 + 99 * x, 166 + 83 * y, 140, 140, null);
+							if(b[r][c].getHabitatTile().getTokenPlaced() != null){
+								g.drawImage(b[r][c].getHabitatTile().getTokenPlaced().getImg(), 365 + 99 * x, 166 + 83 * y, 25, 25, null);
+							}
 						}
 					}
 				}
@@ -439,49 +444,139 @@ public class GamePanel extends JPanel implements MouseListener{
 			if(gameState2 == 1){
 				//rotate cw, ccw, place, cancel
 				if (x >= 990 && x <= 1240 && y >= 925 && y <= 950) {
-					//rotate cw
 					repaint();
-				}
-				if (x >= 720 && x <= 970 && y >= 925 && y <= 950) {
-					//rotate ccw
+				} else if (x >= 720 && x <= 970 && y >= 925 && y <= 950) {
 					rotateRight = true;
 					repaint();
-				}
-				if (x >= 720 && x <= 970 && y >= 965 && y <= 990) {
-					//place
+				} else if (x >= 990 && x <= 1240 && y >= 925 && y <= 950) {
+
+
+				} else if (x >= 720 && x <= 970 && y >= 965 && y <= 990) {
 					polygonContains(true, x, y);
 					repaint();
-				}
-				if (x >= 990 && x <= 1240 && y >= 965 && y <= 990) {
-					//cancel
+				} else if (x >= 990 && x <= 1240 && y >= 965 && y <= 990) {
 
+
+				} else {
+					polygonContains(false, x, y);
+					repaint();
 				}
-				polygonContains(false, x, y);
-				repaint();
 			}
 		}
 		if(gameState == 2) {
+
 
 		}
 	}
 
 	public void setTempBoard(int r, int c){
-		tempboard = game.getPlayerList().get(turn).getPlayerBoard().getBoard();
-		tempboard[r][c].setHabitatTile(game.getAvailableHabitats().getDashboard().get(habitatNum));
+		System.out.println("yurrr" + game.habitatCanBePlaced(r, c, game.getPlayerList().get(turn)));
+		if(game.habitatCanBePlaced(r, c, game.getPlayerList().get(turn))){
+			tempboard = game.getPlayerList().get(turn).getPlayerBoard().getBoard();
+			tempboard[r][c].setHabitatTile(game.getAvailableHabitats().getDashboard().get(habitatNum));
+		}
+	}
+
+	public int getRow(int x, int y){
+		if(y > 175 && y < 260){
+			return top;
+		}
+		if(y > 265 && y < 345){
+			return top + 1;
+		}
+		if(y > 349 && y < 434){
+			return top + 2;
+		}
+		if(y > 442 && y < 515){
+			return top + 3;
+		}
+		if(y > 526 && y < 598){
+			return top + 4;
+		}
+		if(y > 606 && y < 695){
+			return top + 5;
+		}
+		if(y > 695 && y < 785){
+			return top + 6;
+		}
+		if(y > 785 && y < 866){
+			return top + 7;
+		}
+		return -1;
+	}
+
+
+	public int getColumn(int x, int y, boolean even){
+		if(even){
+			if(x > 450 && x < 500){
+				return left;
+			}
+			if(x > 555 && x < 605){
+				return left + 1;
+			}
+			if(x > 654 && x < 715 ){
+				return left + 2;
+			}
+			if(x > 753 && x < 806){
+				return left + 3;
+			}
+			if(x > 853 && x < 904 ){
+				return left + 4;
+			}
+			if(x > 949 && x < 999){
+				return left + 5;
+			}
+			if(x > 1048 && x < 1102){
+				return left + 6;
+			}
+			if(x > 1148 && x < 1199){
+				return left + 7;
+			}
+		}else{
+			if(x > 394 && x < 467){
+				return left - 1;
+			}
+			if(x > 507 && x < 559){
+				return left;
+			}
+			if(x > 602 && x < 654 ){
+				return left + 1;
+			}
+			if(x > 704 && x < 761){
+				return left + 2;
+			}
+			if(x > 796 && x < 860 ){
+				return left + 3;
+			}
+			if(x > 893 && x < 956){
+				return left + 4;
+			}
+			if(x > 995 && x < 1055){
+				return left + 5;
+			}
+			if(x > 1090 && x < 1159){
+				return left + 6;
+			}
+		}
+		return -1;
 	}
 
 	public void polygonContains(boolean place, int x, int y){
-		//add all
-		if(x > 700 && x < 766 && y > 440 && y < 520){
-			//r3c3
-			if (place) {
-				place(top + 3, left + 2);
-			} else {
-				setTempBoard(top + 3, left + 2);
+		if(getRow(x, y) != -1){
+			boolean even = ((getRow(x, y) % 2 ==0));
+			System.out.println(getRow(x, y));
+			System.out.println(getColumn(x, y, even));
+			if(getColumn(x, y, even) != -1){
+				if (place) {
+					place(getRow(x, y), getColumn(x, y, even));
+				} else {
+					setTempBoard(getRow(x, y), getColumn(x, y, even));
+				}
 			}
-			repaint();
 		}
+		repaint();
 	}
+
 
 	public void place (int row, int col) {
 		if(gameState == 1){

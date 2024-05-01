@@ -84,8 +84,8 @@ public class PlayerBoard {
             }
         }
 
-        //odd
         if(0 != (rC % 2)){
+            //odd
             return board[rC + oddR[side]][cC + oddC[side]];
         } else {
             //even
