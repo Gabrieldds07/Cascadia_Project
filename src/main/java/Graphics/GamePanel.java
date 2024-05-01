@@ -10,7 +10,8 @@ import java.awt.geom.AffineTransform;
 import java.awt.Graphics2D;
 import java.awt.Graphics;
 import java.util.Objects;
-
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
 
 public class GamePanel extends JPanel implements MouseListener{
 	private BufferedImage background, ntButtons, scoreCards, test;
@@ -19,7 +20,6 @@ public class GamePanel extends JPanel implements MouseListener{
 	private Game game;
 	private int turn;
 	private boolean rotateRight;
-	private Tile[][] tileMatrix = new Tile[20][20];
 	public static BufferedImage Tile1, Tile2, Tile3, Tile4, Tile5, Tile6, Tile7, Tile8, Tile9, Tile10, Tile11, Tile12, Tile13, Tile14, Tile15, Tile16, Tile17, Tile18, Tile19, Tile20, Tile21, Tile22, Tile23, Tile24, Tile25, Tile26, Tile27, Tile28, Tile29, Tile30, Tile31, Tile32, Tile33, Tile34, Tile35, Tile36, Tile37, Tile38, Tile39, Tile40, Tile41, Tile42, Tile43, Tile44, Tile45, Tile46, Tile47, Tile48, Tile49, Tile50, Tile51, Tile52, Tile53, Tile54, Tile55, Tile56;
 	public static BufferedImage keyStoneTile1, keyStoneTile2, keyStoneTile3, keyStoneTile4, keyStoneTile5, keyStoneTile6, keyStoneTile7, keyStoneTile8, keyStoneTile9, keyStoneTile10, keyStoneTile11, keyStoneTile12, keyStoneTile13, keyStoneTile14, keyStoneTile15, keyStoneTile16, keyStoneTile17, keyStoneTile18, keyStoneTile19, keyStoneTile20, keyStoneTile21, keyStoneTile22, keyStoneTile23, keyStoneTile24, keyStoneTile25;
 	public static BufferedImage starterTile1, starterTile2, starterTile3, starterTile4, starterTile5;
@@ -28,6 +28,8 @@ public class GamePanel extends JPanel implements MouseListener{
 	public static BufferedImage st1IndividualTop, st1IndividualRight, st1IndividualLeft, st2IndividualTop, st2IndividualRight, st2IndividualLeft, st3IndividualTop, st3IndividualRight, st3IndividualLeft, st4IndividualTop, st4IndividualRight, st4IndividualLeft, st5IndividualTop, st5IndividualRight, st5IndividualLeft;
 	private BufferedImage close, scoringCardsBackground;
 	private boolean scoringCardsPressed = false;
+	private boolean topPlayerPressed = false;
+	private boolean bottomPlayerPressed = false;
 	// 0 = game instantiation, 1 = pick habitat Tile & animal token, place habitat, 2 = place animalToken
 	private int gameState = 0;
 	//0 = pick habitat Tile & animal token, 1=  place habitat
@@ -35,6 +37,9 @@ public class GamePanel extends JPanel implements MouseListener{
 	// num is the habitatTile + animal token selected
 	private int habitatNum = -1;
 	private Hexagon[][] tempboard;
+	private int rowTemp;
+	private int colTemp;
+	private int num = 0;
 
 	//board vars
 	private int left = 6;
@@ -195,14 +200,15 @@ public class GamePanel extends JPanel implements MouseListener{
 			}
 			else if(gameState == 2){
 				if(gameState2 == 0){
-					drawPlayerBoard(g, game.getPlayerList().get(turn).getPlayerBoard().getBoard());
-				}
-				if(gameState2 == 1){
 					drawPlayerBoard(g, tempboard);
 				}
+//				if(gameState2 == 1){
+//					drawPlayerBoard(g, tempboard);
+//				}
 			}
 			drawPlayerInfo(g);
 			drawHabitatDashboard(g);
+			drawPrompt(g);
 		}
 		if(rotateRight) {
 			rotateImage(g, game.getAvailableHabitats().getDashboard().get(habitatNum).getImg(), 800, 460, 100, 116, 180);
@@ -215,7 +221,6 @@ public class GamePanel extends JPanel implements MouseListener{
 
 	public void drawScoringCards(Graphics g) {
 		g.setColor(Color.WHITE);
-		//g.fillRect(100, 100, 1720, 880);
 		g.drawImage(scoringCardsBackground, 100, 100, 1720, 880, null);
 		g.drawImage(close, 1760, 100,60,60, null);
 		g.drawImage(elkScoringCard, 180, 180, 350, 350, null);
@@ -224,41 +229,49 @@ public class GamePanel extends JPanel implements MouseListener{
 		g.drawImage(bearScoringCard, 1080, 580, 350, 350, null);
 		g.drawImage(salmonScoringCard, 1380, 180, 350, 350, null);
 	}
+	public void drawTopPlayerBoard(Graphics g){
+		g.setColor(Color.WHITE);
+		g.drawImage(scoringCardsBackground, 100, 100, 1720, 880, null);
+
+	}
+	public void drawBottomPlayerBoard(Graphics g){
+		g.setColor(Color.WHITE);
+		g.drawImage(scoringCardsBackground, 100, 100, 1720, 880, null);
+
+	}
 
 	public void drawPlayerBoard(Graphics g, Hexagon[][] b ){
 		boolean even;
 		int x = 0;
 		int y = 0;
 		for(int r = top; r < bottom; r++){
-            even = (y % 2 == 0);
+			even = (y % 2 == 0);
 			for(int c = left; c < right; c++){
 				if(b[r][c].getHabitatTile() != null) {
 					if(notStarterTileLeftorRight(b[r][c].getHabitatTile())) {
 						if (even) {
-							g.drawImage(b[r][c].getHabitatTile().getImg(), 530 + 100 * x, 176 + 83 * y, 100, 110, null);
+							g.drawImage(b[r][c].getHabitatTile().getImg(), 430 + 100 * x, 175 + 84 * y, 100, 110, null);
 							if(b[r][c].getHabitatTile().getTokenPlaced() != null){
-								g.drawImage(b[r][c].getHabitatTile().getTokenPlaced().getImg(), 530 + 100 * x, 176 + 83 * y, 25, 25, null);
+								g.drawImage(b[r][c].getHabitatTile().getTokenPlaced().getImg(), 430 + 100 * x, 176 + 83 * y, 50, 50, null);
 							}
 						}
 						if (!even) {
-							g.drawImage(b[r][c].getHabitatTile().getImg(), 480 + 100 * x, 176 + 83 * y, 100, 110, null);
+							g.drawImage(b[r][c].getHabitatTile().getImg(), 480 + 100 * x, 175 + 84 * y, 100, 110, null);
 							if(b[r][c].getHabitatTile().getTokenPlaced() != null){
-								g.drawImage(b[r][c].getHabitatTile().getTokenPlaced().getImg(), 480 + 100 * x, 176 + 83 * y, 25, 25, null);
+								g.drawImage(b[r][c].getHabitatTile().getTokenPlaced().getImg(), 480 + 100 * x, 176 + 83 * y, 50, 50, null);
 							}
 						}
-						//System.out.println("row " + b[r][c].getRow());
-						//System.out.println("col " + b[r][c].getColumn());
 					} else {
 						if (even) {
 							g.drawImage(b[r][c].getHabitatTile().getImg(), 413 + 99 * x, 166 + 83 * y, 140, 140, null);
 							if(b[r][c].getHabitatTile().getTokenPlaced() != null){
-								g.drawImage(b[r][c].getHabitatTile().getTokenPlaced().getImg(), 413 + 99 * x, 166 + 83 * y, 25, 25, null);
+								g.drawImage(b[r][c].getHabitatTile().getTokenPlaced().getImg(), 413 + 99 * x, 166 + 83 * y, 50, 50, null);
 							}
 						}
 						if (!even) {
 							g.drawImage(b[r][c].getHabitatTile().getImg(), 365 + 99 * x, 166 + 83 * y, 140, 140, null);
 							if(b[r][c].getHabitatTile().getTokenPlaced() != null){
-								g.drawImage(b[r][c].getHabitatTile().getTokenPlaced().getImg(), 365 + 99 * x, 166 + 83 * y, 25, 25, null);
+								g.drawImage(b[r][c].getHabitatTile().getTokenPlaced().getImg(), 365 + 99 * x, 166 + 83 * y, 50, 50, null);
 							}
 						}
 					}
@@ -292,10 +305,24 @@ public class GamePanel extends JPanel implements MouseListener{
         return img != st3IndividualRight;
     }
 
+	public void drawPrompt(Graphics g){
+		//g.setFont();
+		if(gameState == 1){
+			if(gameState2 == 0){
+				g.drawString("Player " + (turn + 1) + "pick a habitat tile and wildlife token", 500, 100);
+			}
+			if(gameState2 == 1){
+				g.drawString("Player " + (turn + 1) + "place habitat tile ", 500, 100);
+			}
+		}
+		if(gameState == 2){
+			g.drawString("Player " + (turn + 1) + "place wildlife token", 500, 100);
+		}
+	}
+
 	public void drawBackground(Graphics g) {
 		g.drawImage(background, 0, 0, 1920, 1080, null);
 		g.drawImage(ntButtons, 34, 917, 281, 123, null);
-
 	}
 
 	public void drawNatureTokenMenu(Graphics g) {
@@ -321,6 +348,7 @@ public class GamePanel extends JPanel implements MouseListener{
 		}
 	}
 
+	//mouse methods w gamestate
 	public void mouseClicked(MouseEvent e) {
 		int x = e.getX();
 		int y = e.getY();
@@ -381,51 +409,52 @@ public class GamePanel extends JPanel implements MouseListener{
 		}
 
 		//viewing other player boards
-		if (x >= 1305 && x <= 1910 && y >= 55 && y <= 385) {
-
+		if (x >= 1305 && x <= 1910 && y >= 15 && y <= 340) {
+			topPlayerPressed=true;
+			repaint();
 		}
-		if (x >= 1305 && x <= 1910 && y >= 435 && y <= 755) {
-
+		if (x >= 1305 && x <= 1910 && y >= 355 && y <= 680) {
+			bottomPlayerPressed=true;
+			repaint();
 		}
 
 		if(gameState == 1) {
 			//picking habitat Tile and animal token
 			if(gameState2 == 0){
-				tempboard = game.getPlayerList().get(turn).getPlayerBoard().getBoard();
-			}
+				tempboard = game.getPlayerList().get(turn).getPlayerBoard().getBoard().clone();
+				//get Nature Token & replace tokens
+				if (x >= 33 && x <= 315 && y >= 915 && y <= 965 && canUseToken) {
+					repaint();
+				}
+				if (x >= 33 && x <= 315 && y >= 995 && y <= 1045) {
+					canUseToken = true;
+				}
 
-			//get Nature Token & replace tokens
-			if (x >= 33 && x <= 315 && y >= 915 && y <= 965 && canUseToken) {
-				repaint();
-			}
-			if (x >= 33 && x <= 315 && y >= 995 && y <= 1045) {
-				canUseToken = true;
-			}
-
-			//pick habitatTile and animalToken
-			if((y > 198 && y < 272 && x > 90 && x < 164)|| (x > 251 && x < 325 && y < 270 && y > 198)){
-				habitatNum = 0;
-				game.clickedHabitatTile(habitatNum);
-				gameState2 = 1;
-				repaint();
-			}
-			if((y > 374 && y < 446 && x > 90 && x < 164)|| (x > 251 && x < 325 && y < 444 && y > 378)){
-				habitatNum = 1;
-				game.clickedHabitatTile(habitatNum);
-				gameState2 = 1;
-				repaint();
-			}
-			if((y > 550 && y < 622 && x > 90 && x < 164)|| (x > 251 && x < 325 && y < 614 && y > 550)){
-				habitatNum = 2;
-				game.clickedHabitatTile(habitatNum);
-				gameState2 = 1;
-				repaint();
-			}
-			if((y > 725 && y < 795 && x > 90 && x < 164)|| (x > 251 && x < 325 && y < 788 && y > 725)){
-				habitatNum = 3;
-				game.clickedHabitatTile(habitatNum);
-				gameState2 = 1;
-				repaint();
+				//pick habitatTile and animalToken
+				if((y > 198 && y < 272 && x > 90 && x < 164)|| (x > 251 && x < 325 && y < 270 && y > 198)){
+					habitatNum = 0;
+					game.clickedHabitatTile(habitatNum);
+					gameState2 = 1;
+					repaint();
+				}
+				if((y > 374 && y < 446 && x > 90 && x < 164)|| (x > 251 && x < 325 && y < 444 && y > 378)){
+					habitatNum = 1;
+					game.clickedHabitatTile(habitatNum);
+					gameState2 = 1;
+					repaint();
+				}
+				if((y > 550 && y < 622 && x > 90 && x < 164)|| (x > 251 && x < 325 && y < 614 && y > 550)){
+					habitatNum = 2;
+					game.clickedHabitatTile(habitatNum);
+					gameState2 = 1;
+					repaint();
+				}
+				if((y > 725 && y < 795 && x > 90 && x < 164)|| (x > 251 && x < 325 && y < 788 && y > 725)){
+					habitatNum = 3;
+					game.clickedHabitatTile(habitatNum);
+					gameState2 = 1;
+					repaint();
+				}
 			}
 
 			//placing on board
@@ -433,32 +462,38 @@ public class GamePanel extends JPanel implements MouseListener{
 				//rotate cw, ccw, place, cancel
 				if (x >= 990 && x <= 1240 && y >= 925 && y <= 950) {
 					repaint();
-				} else if (x >= 720 && x <= 970 && y >= 925 && y <= 950) {
+				}
+				else if (x >= 720 && x <= 970 && y >= 925 && y <= 950) {
 					rotateRight = true;
 					repaint();
-				} else if (x >= 990 && x <= 1240 && y >= 925 && y <= 950) {
-
-				} else if (x >= 720 && x <= 970 && y >= 965 && y <= 990) {
+				}
+				else if (x >= 720 && x <= 970 && y >= 965 && y <= 990) {
 					polygonContains(true, x, y);
 					repaint();
-				} else if (x >= 990 && x <= 1240 && y >= 965 && y <= 990) {
-
-				} else {
-					polygonContains(false, x, y);
+				}
+				else if (x >= 990 && x <= 1240 && y >= 965 && y <= 990) {
 					repaint();
+				}
+				else if ((y > 175 && y < 866 && x > 394 && x < 1200)){
+					if (num == 0) {
+						tempboard = game.getPlayerList().get(turn).getPlayerBoard().getBoard().clone();
+						polygonContains(false, x, y);
+						repaint();
+					}
 				}
 			}
 		}
 		if(gameState == 2) {
-
-		}
-	}
-
-	public void setTempBoard(int r, int c){
-		System.out.println(game.habitatCanBePlaced(r, c, game.getPlayerList().get(turn)));
-		if(game.habitatCanBePlaced(r, c, game.getPlayerList().get(turn))){
-			tempboard = game.getPlayerList().get(turn).getPlayerBoard().getBoard();
-			tempboard[r][c].setHabitatTile(game.getAvailableHabitats().getDashboard().get(habitatNum));
+			if (x >= 720 && x <= 970 && y >= 965 && y <= 990) {
+				polygonContains(true, x, y);
+				repaint();
+			} else if ((y > 175 && y < 866 && x > 394 && x < 1200)){
+				if (num == 0) {
+					tempboard = game.getPlayerList().get(turn).getPlayerBoard().getBoard().clone();
+					polygonContains(false, x, y);
+					repaint();
+				}
+			}
 		}
 	}
 
@@ -487,57 +522,107 @@ public class GamePanel extends JPanel implements MouseListener{
 		if(y > 785 && y < 866){
 			return top + 7;
 		}
-
 		return -1;
 	}
 
-	public int getColumn(int x, int y){
-		if(x > 450 && x < 500){
-			return left - 1;
-		}
-		if(x > 555 && x < 605){
-			return left;
-		}
-		if(x > 660 && x < 710 ){
-			return left + 1;
-		}
-		if(x > 765 && x < 815){
-			return left + 2;
-		}
-		if(x > 870 && x < 920 ){
-			return left + 3;
-		}
-		if(x > 975 && x < 1025){
-			return left + 4;
-		}
-		if(x > 1080 && x < 1130){
-			return left + 5;
-		}
-		if(x > 1185 && x < 1235){
-			return left + 6;
+
+	public int getColumn(int x, int y, boolean even){
+		if(even){
+			if(x > 450 && x < 500){
+				return left;
+			}
+			if(x > 555 && x < 605){
+				return left + 1;
+			}
+			if(x > 654 && x < 715 ){
+				return left + 2;
+			}
+			if(x > 753 && x < 806){
+				return left + 3;
+			}
+			if(x > 853 && x < 904 ){
+				return left + 4;
+			}
+			if(x > 949 && x < 999){
+				return left + 5;
+			}
+			if(x > 1048 && x < 1102){
+				return left + 6;
+			}
+			if(x > 1148 && x < 1199){
+				return left + 7;
+			}
+		}else{
+			if(x > 394 && x < 467){
+				return left - 1;
+			}
+			if(x > 507 && x < 559){
+				return left;
+			}
+			if(x > 602 && x < 654 ){
+				return left + 1;
+			}
+			if(x > 704 && x < 761){
+				return left + 2;
+			}
+			if(x > 796 && x < 860 ){
+				return left + 3;
+			}
+			if(x > 893 && x < 956){
+				return left + 4;
+			}
+			if(x > 995 && x < 1055){
+				return left + 5;
+			}
+			if(x > 1090 && x < 1159){
+				return left + 6;
+			}
 		}
 		return -1;
 	}
 
 	public void polygonContains(boolean place, int x, int y){
-		if(getRow(x, y) != -1 && getColumn(x, y) != -1){
-			if (place) {
-				place(getRow(x, y), getColumn(x, y));
-			} else {
-				setTempBoard(getRow(x, y), getColumn(x, y));
+		if (place) {
+			place(rowTemp, colTemp);
+		}
+		if(getRow(x, y) != -1){
+			boolean even = ((getRow(x, y) % 2 ==0));
+			System.out.println("row" + getRow(x, y));
+			System.out.println("col" + getColumn(x, y, even));
+			if(getColumn(x, y, even) != -1){
+				rowTemp = getRow(x, y);
+				colTemp = getColumn(x, y, even);
+				setTempBoard(getRow(x, y), getColumn(x, y, even));
 			}
 		}
 		repaint();
 	}
 
+	public void setTempBoard(int r, int c){
+		if(gameState == 1) {
+			if (game.habitatCanBePlaced(r, c, game.getPlayerList().get(turn))) {
+				tempboard[r][c].setHabitatTile(game.getAvailableHabitats().getDashboard().get(habitatNum));
+				num++;
+			}
+		}
+		if(gameState == 2) {
+			System.out.println(game.animalCanBePlaced(habitatNum, r, c, game.getPlayerList().get(turn)));
+			if(game.animalCanBePlaced(habitatNum, r, c, game.getPlayerList().get(turn))) {
+				tempboard[r][c].getHabitatTile().setTokenPlaced(game.getAvailableHabitats().getDashboard().get(habitatNum).getCorrespondingToken());
+				num++;
+			}
+		}
+	}
+
 	public void place (int row, int col) {
 		if(gameState == 1){
-			System.out.println(game.habitatCanBePlaced(row, col, game.getPlayerList().get(turn)));
-			if(game.habitatCanBePlaced(row, col, game.getPlayerList().get(turn))){
-				game.placedHabitat(habitatNum, row, col, game.getPlayerList().get(turn));
-				gameState = 2;
-				gameState2 = 0;
-			}
+			game.placedHabitat(habitatNum, row, col, game.getPlayerList().get(turn));
+			gameState = 2;
+			gameState2 = 0;
+			num = 0;
+//			if(game.habitatCanBePlaced(row, col, game.getPlayerList().get(turn))){
+//				System.out.println("placed");
+//			}
 		}
 		if(gameState == 2){
 			if(game.animalCanBePlaced(habitatNum, row, col, game.getPlayerList().get(turn))){
@@ -548,11 +633,17 @@ public class GamePanel extends JPanel implements MouseListener{
 				if(turn == 3){
 					turn = 0;
 				}
+				num = 0;
 				habitatNum = -1;
 				gameState = 1;
 				System.out.println("DONE");
 			}
 		}
+	}
+
+	public boolean canUseToken() {
+		canUseToken = game.getPlayerList().get(turn).getPlayerBoard().getNatureTokens() > 0;
+		return canUseToken;
 	}
 
 	public void rotateImage(Graphics g, BufferedImage image, int x, int y , int w, int h, int degree) {
@@ -573,11 +664,5 @@ public class GamePanel extends JPanel implements MouseListener{
 	}
 	public void mouseExited(MouseEvent e) {
 	}
-
-	public boolean canUseToken() {
-        canUseToken = game.getPlayerList().get(turn).getPlayerBoard().getNatureTokens() > 0;
-		return canUseToken;
-	}
 }
-
 

@@ -154,6 +154,7 @@ public class Game {
         for(int i=0;i<4;i++){
             int num = (int)(Math.random() *(allHabitats.size()));
             h.add(allHabitats.get(num));
+            allHabitats.remove(num);
             int rand = (int) ((Math.random() * (4)) + 1);
             //1 Bear, 2 Elk, 3 Salmon, 4 Hawk, 5 Fox
             AnimalToken a;
@@ -243,7 +244,7 @@ public class Game {
     public boolean animalCanBePlaced(int num, int row, int col, Player p) {
         PlayerBoard pb = playerList.get(turn).getPlayerBoard();
         ArrayList<AnimalToken> token = pb.getBoard()[row][col].getHabitatTile().getTokens();
-        if(pb.getBoard()[row][col].getHabitatTile() == null){
+        if(pb.getBoard()[row][col].getHabitatTile() != null){
             for(AnimalToken a : token){
                 if(a.getType() == availableHabitats.getDashboard().get(num).getCorrespondingToken().getType()){
                     return true;
