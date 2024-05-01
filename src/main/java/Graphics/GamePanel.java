@@ -246,19 +246,17 @@ public class GamePanel extends JPanel implements MouseListener{
 				if(b[r][c].getHabitatTile() != null) {
 					if(notStarterTileLeftorRight(b[r][c].getHabitatTile())) {
 						if (even) {
-							g.drawImage(b[r][c].getHabitatTile().getImg(), 530 + 100 * x, 176 + 83 * y, 100, 110, null);
+							g.drawImage(b[r][c].getHabitatTile().getImg(), 430 + 100 * x, 175 + 84 * y, 100, 110, null);
 							if(b[r][c].getHabitatTile().getTokenPlaced() != null){
 								g.drawImage(b[r][c].getHabitatTile().getTokenPlaced().getImg(), 530 + 100 * x, 176 + 83 * y, 25, 25, null);
 							}
 						}
 						if (!even) {
-							g.drawImage(b[r][c].getHabitatTile().getImg(), 480 + 100 * x, 176 + 83 * y, 100, 110, null);
+							g.drawImage(b[r][c].getHabitatTile().getImg(), 480 + 100 * x, 175 + 84 * y, 100, 110, null);
 							if(b[r][c].getHabitatTile().getTokenPlaced() != null){
 								g.drawImage(b[r][c].getHabitatTile().getTokenPlaced().getImg(), 480 + 100 * x, 176 + 83 * y, 25, 25, null);
 							}
 						}
-						//System.out.println("row " + b[r][c].getRow());
-						//System.out.println("col " + b[r][c].getColumn());
 					} else {
 						if (even) {
 							g.drawImage(b[r][c].getHabitatTile().getImg(), 413 + 99 * x, 166 + 83 * y, 140, 140, null);
@@ -470,7 +468,7 @@ public class GamePanel extends JPanel implements MouseListener{
 	}
 
 	public void setTempBoard(int r, int c){
-		System.out.println("yurrr" + game.habitatCanBePlaced(r, c, game.getPlayerList().get(turn)));
+		//System.out.println("yurrr" + game.habitatCanBePlaced(r, c, game.getPlayerList().get(turn)));
 		if(game.habitatCanBePlaced(r, c, game.getPlayerList().get(turn))){
 			tempboard = game.getPlayerList().get(turn).getPlayerBoard().getBoard();
 			tempboard[r][c].setHabitatTile(game.getAvailableHabitats().getDashboard().get(habitatNum));
@@ -564,8 +562,6 @@ public class GamePanel extends JPanel implements MouseListener{
 	public void polygonContains(boolean place, int x, int y){
 		if(getRow(x, y) != -1){
 			boolean even = ((getRow(x, y) % 2 ==0));
-			System.out.println(getRow(x, y));
-			System.out.println(getColumn(x, y, even));
 			if(getColumn(x, y, even) != -1){
 				if (place) {
 					place(getRow(x, y), getColumn(x, y, even));
