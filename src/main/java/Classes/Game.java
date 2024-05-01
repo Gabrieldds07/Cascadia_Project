@@ -242,7 +242,7 @@ public class Game {
     public boolean animalCanBePlaced(int num, int row, int col, Player p) {
         PlayerBoard pb = playerList.get(turn).getPlayerBoard();
         ArrayList<AnimalToken> token = pb.getBoard()[row][col].getHabitatTile().getTokens();
-        if(pb.getBoard()[row][col].getHabitatTile() == null){
+        if(pb.getBoard()[row][col].getHabitatTile() != null){
             for(AnimalToken a : token){
                 if(a.getType() == availableHabitats.getDashboard().get(num).getCorrespondingToken().getType()){
                     return true;
