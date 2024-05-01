@@ -200,11 +200,11 @@ public class GamePanel extends JPanel implements MouseListener{
 			}
 			else if(gameState == 2){
 				if(gameState2 == 0){
-					drawPlayerBoard(g, game.getPlayerList().get(turn).getPlayerBoard().getBoard());
-				}
-				if(gameState2 == 1){
 					drawPlayerBoard(g, tempboard);
 				}
+//				if(gameState2 == 1){
+//					drawPlayerBoard(g, tempboard);
+//				}
 			}
 			drawPlayerInfo(g);
 			drawHabitatDashboard(g);

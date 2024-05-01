@@ -153,6 +153,7 @@ public class Game {
         for(int i=0;i<4;i++){
             int num = (int)(Math.random() *(allHabitats.size()));
             h.add(allHabitats.get(num));
+            allHabitats.remove(num);
             int rand = (int) ((Math.random() * (4)) + 1);
             //1 Bear, 2 Elk, 3 Salmon, 4 Hawk, 5 Fox
             AnimalToken a;
