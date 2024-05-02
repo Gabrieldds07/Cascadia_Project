@@ -243,6 +243,8 @@ public class Game {
 
     public boolean animalCanBePlaced(int num, int row, int col, Player p) {
         PlayerBoard pb = playerList.get(turn).getPlayerBoard();
+        System.out.print(row + " ");
+        System.out.print(col + " ");
         if(pb.getBoard()[row][col].getHabitatTile() != null){
             ArrayList<AnimalToken> token = pb.getBoard()[row][col].getHabitatTile().getTokens();
             for(AnimalToken a : token){
@@ -260,6 +262,10 @@ public class Game {
             p.getPlayerBoard().getBoard()[row][col].setGray(false);
             availableHabitats.get(num).getCorrespondingToken().setClicked(false);
 
+            turn++;
+            if(turn == 3){
+                turn = 0;
+            }
             p.getPlayerBoard().getBoard()[row][col].getHabitatTile().setTokenPlaced(availableHabitats.get(num).getCorrespondingToken());
         }
 
