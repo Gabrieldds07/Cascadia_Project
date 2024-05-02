@@ -131,6 +131,7 @@ public class Game {
     public Game(int numOfPlayers){
         initializeImages();
         turn = 0;
+
         //player instantiation
         Player p;
         for(int i=0;i<3;i++){
@@ -242,8 +243,8 @@ public class Game {
 
     public boolean animalCanBePlaced(int num, int row, int col, Player p) {
         PlayerBoard pb = playerList.get(turn).getPlayerBoard();
-        ArrayList<AnimalToken> token = pb.getBoard()[row][col].getHabitatTile().getTokens();
         if(pb.getBoard()[row][col].getHabitatTile() != null){
+            ArrayList<AnimalToken> token = pb.getBoard()[row][col].getHabitatTile().getTokens();
             for(AnimalToken a : token){
                 if(a.getType() == availableHabitats.getDashboard().get(num).getCorrespondingToken().getType()){
                     return true;
