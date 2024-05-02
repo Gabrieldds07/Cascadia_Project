@@ -521,6 +521,12 @@ public class GamePanel extends JPanel implements MouseListener{
 					repaint();
 				}
 			}
+			if(game.getPlayerList().get(2).getTurnsLeft() == 0){
+				gameState = 3;
+			}
+		}
+		if(gameState == 3){
+			frame.switchToEnd();
 		}
 	}
 
@@ -635,7 +641,7 @@ public class GamePanel extends JPanel implements MouseListener{
 			}
 		}
 		if(gameState == 2) {
-			System.out.println(game.animalCanBePlaced(habitatNum, r, c, game.getPlayerList().get(turn)) + "animal can be placed on temp");
+			System.out.println(game.animalCanBePlaced(habitatNum, r, c, game.getPlayerList().get(turn)) + " animal can be placed on temp");
 			if(game.animalCanBePlaced(habitatNum, r, c, game.getPlayerList().get(turn))) {
 				System.out.println("animal placed on temp");
 				tempboard[r][c].getHabitatTile().setTokenPlaced(game.getAvailableHabitats().getDashboard().get(habitatNum).getCorrespondingToken());
