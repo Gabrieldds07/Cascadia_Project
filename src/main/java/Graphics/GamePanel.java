@@ -12,6 +12,15 @@ import java.awt.Graphics;
 import java.util.Objects;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
+import java.awt.Font;
+import java.awt.GraphicsEnvironment;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 public class GamePanel extends JPanel implements MouseListener{
 	private BufferedImage background, ntButtons, scoreCards, test;
@@ -319,7 +328,7 @@ public class GamePanel extends JPanel implements MouseListener{
 
 	public void drawBackground(Graphics g) {
 		g.drawImage(background, 0, 0, 1920, 1080, null);
-		g.drawImage(ntButtons, 34, 917, 281, 123, null);
+		g.drawImage(ntButtons, 34, 850, 281, 123, null);
 	}
 
 	public void drawNatureTokenMenu(Graphics g) {
@@ -328,9 +337,11 @@ public class GamePanel extends JPanel implements MouseListener{
 	}
 
 	public void drawPlayerInfo(Graphics g) {
+		g.setFont(new Font("DialogInput", Font.PLAIN, 20));
+
 		g.drawString("Player " + (turn + 1), 50,65);
 		g.drawString("Turns Left: " + game.getPlayerList().get(turn).getTurnsLeft(), 50,95);
-		g.drawString("Nature Tokes: " + game.getPlayerList().get(turn).getPlayerBoard().getNatureTokens(), 50,125);
+		g.drawString("Nature Tokens: " + game.getPlayerList().get(turn).getPlayerBoard().getNatureTokens(), 50,125);
 	}
 
 	public void drawHabitatDashboard(Graphics g){
