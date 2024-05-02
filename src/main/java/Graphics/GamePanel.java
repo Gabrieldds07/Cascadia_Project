@@ -514,6 +514,12 @@ public class GamePanel extends JPanel implements MouseListener{
 					repaint();
 				}
 			}
+			if(game.getPlayerList().get(2).getTurnsLeft() == 0){
+				gameState = 3;
+			}
+		}
+		if(gameState == 3){
+			frame.switchToEnd();
 		}
 	}
 
