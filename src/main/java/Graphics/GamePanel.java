@@ -23,7 +23,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 public class GamePanel extends JPanel implements MouseListener{
-	private BufferedImage background, ntButtons, scoreCards, test;
+	private BufferedImage background, ntButtons, scoreCards, test, discard;
 	private CascadiaFrame frame;
 	private boolean canUseToken;
 	private Game game;
@@ -62,6 +62,7 @@ public class GamePanel extends JPanel implements MouseListener{
 			background = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Screens/GameBoard.png")));
 			ntButtons = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Screens/buttons.png")));
 			scoringCardsBackground = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Screens/Scoring Cards Background.png")));
+			discard = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Screens/Discard.png")));
 
 			Tile1 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/Tile 1.png")));
 			Tile2 = ImageIO.read(Objects.requireNonNull(GamePanel.class.getResource("/Images/Tiles/Tile 2.png")));
@@ -328,7 +329,13 @@ public class GamePanel extends JPanel implements MouseListener{
 
 	public void drawBackground(Graphics g) {
 		g.drawImage(background, 0, 0, 1920, 1080, null);
-		g.drawImage(ntButtons, 34, 850, 281, 123, null);
+		g.drawImage(ntButtons, 35, 840, 281, 101, null);
+		g.drawImage(discard, 35, 946, 281, 48, null);
+		g.drawImage(foxAnimalToken, 27, 38, 45, 45, null);
+		g.drawImage(elkAnimalToken, 90, 38, 45, 45, null);
+		g.drawImage(bearAnimalToken, 153, 38, 45, 45, null);
+		g.drawImage(hawkAnimalToken, 216, 38, 45, 45, null);
+		g.drawImage(salmonAnimalToken, 279, 38, 45, 45, null);
 	}
 
 	public void drawNatureTokenMenu(Graphics g) {
@@ -339,9 +346,9 @@ public class GamePanel extends JPanel implements MouseListener{
 	public void drawPlayerInfo(Graphics g) {
 		g.setFont(new Font("DialogInput", Font.PLAIN, 20));
 
-		g.drawString("Player " + (turn + 1), 50,65);
-		g.drawString("Turns Left: " + game.getPlayerList().get(turn).getTurnsLeft(), 50,95);
-		g.drawString("Nature Tokens: " + game.getPlayerList().get(turn).getPlayerBoard().getNatureTokens(), 50,125);
+		g.drawString("Player " + (turn + 1) + "                                                           Turns Left: " + game.getPlayerList().get(turn).getTurnsLeft() + "                                                           Nature Tokens: " + game.getPlayerList().get(turn).getPlayerBoard().getNatureTokens(), 423,15);
+		/*g.drawString("Turns Left: " + game.getPlayerList().get(turn).getTurnsLeft(), 50,95);
+		g.drawString("Nature Tokens: " + game.getPlayerList().get(turn).getPlayerBoard().getNatureTokens(), 50,125);*/
 	}
 
 	public void drawHabitatDashboard(Graphics g){

@@ -19,7 +19,7 @@ public class Game {
     public void initializeImages() {
         //1 Bear, 2 Elk, 3 Salmon, 4 Hawk, 5 Fox
         //1 river, 2 wetland, 3 forest, 4 mountain, 5 prairie
-        allHabitats.add(new HabitatTile("1", 5, 2, 3, 2, 5, GamePanel.Tile1));
+        allHabitats.add(new HabitatTile("1", 2, 5, 3, 2, 5, GamePanel.Tile1));
         allHabitats.add(new HabitatTile("2", 5, 3, 3, 2, 5, GamePanel.Tile2));
         allHabitats.add(new HabitatTile("3", 2, 4, 3, 2, 1, GamePanel.Tile3));
         allHabitats.add(new HabitatTile("4", 2, 3, 3, 2, 4, GamePanel.Tile4));
@@ -27,7 +27,7 @@ public class Game {
         allHabitats.add(new HabitatTile("6", 4, 1, 3, 1, 4, GamePanel.Tile6));
         allHabitats.add(new HabitatTile("7", 1, 5, 3, 1, 5, GamePanel.Tile7));
         allHabitats.add(new HabitatTile("8", 1, 2, 3, 1, 4, GamePanel.Tile8));
-        allHabitats.add(new HabitatTile("9", 5, 3, 3, 2, 5, GamePanel.Tile9));
+        allHabitats.add(new HabitatTile("9", 2, 5, 3, 4, 5, GamePanel.Tile9));
         allHabitats.add(new HabitatTile("10",3, 4, 4, 2, 1, GamePanel.Tile10));
         allHabitats.add(new HabitatTile("11",1, 3, 4, 2, 5, GamePanel.Tile11));
         allHabitats.add(new HabitatTile("12",1, 5, 5, 1, 4, GamePanel.Tile12));
