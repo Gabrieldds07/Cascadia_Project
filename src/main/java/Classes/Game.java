@@ -163,6 +163,9 @@ public class Game {
             h.get(i).setCorrespondingToken(generateAnimalToken());
         }
         availableHabitats = new HabitatDashBoard(h);
+        if(checkFourSameToken()){
+            replaceFourSameTokens();
+        }
     }
 
     public AnimalToken generateAnimalToken(){
@@ -314,6 +317,9 @@ public class Game {
             a = new AnimalToken(rand, GamePanel.foxAnimalToken);
         }
         availableHabitats.get(availableHabitats.getDashboard().size()- 1).setCorrespondingToken(a);
+        if(checkFourSameToken()){
+            replaceFourSameTokens();
+        }
         //updating player turn
         p.setTurnsLeft(p.getTurnsLeft() - 1);
         turn++;
