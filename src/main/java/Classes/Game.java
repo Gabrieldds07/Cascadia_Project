@@ -13,6 +13,7 @@ public class Game {
     private  ArrayList <HabitatTile> allHabitats = new ArrayList();
     private  ArrayList <HabitatTile> startingTiles = new ArrayList();
     private  HabitatDashBoard availableHabitats;
+    private ArrayList<Integer> tokenCount = new ArrayList();
 
 
     //Initializes All images and image objects
@@ -131,6 +132,9 @@ public class Game {
     public Game(int numOfPlayers){
         initializeImages();
         turn = 0;
+        for(int i = 0; i < 5; i++){
+            tokenCount.add(20);
+        }
 
         //player instantiation
         Player p;
@@ -155,23 +159,45 @@ public class Game {
             int num = (int)(Math.random() *(allHabitats.size()));
             h.add(allHabitats.get(num));
             allHabitats.remove(num);
-            int rand = (int) ((Math.random() * (4)) + 1);
-            //1 Bear, 2 Elk, 3 Salmon, 4 Hawk, 5 Fox
-            AnimalToken a;
-            if(rand == 1){
-                a = new AnimalToken(rand, GamePanel.bearAnimalToken);
-            } else if(rand == 2){
-                a = new AnimalToken(rand, GamePanel.elkAnimalToken);
-            } else if(rand == 3){
-                a = new AnimalToken(rand, GamePanel.salmonAnimalToken);
-            } else if(rand == 4){
-                a = new AnimalToken(rand, GamePanel.hawkAnimalToken);
-            } else {
-                a = new AnimalToken(rand, GamePanel.foxAnimalToken);
-            }
-            h.get(i).setCorrespondingToken(a);
+
+            h.get(i).setCorrespondingToken(generateAnimalToken());
         }
         availableHabitats = new HabitatDashBoard(h);
+    }
+
+    public AnimalToken generateAnimalToken(){
+        AnimalToken a = null;
+        boolean temp = true;
+        while(temp) {
+            int rand = (int) ((Math.random() * (4)) + 1);
+            //1 Bear, 2 Elk, 3 Salmon, 4 Hawk, 5 Fox
+            if (rand == 1 && tokenCount.get(0) > 0) {
+                a = new AnimalToken(rand, GamePanel.bearAnimalToken);
+                tokenCount.set(0, tokenCount.get(0) -1);
+                temp = false;
+            } else if (rand == 2 && tokenCount.get(1) > 0) {
+                a = new AnimalToken(rand, GamePanel.elkAnimalToken);
+                tokenCount.set(1, tokenCount.get(1) -1);
+                temp = false;
+            } else if (rand == 3 && tokenCount.get(2) > 0) {
+                a = new AnimalToken(rand, GamePanel.salmonAnimalToken);
+                tokenCount.set(2, tokenCount.get(2) -1);
+                temp = false;
+            } else if (rand == 4 && tokenCount.get(3) > 0) {
+                a = new AnimalToken(rand, GamePanel.hawkAnimalToken);
+                tokenCount.set(3, tokenCount.get(3) -1);
+                temp = false;
+            } else if (rand == 5 && tokenCount.get(4) > 0) {
+                a = new AnimalToken(rand, GamePanel.foxAnimalToken);
+                tokenCount.set(4, tokenCount.get(4) -1);
+                temp = false;
+            }
+        }
+        return a;
+    }
+
+    public ArrayList<Integer> getTokenCount() {
+        return tokenCount;
     }
 
     public ArrayList<AnimalToken> getAllTokens () {
