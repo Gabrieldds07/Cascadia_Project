@@ -32,8 +32,8 @@ public class CascadiaFrame extends JFrame{
 	public void switchToEnd() {
 		setVisible(false);
 		remove(mainGame);
-		endGame = new EndPanel();
-		add(mainGame);
+		endGame = new EndPanel(this);
+		add(endGame);
 		setVisible(true);
 	}
 	public void endToGame() {
