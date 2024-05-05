@@ -620,7 +620,7 @@ public class GamePanel extends JPanel implements MouseListener{
 				}
 			}
 		}
-		gameState = 3;
+		//gameState = 3;
 		if(gameState == 3){
 			frame.switchToEnd(game);
 		}
