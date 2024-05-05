@@ -1,5 +1,7 @@
 package Graphics;
 
+import Classes.Game;
+
 import java.awt.*;
 import java.util.*;
 import javax.swing.*;
@@ -29,10 +31,10 @@ public class CascadiaFrame extends JFrame{
 		add(mainGame);
 		setVisible(true);
 	}
-	public void switchToEnd() {
+	public void switchToEnd(Game g) {
 		setVisible(false);
 		remove(mainGame);
-		endGame = new EndPanel(this);
+		endGame = new EndPanel(g, this);
 		add(endGame);
 		setVisible(true);
 	}

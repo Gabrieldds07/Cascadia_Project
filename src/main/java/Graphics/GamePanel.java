@@ -36,7 +36,7 @@ public class GamePanel extends JPanel implements MouseListener{
 	public static BufferedImage elkScoringCard, foxScoringCard, salmonScoringCard, bearScoringCard, hawkScoringCard;
 	public static BufferedImage elkAnimalToken, foxAnimalToken, salmonAnimalToken, bearAnimalToken, hawkAnimalToken;
 	public static BufferedImage st1IndividualTop, st1IndividualRight, st1IndividualLeft, st2IndividualTop, st2IndividualRight, st2IndividualLeft, st3IndividualTop, st3IndividualRight, st3IndividualLeft, st4IndividualTop, st4IndividualRight, st4IndividualLeft, st5IndividualTop, st5IndividualRight, st5IndividualLeft;
-	private BufferedImage close, scoringCardsBackground;
+	public static BufferedImage close, scoringCardsBackground;
 	private boolean scoringCardsPressed = false;
 	private boolean topPlayerPressed = false;
 	private boolean bottomPlayerPressed = false;
@@ -620,9 +620,9 @@ public class GamePanel extends JPanel implements MouseListener{
 				}
 			}
 		}
-		//gameState = 3;
+		gameState = 3;
 		if(gameState == 3){
-			frame.switchToEnd();
+			frame.switchToEnd(game);
 		}
 	}
 

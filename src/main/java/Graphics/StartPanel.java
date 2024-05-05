@@ -1,4 +1,6 @@
 package Graphics;
+import Classes.Hexagon;
+
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import javax.swing.*;
@@ -49,7 +51,6 @@ public class StartPanel extends JPanel implements MouseListener	{
     	g.fillRect(100, 100, 1720, 880);
     	g.drawImage(close, 1740, 120,60,60, null);
     }
-
 
     public void mouseClicked(MouseEvent e) {
         int x = e.getX();
