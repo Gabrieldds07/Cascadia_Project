@@ -516,7 +516,7 @@ public class Game {
     public ArrayList<Integer> totalBiome(){
         ArrayList<Integer> points = new ArrayList<>();
 
-        for(int i = 0; i < 4; i++){
+        for(int i = 0; i < 3 ; i++){
             Player p = playerList.get(i);
             int total = 0;
             for(int j = 1; j < 6; j++){
@@ -531,7 +531,7 @@ public class Game {
     public ArrayList<Integer> totalAnimalTokens(){
         ArrayList<Integer> points = new ArrayList<>();
 
-        for(int i = 0; i < 4; i++) {
+        for(int i = 0; i < 3; i++) {
             Player p = playerList.get(i);
             int total = 0;
             total += p.getPlayerBoard().calculateBear();
@@ -547,7 +547,7 @@ public class Game {
 
     public ArrayList<Integer> totalNatureTokens(){
         ArrayList<Integer> points = new ArrayList<>();
-        for(int i = 0; i < 4; i++){
+        for(int i = 0; i < 3; i++){
             points.add(playerList.get(i).getPlayerBoard().getNatureTokens());
         }
         return points;
@@ -555,7 +555,7 @@ public class Game {
 
     public ArrayList<Integer> getFinalScore(){
         ArrayList<Integer> points = new ArrayList<>();
-        for(int i = 0; i < 4; i++){
+        for(int i = 0; i < 3; i++){
             int total = 0;
             total += totalNatureTokens().get(i);
             total += totalAnimalTokens().get(i);

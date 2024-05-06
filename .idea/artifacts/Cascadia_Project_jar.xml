@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="jar" build-on-make="true" name="Cascadia_Project:jar">
+  <artifact type="jar" name="Cascadia_Project:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/Cascadia_Project_jar</output-path>
     <root id="archive" name="Cascadia_Project.jar">
       <element id="module-output" name="Cascadia_Project" />

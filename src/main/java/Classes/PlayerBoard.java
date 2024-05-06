@@ -112,8 +112,8 @@ public class PlayerBoard {
     //biome scoring
     public int calculateBiomes(int biomeType) {
         int max = 0;
-        for (int r = 0; r < 42; r++) {
-            for (int c = 0; c < 42; c++) {
+        for (int r = 0; r < 20; r++) {
+            for (int c = 0; c < 20; c++) {
                 Hexagon h = board[r][c];
                 if (!(h.getHabitatTile() == null)) {
                     if (h.getHabitatTile().getBiome1().getType()== biomeType){
@@ -165,7 +165,7 @@ public class PlayerBoard {
             if (i==5) {
                 x = 2;
             }
-            Hexagon hex = getAdjacentHexagon(r, c, i);
+            Hexagon hex = getAdjacentHexagon(x, r, c);
             if (hex != null) {
                 if(hex.getHabitatTile() != null){
                     if(hex.getHabitatTile().getBiomes().get(x).getType() == type){
@@ -187,7 +187,7 @@ public class PlayerBoard {
         //1 Bear, 2 Elk, 3 Salmon, 4 Hawk, 5 Fox
         for(int i = 0; i < 20; i++) {
             for (int j = 0; j < 20; j++) {
-                if (board[i][j].getHabitatTile() != null) {
+                if (board[i][j].getHabitatTile() != null && board[i][j].getHabitatTile().getTokenPlaced() != null) {
                     if (board[i][j].getHabitatTile().getTokenPlaced().getType() == 2) {
                         if (board[i][j].getHabitatTile().getTokenPlaced().getScored() == false) {
                             elkCnt += elkHelper(i, j);
@@ -204,9 +204,9 @@ public class PlayerBoard {
         ArrayList<Hexagon> hexes = new ArrayList<>();
         board[r][c].getHabitatTile().getTokenPlaced().setScored(true);
         for(int i = 0; i <= 5; i++){
-            Hexagon hex = getAdjacentHexagon(r, c, i);
+            Hexagon hex = getAdjacentHexagon(i, r, c);
             if(hex != null){
-                if(hex.getHabitatTile() != null){
+                if(hex.getHabitatTile() != null && hex.getHabitatTile().getTokenPlaced() != null){
                     if(hex.getHabitatTile().getTokenPlaced().getType() == 2){
                         if(hex.getHabitatTile().getTokenPlaced().getScored() == false){
                             s = i;
@@ -232,7 +232,7 @@ public class PlayerBoard {
         //1 Bear, 2 Elk, 3 Salmon, 4 Hawk, 5 Fox
         for(int i = 0; i < 20; i++){
             for(int j = 0; j < 20; j++){
-                if(board[i][j].getHabitatTile() != null){
+                if(board[i][j].getHabitatTile() != null && board[i][j].getHabitatTile().getTokenPlaced() != null){
                     if(board[i][j].getHabitatTile().getTokenPlaced().getType() == 3){
                         if(!board[i][j].getHabitatTile().getTokenPlaced().getScored()){
                             int adjacentSalmon = 0;
@@ -240,10 +240,10 @@ public class PlayerBoard {
                             ArrayList<Hexagon> hexes = new ArrayList<>();
 
                             for(int z = 0; z <= 5; z++){
-                                Hexagon adjacentSalmonToken = getAdjacentHexagon(i, j, s);
+                                Hexagon adjacentSalmonToken = getAdjacentHexagon(s, i, j);
                                 if(adjacentSalmonToken != null && adjacentSalmonToken.getHabitatTile() != null){
                                     AnimalToken a = adjacentSalmonToken.getHabitatTile().getTokenPlaced();
-                                    if(a.getType() == 3 && !a.getScored()){
+                                    if(a != null && a.getType() == 3 && !a.getScored()){
                                         adjacentSalmon++;
                                         s = z;
                                         hexes.add(adjacentSalmonToken);
@@ -322,7 +322,7 @@ public class PlayerBoard {
         ArrayList<Hexagon> hexes = new ArrayList<>();
         for(int i=0; i<= 5; i++){
             if (i != b) {
-                Hexagon hex = getAdjacentHexagon(r, c, i);
+                Hexagon hex = getAdjacentHexagon(i, r, c);
                 if (hex!=null && hex.getHabitatTile() != null) {
                     if(hex.getHabitatTile().getTokenPlaced().getType() == 3){
                         if(hex.getHabitatTile().getTokenPlaced().getScored() == false){
@@ -351,7 +351,7 @@ public class PlayerBoard {
         ArrayList<Hexagon> hexes = new ArrayList<>();
         board[r][c].getHabitatTile().getTokenPlaced().setScored(true);
         for(int i = 0; i < 6; i++){
-            Hexagon hex = getAdjacentHexagon(r, c, i);
+            Hexagon hex = getAdjacentHexagon(i, r, c);
             if(hex != null){
                 if(hex.getHabitatTile() != null){
                     if(hex.getHabitatTile().getTokenPlaced().getType() == 3){
@@ -375,7 +375,7 @@ public class PlayerBoard {
         ArrayList<Hexagon> hexes = getAdjacentHexagons(rC, cC);
 
         for(Hexagon h : hexes){
-            if(h.getHabitatTile() != null){
+            if(h.getHabitatTile() != null && h.getHabitatTile().getTokenPlaced() != null){
                 if(h.getHabitatTile().getTokenPlaced().getType() == 4){
                     return 0;
                 }
@@ -388,7 +388,7 @@ public class PlayerBoard {
         int hawkCnt = 0;
         for(int i = 0; i < 20; i++) {
             for (int j = 0; j < 20; j++) {
-                if(board[i][j].getHabitatTile() != null){
+                if(board[i][j].getHabitatTile() != null && board[i][j].getHabitatTile().getTokenPlaced() != null){
                     if(board[i][j].getHabitatTile().getTokenPlaced().getType() == 4){
                         hawkCnt += hawkHelper(i, j);
                     }
@@ -421,7 +421,7 @@ public class PlayerBoard {
         for(int i = 0; i < 20; i++){
             for(int j = 0; j < 20; j++){
                 Hexagon h = board[i][j];
-                if(h.getHabitatTile() != null && h.getHabitatTile().getTokenPlaced().getType() == 1 && !h.getHabitatTile().getTokenPlaced().getScored()){
+                if(h.getHabitatTile() != null && h.getHabitatTile().getTokenPlaced() != null && h.getHabitatTile().getTokenPlaced().getType() == 1 && !h.getHabitatTile().getTokenPlaced().getScored()){
                     boolean pair = bearPair(i, j);
                     if(pair){
                         board[i][j].getHabitatTile().getTokenPlaced().setScored(true);
@@ -448,7 +448,7 @@ public class PlayerBoard {
         int numOfAdjacentBears = 0;
         ArrayList<Hexagon> match = new ArrayList<>();
         for(Hexagon h : hexes){
-            if(h.getHabitatTile() != null){
+            if(h.getHabitatTile() != null && h.getHabitatTile().getTokenPlaced() != null){
                 if(h.getHabitatTile().getTokenPlaced().getType() == 1){
                     if(!h.getHabitatTile().getTokenPlaced().getScored()){
                         numOfAdjacentBears++;
@@ -457,18 +457,20 @@ public class PlayerBoard {
                 }
             }
             if(numOfAdjacentBears == 0){
-                Hexagon hex = match.get(0);
-                ArrayList<Hexagon> match2 = getAdjacentHexagons(hex.getRow(), hex.getColumn());
-                int numAdjacentBearstoMatchingBear = 0;
-                for(Hexagon h2 : match2){
-                    if(h2.getHabitatTile() != null){
-                        if(h2.getHabitatTile().getTokenPlaced().getType() == 1){
-                            numAdjacentBearstoMatchingBear++;
+                if(match.size() > 0){
+                    Hexagon hex = match.get(0);
+                    ArrayList<Hexagon> match2 = getAdjacentHexagons(hex.getRow(), hex.getColumn());
+                    int numAdjacentBearstoMatchingBear = 0;
+                    for(Hexagon h2 : match2){
+                        if(h2.getHabitatTile() != null){
+                            if(h2.getHabitatTile().getTokenPlaced().getType() == 1){
+                                numAdjacentBearstoMatchingBear++;
+                            }
                         }
                     }
-                }
-                if(numAdjacentBearstoMatchingBear == 1){
-                    return true;
+                    if(numAdjacentBearstoMatchingBear == 1){
+                        return true;
+                    }
                 }
             }
         }
@@ -479,7 +481,7 @@ public class PlayerBoard {
         int FoxCnt = 0;
         for(int i = 0; i < 20; i++){
             for(int j = 0; j < 20; j++){
-                if(board[i][j].getHabitatTile() != null && board[i][j].getHabitatTile().getTokenPlaced().getType() == 5){
+                if(board[i][j].getHabitatTile() != null && board[i][j].getHabitatTile().getTokenPlaced() != null && board[i][j].getHabitatTile().getTokenPlaced().getType() == 5){
                     FoxCnt = surroundingFox(i, j);
                 }
             }
@@ -497,7 +499,7 @@ public class PlayerBoard {
         boolean fox = false;
         //1 Bear, 2 Elk, 3 Salmon, 4 Hawk, 5 Fox
         for(Hexagon h : hexes){
-            if(h.getHabitatTile() != null){
+            if(h.getHabitatTile() != null && h.getHabitatTile().getTokenPlaced() != null){
                 if(h.getHabitatTile().getTokenPlaced().getType() == 1){
                     bear = true;
                 }

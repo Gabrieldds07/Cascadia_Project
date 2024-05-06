@@ -338,7 +338,7 @@ public class GamePanel extends JPanel implements MouseListener{
 						if (!even) {
 							g.drawImage(b[r][c].getHabitatTile().getImg(), 480 + 100 * x, 175 + 84 * y, 100, 110, null);
 							if(b[r][c].getHabitatTile().getTokenPlaced() != null){
-								g.drawImage(b[r][c].getHabitatTile().getTokenPlaced().getImg(), 415 + 100 * x, 200 + 83 * y, 50, 50, null);
+								g.drawImage(b[r][c].getHabitatTile().getTokenPlaced().getImg(), 510 + 100 * x, 200 + 83 * y, 50, 50, null);
 							}
 						}
 					} else {
