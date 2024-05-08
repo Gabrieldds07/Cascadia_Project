@@ -161,6 +161,27 @@ public class HabitatTile {
         biomes.add(0, temp);
     }
 
+    public void rotate(int r){
+        image = rotate2(image, r);
+
+
+    }
+
+    private BufferedImage rotate2(BufferedImage img, int r){
+        int width = img.getWidth();
+        int height = img.getHeight();
+
+
+        BufferedImage newImg = new BufferedImage(img.getWidth(), img.getHeight(), img.getType());
+        Graphics2D g2 = newImg.createGraphics();
+
+
+        g2.rotate(Math.toRadians(r), width/2, height/2);
+        g2.drawImage(img, null, 0, 0);
+        return newImg;
+    }
+
+
     public void rotateCounterClockwise(){
         Biome temp = biomes.remove(0);
         biomes.add(biomes.size()-1, temp);

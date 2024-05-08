@@ -220,7 +220,8 @@ public class GamePanel extends JPanel implements MouseListener{
 			drawBottomPlayerBoard(g);
 		}
 		if(rotateRight) {
-			rotateImage(g, game.getAvailableHabitats().getDashboard().get(habitatNum).getImg(), 800, 460, 100, 116, 180);
+			//rotateImage(g, game.getAvailableHabitats().getDashboard().get(habitatNum).getImg(), 800, 460, 100, 116, 180);
+
 			rotateRight = false;
 		}
 		if(scoringCardsPressed && !canUseToken){
@@ -624,8 +625,22 @@ public class GamePanel extends JPanel implements MouseListener{
 			//placing on board
 			if(gameState2 == 1){
 				//rotate cw, ccw, place, cancel
+				if (x >= 990 && x <= 1240 && y >= 925 && y <= 950) {
+					rotateRight = false;
+					game.getAvailableHabitats().getDashboard().get(habitatNum).rotate(60);
+
+					repaint();
+				}
+				else if (x >= 720 && x <= 970 && y >= 925 && y <= 950) {
+					rotateRight = true;
+					game.getAvailableHabitats().getDashboard().get(habitatNum).rotate(-60);
+					repaint();
+				}
+				//else if (x >= 720 && x <= 970 && y >= 965 && y <= 990) {}
 				if (x >= 720 && x <= 970 && y >= 965 && y <= 990) {
-					polygonContains(true, x, y);
+//					polygonContains(true, x, y);
+					//game.getAvailableHabitats().getDashboard().get(habitatNum).rotate();
+
 					repaint();
 				}
 				else if (x >= 990 && x <= 1240 && y >= 965 && y <= 990) {
@@ -841,7 +856,7 @@ public class GamePanel extends JPanel implements MouseListener{
 		double yCor = (double) image.getHeight() /2;
 		AffineTransform tx = AffineTransform.getRotateInstance(rotationRequired, xCor, yCor);
 		AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
-		g2.drawImage(op.filter(image, null), x, y, w, h, null);
+	//	g2.drawImage(op.filter(image, null), x, y, w, h, null);
 	}
 
 	public void mousePressed(MouseEvent e) {
