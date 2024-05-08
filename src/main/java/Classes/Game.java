@@ -317,14 +317,19 @@ public class Game {
         AnimalToken a;
         if(rand == 1){
             a = new AnimalToken(rand, GamePanel.bearAnimalToken);
+            tokenCount.set(0, tokenCount.get(0) - 1);
         } else if(rand == 2){
             a = new AnimalToken(rand, GamePanel.elkAnimalToken);
+            tokenCount.set(1, tokenCount.get(1) - 1);
         } else if(rand == 3){
             a = new AnimalToken(rand, GamePanel.salmonAnimalToken);
+            tokenCount.set(2, tokenCount.get(2) - 1);
         } else if(rand == 4){
             a = new AnimalToken(rand, GamePanel.hawkAnimalToken);
+            tokenCount.set(3, tokenCount.get(3) - 1);
         } else {
             a = new AnimalToken(rand, GamePanel.foxAnimalToken);
+            tokenCount.set(4, tokenCount.get(4) - 1);
         }
         availableHabitats.get(availableHabitats.getDashboard().size()- 1).setCorrespondingToken(a);
         if(checkFourSameToken()){
