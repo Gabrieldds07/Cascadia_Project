@@ -77,7 +77,7 @@ public class Game {
         allHabitats.add(new HabitatTile("55",4, 1, 3, 4,            GamePanel.Tile55));
         allHabitats.add(new HabitatTile("56",5, 4, 1, 3,            GamePanel.Tile56));
 
-
+                                                                    //1 Bear, 2 Elk, 3 Salmon, 4 Hawk, 5 Fox
         startingTiles.add(new HabitatTile("1", 3, 2, true, GamePanel.st1IndividualTop));
         startingTiles.add(new HabitatTile("1", 2, 5, 5, 3, false, GamePanel.st1IndividualRight));
         startingTiles.add(new HabitatTile("1", 1, 4, 4, 2, 1, false, GamePanel.st1IndividualLeft));
@@ -262,7 +262,7 @@ public class Game {
         ArrayList<Hexagon> surrounding = pb.getAdjacentHexagons(row, col);
         if(pb.getBoard()[row][col].getHabitatTile() == null){
             for(Hexagon h : surrounding){
-                if(!h.getGray() || h.getHabitatTile() != null){
+                if(h.getHabitatTile() == null){
                     return true;
                 }
             }
@@ -270,11 +270,15 @@ public class Game {
         return false;
     }
 
-    public boolean animalCanBePlaced(int num, int row, int col, Player p) {
-        PlayerBoard pb = playerList.get(turn).getPlayerBoard();
+    public boolean animalCanBePlaced(int num, int row, int col, Player p, boolean b) {
+        PlayerBoard pb = p.getPlayerBoard();
         System.out.print(row + " ");
         System.out.print(col + " ");
-        if(pb.getBoard()[row][col].getHabitatTile() != null){
+        boolean bool = pb.getBoard()[row][col].getHabitatTile().getTokenPlaced() == null;
+        if(!b){
+            bool = true;
+        }
+        if(pb.getBoard()[row][col].getHabitatTile() != null && bool){
             ArrayList<AnimalToken> token = pb.getBoard()[row][col].getHabitatTile().getTokens();
             for(AnimalToken a : token){
                 if(a.getType() == availableHabitats.getDashboard().get(num).getCorrespondingToken().getType()){
@@ -291,6 +295,12 @@ public class Game {
             p.getPlayerBoard().getBoard()[row][col].setGray(false);
             availableHabitats.get(num).getCorrespondingToken().setClicked(false);
 
+            PlayerBoard pb = playerList.get(turn).getPlayerBoard();
+            if(pb.getBoard()[row][col].getHabitatTile() != null){
+                if(pb.getBoard()[row][col].getHabitatTile().getKeyStone()){
+                    pb.setNatureTokens(pb.getNatureTokens() + 1);
+                }
+            }
             turn++;
             if(turn == 3){
                 turn = 0;

@@ -34,17 +34,6 @@ public class HabitatTile {
     private ArrayList <BufferedImage> tiles = new ArrayList<BufferedImage>();
     private String tileNumber;
 
-    public HabitatTile(ArrayList<AnimalToken> t, ArrayList<Biome> b, boolean k, BufferedImage i) {
-        tokens = t;
-        biomes = b;
-        tokenPlaced = null;
-        correspondingToken = null;
-        clicked = false;
-        placed = false;
-        keyStone = k;
-        image = i;
-    }
-
     public HabitatTile(String tileNumber, int type1, int type2, int animal1, int animal2, int animal3, BufferedImage image){
         //1 Bear, 2 Elk, 3 Salmon, 4 Hawk, 5 Fox
         //1 river, 2 wetland, 3 forest, 4 mountain, 5 prairie
@@ -195,7 +184,6 @@ public class HabitatTile {
     }
 
     //get methods
-
     public Biome getBiome1() {
         return biome1;
     }
@@ -232,9 +220,7 @@ public class HabitatTile {
         return placed;
     }
 
-    public BufferedImage getImg() {
-        return image;
-    }
+    public BufferedImage getImg() {return image;}
 
     public AnimalToken getCorrespondingToken() {
         return correspondingToken;
