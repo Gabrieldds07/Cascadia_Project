@@ -638,7 +638,7 @@ public class GamePanel extends JPanel implements MouseListener{
 				}
 				//else if (x >= 720 && x <= 970 && y >= 965 && y <= 990) {}
 				if (x >= 720 && x <= 970 && y >= 965 && y <= 990) {
-//					polygonContains(true, x, y);
+					polygonContains(true, x, y);
 					//game.getAvailableHabitats().getDashboard().get(habitatNum).rotate();
 
 					repaint();
