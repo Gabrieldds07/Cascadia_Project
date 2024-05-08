@@ -274,15 +274,17 @@ public class Game {
         PlayerBoard pb = p.getPlayerBoard();
         System.out.print(row + " ");
         System.out.print(col + " ");
-        boolean bool = pb.getBoard()[row][col].getHabitatTile().getTokenPlaced() == null;
-        if(!b){
-            bool = true;
-        }
-        if(pb.getBoard()[row][col].getHabitatTile() != null && bool){
-            ArrayList<AnimalToken> token = pb.getBoard()[row][col].getHabitatTile().getTokens();
-            for(AnimalToken a : token){
-                if(a.getType() == availableHabitats.getDashboard().get(num).getCorrespondingToken().getType()){
-                    return true;
+        if(pb.getBoard()[row][col].getHabitatTile() != null){
+            boolean bool = pb.getBoard()[row][col].getHabitatTile().getTokenPlaced() == null;
+            if(!b){
+                bool = true;
+            }
+            if(bool){
+                ArrayList<AnimalToken> token = pb.getBoard()[row][col].getHabitatTile().getTokens();
+                for(AnimalToken a : token){
+                    if(a.getType() == availableHabitats.getDashboard().get(num).getCorrespondingToken().getType()){
+                        return true;
+                    }
                 }
             }
         }
