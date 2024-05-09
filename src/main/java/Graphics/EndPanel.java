@@ -122,6 +122,7 @@ public class EndPanel extends JPanel implements MouseListener {
 //                g.drawString(Integer.toString(game.getWetlandScoring(p)), xPos[i] + 200, yPos[i] + 80 * 3  );
 //                g.drawString(Integer.toString(game.getRiverScoring(p)), xPos[i] + 200, yPos[i] + 80 * 4  );
 //                g.drawString(Integer.toString(game.getFinalScore().get(i)), xPos[i] + 200, yPos[i] + 80 * 5 );
+
             }
         }
 
