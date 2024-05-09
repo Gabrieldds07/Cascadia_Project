@@ -608,7 +608,7 @@ public class GamePanel extends JPanel implements MouseListener{
 					}
 					tempX = -1;
 					tempY = -1;
-					for(HabitatTile h: game.getAllHabitats()){
+					for(HabitatTile h: game.getAvailableHabitats().getDashboard()){
 						h.setClicked(false);
 					}
 					repaint();
@@ -628,7 +628,6 @@ public class GamePanel extends JPanel implements MouseListener{
 				if (x >= 990 && x <= 1240 && y >= 925 && y <= 950) {
 					rotateRight = false;
 					game.getAvailableHabitats().getDashboard().get(habitatNum).rotate(60);
-
 					repaint();
 				}
 				else if (x >= 720 && x <= 970 && y >= 925 && y <= 950) {
@@ -640,7 +639,6 @@ public class GamePanel extends JPanel implements MouseListener{
 				if (x >= 720 && x <= 970 && y >= 965 && y <= 990) {
 					polygonContains(true, x, y);
 					//game.getAvailableHabitats().getDashboard().get(habitatNum).rotate();
-
 					repaint();
 				}
 				else if (x >= 990 && x <= 1240 && y >= 965 && y <= 990) {
@@ -661,8 +659,8 @@ public class GamePanel extends JPanel implements MouseListener{
 			if (x >= 33 && x <= 315 && y >= 945 && y <= 985) {
 				num = 0;
 				game.getAvailableHabitats().get(habitatNum).setClicked(false);
-				Player p = game.getPlayerList().get(turn);
-				p.setTurnsLeft( p.getTurnsLeft()- 1);
+				game.updateHabitatDashboard(habitatNum);
+
 				turn++;
 				if(turn == 3){
 					turn = 0;
@@ -825,8 +823,6 @@ public class GamePanel extends JPanel implements MouseListener{
 			if(game.animalCanBePlaced(habitatNum, row, col, game.getPlayerList().get(turn), false) && temp) {
 				game.placedAnimalToken(habitatNum, row, col, game.getPlayerList().get(turn));
 
-				Player p = game.getPlayerList().get(turn);
-				p.setTurnsLeft( p.getTurnsLeft()- 1);
 				turn++;
 				if(turn == 3){
 					turn = 0;

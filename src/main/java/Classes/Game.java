@@ -254,6 +254,7 @@ public class Game {
             //placing habitat in board
             Hexagon[][] b = p.getPlayerBoard().getBoard();
             b[row][col].setHabitatTile(availableHabitats.get(num));
+            p.getPlayerBoard().getBoard()[row][col].setGray(false);
         }
     }
 
@@ -294,7 +295,6 @@ public class Game {
     public void placedAnimalToken(int num, int row, int col, Player p) {
         if(p.getTurnsLeft() > 0) {
             availableHabitats.get(num).setClicked(false);
-            p.getPlayerBoard().getBoard()[row][col].setGray(false);
             availableHabitats.get(num).getCorrespondingToken().setClicked(false);
 
             PlayerBoard pb = playerList.get(turn).getPlayerBoard();
@@ -303,45 +303,31 @@ public class Game {
                     pb.setNatureTokens(pb.getNatureTokens() + 1);
                 }
             }
+
             turn++;
             if(turn == 3){
                 turn = 0;
             }
+            p.setTurnsLeft( p.getTurnsLeft()- 1);
             p.getPlayerBoard().getBoard()[row][col].getHabitatTile().setTokenPlaced(availableHabitats.get(num).getCorrespondingToken());
-        }
 
-        //updating habitatDashboard
+            //updating habitatDashboard
+            updateHabitatDashboard(num);
+        }
+    }
+
+    public void updateHabitatDashboard(int num){
         availableHabitats.get(num).setPlaced(true);
         availableHabitats.removeHabitat(num);
+
         int rand = (int) (Math.random() * (allHabitats.size()));
         availableHabitats.addHabitat(allHabitats.get(rand));
-        rand = (int) ((Math.random() * (4)) + 1);
-        AnimalToken a;
-        if(rand == 1){
-            a = new AnimalToken(rand, GamePanel.bearAnimalToken);
-            tokenCount.set(0, tokenCount.get(0) - 1);
-        } else if(rand == 2){
-            a = new AnimalToken(rand, GamePanel.elkAnimalToken);
-            tokenCount.set(1, tokenCount.get(1) - 1);
-        } else if(rand == 3){
-            a = new AnimalToken(rand, GamePanel.salmonAnimalToken);
-            tokenCount.set(2, tokenCount.get(2) - 1);
-        } else if(rand == 4){
-            a = new AnimalToken(rand, GamePanel.hawkAnimalToken);
-            tokenCount.set(3, tokenCount.get(3) - 1);
-        } else {
-            a = new AnimalToken(rand, GamePanel.foxAnimalToken);
-            tokenCount.set(4, tokenCount.get(4) - 1);
-        }
+
+        AnimalToken a = generateAnimalToken();
         availableHabitats.get(availableHabitats.getDashboard().size()- 1).setCorrespondingToken(a);
+        allHabitats.remove(rand);
         if(checkFourSameToken()){
             replaceFourSameTokens();
-        }
-        //updating player turn
-        p.setTurnsLeft(p.getTurnsLeft() - 1);
-        turn++;
-        if (turn == 3) {
-            turn = 0;
         }
     }
 
