@@ -72,7 +72,7 @@ public class EndPanel extends JPanel implements MouseListener {
         num.set(player, -1);
 
         player = 0;
-        for(int i = 0; i < 2; i ++){
+        for(int i = 0; i < 3; i ++){
             int max = num.get(0);
             int number = num.get(i);
             if(number > max){
@@ -146,7 +146,7 @@ public class EndPanel extends JPanel implements MouseListener {
                     if (!even) {
                         g.drawImage(b[r][c].getHabitatTile().getImg(), 480 + 100 * x, 175 + 84 * y, 100, 110, null);
                         if(b[r][c].getHabitatTile().getTokenPlaced() != null){
-                            g.drawImage(b[r][c].getHabitatTile().getTokenPlaced().getImg(), 415 + 100 * x, 200 + 83 * y, 50, 50, null);
+                            g.drawImage(b[r][c].getHabitatTile().getTokenPlaced().getImg(), 500 + 100 * x, 200 + 83 * y, 50, 50, null);
                         }
                     }
                 }
